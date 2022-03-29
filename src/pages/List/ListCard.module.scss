@@ -20,11 +20,19 @@ $delieveryColor: #0d0d0d;
 .listBox {
   height: 402px;
   .listImg {
+    box-sizing: border-box;
     width: 265px;
     height: 265px;
     overflow: hidden;
+
     img {
       width: 100%;
+      transition: transform 0.2s ease-out 0s;
+      cursor: pointer;
+
+      &:hover {
+        transform: scale(1.1);
+      }
     }
   }
 
@@ -41,6 +49,10 @@ $delieveryColor: #0d0d0d;
     color: $darkgray;
     font-weight: 500;
     padding-bottom: 10px;
+    cursor: pointer;
+    &:hover {
+      text-decoration: underline;
+    }
   }
   .price {
     display: block;
