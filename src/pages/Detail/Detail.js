@@ -11,9 +11,9 @@ function Detail() {
         <div className={style.category}>
           HOME > 꽃다발 > 블루 버터플라이 에디션
         </div>
-        <div className={style.content}>
-          <div className={style.imgBox} />
-          <div className={style.detailBox}>
+        <ul className={style.content}>
+          <li className={style.imgBox} />
+          <li className={style.detailBox}>
             <ul className={style.productInfo}>
               <li> 꽃밭에 앉은 파란 나비</li>
               <li>블루 버터플라이 에디션</li>
@@ -52,8 +52,8 @@ function Detail() {
               <button>장바구니</button>
               <button>바로 구매</button>
             </div>
-          </div>
-        </div>
+          </li>
+        </ul>
       </div>
     </div>
   );

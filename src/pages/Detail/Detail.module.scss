@@ -28,38 +28,33 @@ $padding-bottom: 20px;
   font-weight: $weight;
   font-size: $size;
 }
+
 .container {
   @include sideMargin(40px);
   @include sidePadding(40px);
-
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
 }
+
 .category {
   @include fontStyle($padding-bottom, 300, $small-font-size);
-  @include sidePadding(30px);
+  @include sidePadding(70px);
 
   display: flex;
   padding-top: 50px;
   color: $gray-color;
 }
-
 .content {
-  @include sidePadding(30px);
-
   display: flex;
+  justify-content: center;
+}
 
-  .imgBox {
-    width: 400px;
-    height: 400px;
-    border: 1px solid black;
-  }
+.imgBox {
+  width: 400px;
+  height: 400px;
+  border: 1px solid black;
 }
 .detailBox {
   @include sidePadding(50px);
 
-  flex-direction: column;
   width: 500px;
 }
 
