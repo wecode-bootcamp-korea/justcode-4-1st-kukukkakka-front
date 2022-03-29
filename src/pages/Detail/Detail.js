@@ -11,41 +11,46 @@ function Detail() {
         <div className={style.category}>
           HOME > 꽃다발 > 블루 버터플라이 에디션
         </div>
-        <div className={style.detailBox}>
+        <div className={style.content}>
           <div className={style.imgBox} />
-          <div className={style.discriptionBox}>
-            <ul>
-              <li className={style.description}> 꽃밭에 앉은 파란 나비</li>
-              <li className={style.tittle}>블루 버터플라이 에디션</li>
-              <li className={style.tittlePrice}>53900원</li>
+          <div className={style.detailBox}>
+            <ul className={style.productInfo}>
+              <li> 꽃밭에 앉은 파란 나비</li>
+              <li>블루 버터플라이 에디션</li>
+              <li>53900원</li>
             </ul>
             <div className={style.eventTittle}>
-              3만원 이상 구매 시,
-              <span className={style.highlight}>무료배송!</span>
+              회원 구매 시,
+              <span>적립금 2000원 증정!</span>
             </div>
-            <div className={style.quantityBox}>
-              <div className={style.optionTittle}>수량</div>
-              <div>
-                <button className={style.minusBtn}> - </button>
-                <div> 1 </div>
-                <button className={style.plusBtn}>+</button>
+            <div className={style.inBox}>
+              <div className={style.contentTittle}>수량</div>
+              <div className={style.operationButtons}>
+                <button className={style.btns}> - </button>
+                <div className={style.num}> 1 </div>
+                <button className={style.btns}>+</button>
               </div>
-              <div className={style.eventTittle}>
-                <div className={style.optionTittle}>추가옵션</div>
-                <button>함께하면 좋은 추천상품</button>
+            </div>
+            <div className={style.inBox}>
+              <div className={style.contentTittle}>추가옵션</div>
+              <div className={style.optionBtnBox}>
+                <nav className={style.optionBtn}>
+                  <div>함께하면 좋은 추천상품</div>
+                  <i className={style.btnDown}>⌵</i>
+                </nav>
               </div>
-              <div className={style.priceBox}>
-                <div>상품가격</div>
-                <div>53900원</div>
-                <div className={style.totalPriceBox}>
-                  <div>총 주문금액</div>
-                  <div>69300원</div>
-                </div>
-                <div className={style.btnBox}>
-                  <button>장바구니</button>
-                  <button>바로 구매</button>
-                </div>
-              </div>
+            </div>
+            <div className={style.priceBox}>
+              <div>상품가격</div>
+              <div>53900원</div>
+            </div>
+            <div className={style.totalPriceBox}>
+              <span>총 주문금액</span>
+              <span>69300원</span>
+            </div>
+            <div className={style.contentBtnBox}>
+              <button>장바구니</button>
+              <button>바로 구매</button>
             </div>
           </div>
         </div>

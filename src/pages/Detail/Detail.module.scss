@@ -1,25 +1,53 @@
 $gray-color: #b1b1b1;
+$large-font-size: 20px;
+$medium-font-size: 13px;
+$small-font-size: 11px;
+$padding-bottom: 20px;
+
+@mixin sidePadding($px) {
+  padding-left: $px;
+  padding-right: $px;
+}
+@mixin sideMargin($px) {
+  margin-left: $px;
+  margin-right: $px;
+}
 
 @mixin grayBox {
+  @include fontStyle(15px, 400, $medium-font-size);
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 15px;
+  background-color: #f7f7f7;
+  border: 1px solid white;
+  border-radius: 5px;
 }
 
-@mixin boxMargin {
-  margin-top: 50px;
-  margin-left: 150px;
+@mixin fontStyle($bottom, $weight, $size) {
+  padding-bottom: $bottom;
+  font-weight: $weight;
+  font-size: $size;
 }
 .container {
-  margin: 40px;
-}
+  @include sideMargin(40px);
+  @include sidePadding(40px);
 
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
 .category {
-  @include boxMargin;
-  padding-bottom: 40px;
+  @include fontStyle($padding-bottom, 300, $small-font-size);
+  @include sidePadding(30px);
+
+  display: flex;
+  padding-top: 50px;
   color: $gray-color;
-  font-weight: lighter;
-  font-size: 12px;
 }
 
-.detailBox {
+.content {
+  @include sidePadding(30px);
+
   display: flex;
 
   .imgBox {
@@ -28,10 +56,132 @@ $gray-color: #b1b1b1;
     border: 1px solid black;
   }
 }
-.descriptionBox {
-  display: flex;
-  flex-grow: 2;
-  .description {
+.detailBox {
+  @include sidePadding(50px);
+
+  flex-direction: column;
+  width: 500px;
+}
+
+.productInfo {
+  :first-child {
+    @include fontStyle($padding-bottom, 300, 13px);
+    padding-top: 10px;
     color: #7e7e7e;
+  }
+
+  :nth-child(2) {
+    @include fontStyle($padding-bottom, bold, $large-font-size);
+  }
+
+  :last-child {
+    @include fontStyle($padding-bottom, normal, $large-font-size);
+  }
+}
+
+.eventTittle {
+  @include fontStyle($padding-bottom, normal, $medium-font-size);
+  padding-top: 20px;
+  border-top: 1px solid $gray-color;
+  border-bottom: 1px solid $gray-color;
+
+  :first-child {
+    padding-left: 10px;
+    color: #46cfa7;
+  }
+}
+
+.inBox {
+  display: flex;
+  padding-top: 20px;
+}
+
+.contentTittle {
+  @include fontStyle($padding-bottom, 500, $medium-font-size);
+  padding-top: 10px;
+}
+
+.operationButtons {
+  display: flex;
+  padding-left: 130px;
+  padding-bottom: $padding-bottom;
+}
+
+.btns {
+  padding: 0 10px 3px 10px;
+  border-radius: 90%;
+  border: 1px solid white;
+  color: #7e7e7e;
+  font-size: 17px;
+}
+
+.num {
+  padding: 5px 15px 0 15px;
+}
+
+.optionBtnBox {
+  padding-left: 100px;
+  padding-bottom: $padding-bottom;
+}
+
+.optionBtn {
+  @include fontStyle(8px, lighter, $small-font-size);
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px 10px 20px;
+  border: 1px solid $gray-color;
+  border-radius: 5px;
+  background-color: white;
+  cursor: pointer;
+
+  :first-child {
+    padding-top: 10px;
+    font-size: $small-font-size;
+  }
+
+  :last-child {
+    padding-left: 70px;
+    font-size: $large-font-size;
+    font-weight: 100;
+  }
+}
+
+.priceBox {
+  @include grayBox;
+}
+
+.totalPriceBox {
+  padding-top: 20px;
+  text-align: right;
+
+  :first-child {
+    @include fontStyle(20px, normal, $small-font-size);
+    padding-right: 20px;
+  }
+
+  :last-child {
+    @include fontStyle(20px, 500, $large-font-size);
+  }
+}
+
+.contentBtnBox {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 20px;
+
+  :first-child {
+    padding: 10px 65px;
+    border: 1px solid white;
+    border-radius: 5px;
+    background-color: #ececec;
+    font-size: $medium-font-size;
+  }
+
+  :last-child {
+    padding: 10px 65px;
+    border: 1px solid white;
+    border-radius: 5px;
+    background-color: #ffcd32;
+    font-size: $medium-font-size;
   }
 }
