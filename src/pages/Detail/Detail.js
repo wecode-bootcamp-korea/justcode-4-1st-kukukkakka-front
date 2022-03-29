@@ -15,7 +15,7 @@ function Detail() {
           <div className={style.imgBox} />
           <div className={style.discriptionBox}>
             <ul>
-              <li className={style.description}> 꽃밭에 앉은 나비</li>
+              <li className={style.description}> 꽃밭에 앉은 파란 나비</li>
               <li className={style.tittle}>블루 버터플라이 에디션</li>
               <li className={style.tittlePrice}>53900원</li>
             </ul>
@@ -28,14 +28,14 @@ function Detail() {
               <div>
                 <button className={style.minusBtn}> - </button>
                 <div> 1 </div>
-                <button className={style.plusBtn}> + </button>
+                <button className={style.plusBtn}>+</button>
               </div>
               <div className={style.eventTittle}>
                 <div className={style.optionTittle}>추가옵션</div>
                 <button>함께하면 좋은 추천상품</button>
               </div>
               <div className={style.priceBox}>
-                <div>상품가격상품가격</div>
+                <div>상품가격</div>
                 <div>53900원</div>
                 <div className={style.totalPriceBox}>
                   <div>총 주문금액</div>

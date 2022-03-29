@@ -1,22 +1,37 @@
-$gray-color: #7e7e7e;
+$gray-color: #b1b1b1;
 
 @mixin grayBox {
 }
 
+@mixin boxMargin {
+  margin-top: 50px;
+  margin-left: 150px;
+}
 .container {
-  margin: 30px;
+  margin: 40px;
 }
 
 .category {
+  @include boxMargin;
+  padding-bottom: 40px;
   color: $gray-color;
+  font-weight: lighter;
+  font-size: 12px;
 }
 
 .detailBox {
   display: flex;
-  justify-content: space-evenly;
+
   .imgBox {
     width: 400px;
     height: 400px;
     border: 1px solid black;
+  }
+}
+.descriptionBox {
+  display: flex;
+  flex-grow: 2;
+  .description {
+    color: #7e7e7e;
   }
 }
