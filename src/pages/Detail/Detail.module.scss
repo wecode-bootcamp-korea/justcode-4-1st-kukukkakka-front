@@ -1,0 +1,22 @@
+$gray-color: #7e7e7e;
+
+@mixin grayBox {
+}
+
+.container {
+  margin: 30px;
+}
+
+.category {
+  color: $gray-color;
+}
+
+.detailBox {
+  display: flex;
+  justify-content: space-evenly;
+  .imgBox {
+    width: 400px;
+    height: 400px;
+    border: 1px solid black;
+  }
+}
