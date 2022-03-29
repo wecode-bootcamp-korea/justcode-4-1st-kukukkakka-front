@@ -1,7 +1,8 @@
 import React from 'react';
+import Nav from '../components/Nav/Nav';
 
 function Main() {
-  return <div>안녕</div>;
+  return <Nav />;
 }
 
 export default Main;
