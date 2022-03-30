@@ -22,15 +22,26 @@ function Login() {
         <img
           className={styles.facebookIcon}
           src="https://ifh.cc/g/4mMCRP.png"
+          alt="facebookLogin"
         />
-        <img className={styles.naverIcon} src="https://ifh.cc/g/5hPH1n.png" />
-        <img className={styles.kakaoIcon} src="https://ifh.cc/g/O0aF09.png" />
+        <img
+          className={styles.naverIcon}
+          src="https://ifh.cc/g/5hPH1n.png"
+          alt="naverLogin"
+        />
+        <img
+          className={styles.kakaoIcon}
+          src="https://ifh.cc/g/O0aF09.png"
+          alt="kakaoLogin"
+        />
       </section>
       <span className={styles.noticeText}>
-        지금 회원가입 하시면 1,000p 바로 지급!
+        지금 회원가입 하시면{' '}
+        <span className={styles.signupPoint}> 1,000p </span>바로 지급!
       </span>
       <button className={styles.signupBtn}>회원가입</button>
-      <span>비회원 주문조회</span>
+      <span className={styles.nonMemberOrder}>비회원 주문조회</span>
+      {/* <modal> 모달창이 뜨나? </modal> */}
     </section>
   );
 }
