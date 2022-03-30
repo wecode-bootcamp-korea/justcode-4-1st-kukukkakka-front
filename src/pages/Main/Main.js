@@ -1,7 +1,9 @@
 import React from 'react';
+// import Nav from '../components/Nav/Nav';
+// import Footer from '../components/Footer/Footer';
 
 function Main() {
-  return <div>안녕</div>;
+  return <> </>;
 }
 
 export default Main;
