@@ -6,10 +6,13 @@ import Login from './pages/Login/Login';
 import List from './pages/List/List';
 import Detail from './pages/Detail/Detail';
 import Cart from './pages/Cart/Cart';
+import Nav from './pages/components/Nav/Nav';
+import Footer from './pages/components/Footer/Footer';
 
 function Router() {
   return (
     <BrowserRouter>
+      <Nav />
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/signup" element={<Signup />} />
@@ -18,6 +21,7 @@ function Router() {
         <Route path="/detail" element={<Detail />} />
         <Route path="/cart" element={<Cart />} />
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 }
