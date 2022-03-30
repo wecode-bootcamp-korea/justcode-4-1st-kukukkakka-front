@@ -1,0 +1,109 @@
+$gray: #f7f7f7;
+
+.cartSection {
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
+  padding-bottom: 30px;
+
+  .title {
+    display: block;
+    padding: 40px 0;
+    height: 30px;
+    text-align: center;
+  }
+}
+
+.cartHead {
+  display: flex;
+  width: 100%;
+  padding: 15px 0;
+  background-color: $gray;
+
+  .checkbox {
+    width: 5%;
+  }
+
+  .info {
+    width: 35%;
+    text-align: center;
+  }
+  .option {
+    width: 35%;
+    text-align: center;
+  }
+  .price {
+    width: 25%;
+    text-align: center;
+  }
+}
+
+.cartCenter {
+  display: flex;
+  width: 100%;
+  padding: 15px 0;
+
+  .checkbox {
+    width: 5%;
+  }
+
+  .info {
+    position: relative;
+    width: 45%;
+    display: flex;
+    gap: 20px;
+    .productImg {
+      width: 150px;
+      height: 150px;
+      background-color: $gray;
+      img {
+        width: 100%;
+      }
+    }
+    .productDetail {
+      .name {
+        font-size: 16px;
+      }
+
+      .dueDate {
+        font-size: 14px;
+        font-weight: 100;
+        color: #787878;
+        padding: 10px 0 7px;
+      }
+      .price {
+        font-size: 16px;
+        line-height: 25px;
+      }
+
+      .quantityBox {
+        display: flex;
+        align-items: center;
+        padding-top: 15px;
+        gap: 15px;
+        button {
+          width: 24px;
+          height: 24px;
+          line-height: 24px;
+          border-radius: 50%;
+          background-color: $gray;
+          color: #7878;
+          outline: none;
+          border: none;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+  .delete {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 24px;
+    height: 24px;
+    outline: none;
+    border: 1px solid #ddd;
+    background-color: transparent;
+    cursor: pointer;
+  }
+}
