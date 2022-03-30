@@ -1,0 +1,67 @@
+.headerWrapper {
+  padding: 0 140px;
+  height: 150vh;
+}
+
+.topList {
+  display: flex;
+  justify-content: flex-end;
+  list-style: none;
+  margin: 20px 0;
+}
+
+.topMenu {
+  padding: 0 10px 0 10px;
+  font-weight: 300;
+  color: #222222;
+  border-right: 1px solid gray;
+}
+
+.pointColor {
+  color: #46cfa7;
+}
+
+.topMenuBold {
+  padding: 0 10px 0 10px;
+  color: #222222;
+  font-weight: 400;
+}
+
+.mainLogo {
+  padding-top: 20px;
+}
+
+.navSticky {
+  position: sticky;
+  top: 0;
+}
+
+.navWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 0;
+  // border: 1px solid red;
+}
+
+.navList {
+  display: flex;
+  justify-content: space-around;
+  gap: 60px;
+}
+
+.navMenu {
+  height: 30px;
+  font-size: 18px;
+  font-weight: 400;
+  color: #222222;
+
+  &:hover {
+    bottom: -14px;
+    border-bottom: 5px solid #ffcd32;
+  }
+}
+
+.iconBlank {
+  margin-left: 20px;
+}
