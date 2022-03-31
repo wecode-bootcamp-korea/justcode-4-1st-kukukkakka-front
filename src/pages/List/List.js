@@ -7,7 +7,7 @@ function List() {
     productList: [],
   });
 
-  console.log(lists);
+  const [inputs, setInputs] = useState('');
 
   useEffect(() => {
     fetch('http://localhost:8000/products')
@@ -18,8 +18,14 @@ function List() {
       });
   }, []);
 
-  console.log(lists.productList);
+  const inputValue = e => {
+    e.preventDefault();
+    if (e.key === 'Enter') setInputs(e.target.value);
+  };
 
+  const filterWords = lists.productList.filter(list =>
+    list.name.includes(inputs)
+  );
   return (
     <>
       <section className={styles.listBanner}>
@@ -36,6 +42,8 @@ function List() {
               className={styles.searchBox}
               type="text"
               placeholder="검색어를 입력하세요"
+              onChange={inputValue}
+              onKeyUp={inputValue}
             />
             <div className={styles.icons}>
               <AiOutlineSearch size="1.5em" color="#ddd" />
@@ -50,9 +58,8 @@ function List() {
           </div>
         </div>
       </section>
-      {/* <ListCard lists={lists} /> */}
       <div className={styles.listContainer}>
-        {lists.productList.map(list => (
+        {filterWords.map(list => (
           <ListCard list={list} key={list.id} />
         ))}
       </div>
