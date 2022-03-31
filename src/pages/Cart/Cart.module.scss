@@ -104,6 +104,7 @@ $lightyellow: #fff9ee;
     width: 150px;
     height: 150px;
     background-color: $gray;
+    box-shadow: 3px 2px 10px $gray;
     img {
       width: 100%;
     }
@@ -263,4 +264,5 @@ $lightyellow: #fff9ee;
   font-size: 14px;
   background-color: $yellow;
   text-align: center;
+  cursor: pointer;
 }

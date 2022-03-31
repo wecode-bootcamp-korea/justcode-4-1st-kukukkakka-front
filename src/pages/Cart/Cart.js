@@ -35,7 +35,7 @@ function Cart() {
           </div>
           <div className={styles.infoBox}>
             <div className={styles.productImg}>
-              <img src="" alt="product" />
+              <img src="https://ifh.cc/g/2zkV3j.jpg" alt="product" />
             </div>
             <div className={styles.productDetail}>
               <h2 className={styles.name}>코랄 로즈 에디션</h2>
