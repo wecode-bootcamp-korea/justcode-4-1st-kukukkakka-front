@@ -1,12 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import style from './Detail.module.scss';
+import OptionBtn from '../components/OptionBtn/OptionBtn';
 
 function Detail() {
+  const [count, setcount] = useState(1);
+
+  const operationNum = () => {
+    if (count - 1 < 1) return;
+    return setcount(count - 1);
+  };
+
   return (
     <div>
-      {/* <header>
-        <Nav />
-      </header> */}
+      <header />
       <div className={style.container}>
         <div className={style.category}>
           HOME > 꽃다발 > 블루 버터플라이 에디션
@@ -26,19 +32,21 @@ function Detail() {
             <div className={style.inBox}>
               <div className={style.contentTittle}>수량</div>
               <div className={style.operationButtons}>
-                <button className={style.btns}> - </button>
-                <div className={style.num}> 1 </div>
-                <button className={style.btns}>+</button>
+                <button className={style.btns} onClick={operationNum}>
+                  -
+                </button>
+                <div className={style.num}> {count} </div>
+                <button
+                  className={style.btns}
+                  onClick={() => setcount(count + 1)}
+                >
+                  +
+                </button>
               </div>
             </div>
             <div className={style.inBox}>
               <div className={style.contentTittle}>추가옵션</div>
-              <div className={style.optionBtnBox}>
-                <nav className={style.optionBtn}>
-                  <div>함께하면 좋은 추천상품</div>
-                  <i className={style.btnDown}>⌵</i>
-                </nav>
-              </div>
+              <OptionBtn />
             </div>
             <div className={style.priceBox}>
               <div>상품가격</div>

@@ -1,0 +1,38 @@
+$gray-color: #b1b1b1;
+$large-font-size: 20px;
+$medium-font-size: 13px;
+$small-font-size: 11px;
+$padding-bottom: 20px;
+
+@mixin fontStyle($bottom, $weight, $size) {
+  padding-bottom: $bottom;
+  font-weight: $weight;
+  font-size: $size;
+}
+
+.optionBtnBox {
+  padding-left: 110px;
+  padding-bottom: $padding-bottom;
+}
+
+.optionBtn {
+  @include fontStyle(8px, lighter, $small-font-size);
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 20px 15px 20px;
+  border: 1px solid $gray-color;
+  border-radius: 5px;
+  background-color: white;
+  cursor: pointer;
+
+  :first-child {
+    padding-top: 10px;
+    font-size: $small-font-size;
+  }
+
+  :last-child {
+    padding-left: 70px;
+    font-size: $large-font-size;
+    font-weight: 100;
+  }
+}
