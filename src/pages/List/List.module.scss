@@ -86,3 +86,11 @@ $yellow: #ffcd32;
     }
   }
 }
+
+.listContainer {
+  @include container;
+  display: flex;
+  gap: 13px;
+  flex-wrap: wrap;
+  padding-bottom: 100px;
+}

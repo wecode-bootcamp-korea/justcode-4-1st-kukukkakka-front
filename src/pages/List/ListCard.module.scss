@@ -10,19 +10,13 @@ $delieveryColor: #0d0d0d;
   margin: 0 auto;
 }
 
-.listContainer {
-  @include container;
-  display: flex;
-  gap: 13px;
-  flex-wrap: wrap;
-}
-
 .listBox {
   height: 402px;
   .listImg {
     box-sizing: border-box;
     width: 265px;
     height: 265px;
+    box-shadow: 1px 1px 10px #efefef;
     overflow: hidden;
 
     img {
