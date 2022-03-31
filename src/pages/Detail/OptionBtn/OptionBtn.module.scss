@@ -41,7 +41,7 @@ $padding-bottom: 20px;
 .option_btn_box ul {
   @include fontStyle(8px, 400, $medium-font-size);
   padding: 20px;
-  border-top: 1px solid $gray-color;
+  border-top: 1px solid lightgray;
   background-color: white;
   cursor: pointer;
 

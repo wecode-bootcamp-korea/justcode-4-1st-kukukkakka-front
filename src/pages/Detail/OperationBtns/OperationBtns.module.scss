@@ -1,0 +1,24 @@
+$gray_color: #b1b1b1;
+$large_font_size: 20px;
+$medium_font_size: 13px;
+$small_font_size: 11px;
+$padding_bottom: 20px;
+
+.operationButtons {
+  display: flex;
+  padding-left: 130px;
+  padding-bottom: $padding_bottom;
+}
+
+.btns {
+  padding: 0 10px 3px 10px;
+  border-radius: 90%;
+  border: 1px solid white;
+  color: #7e7e7e;
+  font-size: 17px;
+  cursor: pointer;
+}
+
+.num {
+  padding: 5px 15px 0 15px;
+}

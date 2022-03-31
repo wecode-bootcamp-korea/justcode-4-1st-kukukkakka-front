@@ -1,0 +1,15 @@
+$gray_color: #b1b1b1;
+$large_font_size: 20px;
+$medium_font_size: 13px;
+$small_font_size: 11px;
+$padding_bottom: 20px;
+
+@mixin grayBox {
+  @include fontStyle(15px, 400, $medium-font-size);
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 15px;
+  background-color: #f7f7f7;
+  border: 1px solid white;
+  border-radius: 5px;
+}

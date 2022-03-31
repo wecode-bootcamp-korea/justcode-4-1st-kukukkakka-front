@@ -1,8 +1,8 @@
-$gray-color: #b1b1b1;
-$large-font-size: 20px;
-$medium-font-size: 13px;
-$small-font-size: 11px;
-$padding-bottom: 20px;
+$gray_color: #b1b1b1;
+$large_font_size: 20px;
+$medium_font_size: 13px;
+$small_font_size: 11px;
+$padding_bottom: 20px;
 
 @mixin sidePadding($px) {
   padding-left: $px;
@@ -14,7 +14,7 @@ $padding-bottom: 20px;
 }
 
 @mixin grayBox {
-  @include fontStyle(15px, 400, $medium-font-size);
+  @include fontStyle(15px, 400, $medium_font_size);
   display: flex;
   justify-content: space-between;
   padding: 20px 15px;
@@ -37,12 +37,12 @@ $padding-bottom: 20px;
 }
 
 .category {
-  @include fontStyle($padding-bottom, 300, $small-font-size);
+  @include fontStyle($padding_bottom, 300, $small_font_size);
   @include sidePadding(70px);
 
   display: flex;
   padding-top: 50px;
-  color: $gray-color;
+  color: $gray_color;
 }
 .content {
   display: flex;
@@ -56,31 +56,30 @@ $padding-bottom: 20px;
 }
 .detailBox {
   @include sidePadding(50px);
-
-  width: 500px;
+  width: 550px;
 }
 
 .productInfo {
   :first-child {
-    @include fontStyle($padding-bottom, 300, 13px);
+    @include fontStyle($padding_bottom, 300, 13px);
     padding-top: 10px;
     color: #7e7e7e;
   }
 
   :nth-child(2) {
-    @include fontStyle($padding-bottom, bold, $large-font-size);
+    @include fontStyle($padding_bottom, bold, $large_font_size);
   }
 
   :last-child {
-    @include fontStyle($padding-bottom, normal, $large-font-size);
+    @include fontStyle($padding_bottom, normal, $large_font_size);
   }
 }
 
 .eventTittle {
-  @include fontStyle($padding-bottom, normal, $medium-font-size);
+  @include fontStyle($padding_bottom, normal, $medium_font_size);
   padding-top: 20px;
-  border-top: 1px solid $gray-color;
-  border-bottom: 1px solid $gray-color;
+  border-top: 1px solid $gray_color;
+  border-bottom: 1px solid $gray_color;
 
   :first-child {
     padding-left: 10px;
@@ -94,27 +93,8 @@ $padding-bottom: 20px;
 }
 
 .contentTittle {
-  @include fontStyle($padding-bottom, 500, $medium-font-size);
+  @include fontStyle($padding_bottom, 500, 16px);
   padding-top: 10px;
-}
-
-.operationButtons {
-  display: flex;
-  padding-left: 130px;
-  padding-bottom: $padding-bottom;
-}
-
-.btns {
-  padding: 0 10px 3px 10px;
-  border-radius: 90%;
-  border: 1px solid white;
-  color: #7e7e7e;
-  font-size: 17px;
-  cursor: pointer;
-}
-
-.num {
-  padding: 5px 15px 0 15px;
 }
 
 .priceBox {
@@ -127,12 +107,12 @@ $padding-bottom: 20px;
   text-align: right;
 
   :first-child {
-    @include fontStyle(20px, normal, $small-font-size);
+    @include fontStyle(20px, normal, $small_font_size);
     padding-right: 20px;
   }
 
   :last-child {
-    @include fontStyle(20px, 500, $large-font-size);
+    @include fontStyle(20px, 500, $large_font_size);
   }
 }
 

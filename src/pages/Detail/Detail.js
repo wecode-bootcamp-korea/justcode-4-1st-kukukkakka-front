@@ -1,14 +1,10 @@
 import React, { useState } from 'react';
+import OperationBtns from './OperationBtns/OperationBtns';
 import style from './Detail.module.scss';
-import OptionBtn from './OptionBtn';
+import OptionBtn from './OptionBtn/OptionBtn';
 
 function Detail() {
-  const [count, setcount] = useState(1);
-
-  const operationNum = () => {
-    if (count - 1 < 1) return;
-    return setcount(count - 1);
-  };
+  const [totalPrice, setTotalPrice] = useState(45000);
 
   return (
     <div>
@@ -30,19 +26,8 @@ function Detail() {
               <span>적립금 2000원 증정!</span>
             </div>
             <div className={style.inBox}>
-              <div className={style.contentTittle}>수량</div>
-              <div className={style.operationButtons}>
-                <button className={style.btns} onClick={operationNum}>
-                  -
-                </button>
-                <div className={style.num}> {count} </div>
-                <button
-                  className={style.btns}
-                  onClick={() => setcount(count + 1)}
-                >
-                  +
-                </button>
-              </div>
+              <span className={style.contentTittle}>수량</span>
+              <OperationBtns props={setTotalPrice} totalPrice={totalPrice} />
             </div>
             <div className={style.inBox}>
               <div className={style.contentTittle}>추가옵션</div>
@@ -54,7 +39,7 @@ function Detail() {
             </div>
             <div className={style.totalPriceBox}>
               <span>총 주문금액</span>
-              <span>69300원</span>
+              <span>{totalPrice}원</span>
             </div>
             <div className={style.contentBtnBox}>
               <button>장바구니</button>
