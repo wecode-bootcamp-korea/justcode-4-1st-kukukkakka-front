@@ -1,27 +1,27 @@
 .headerWrapper {
   padding: 0 140px;
-  height: 150vh;
 }
 
-.topList {
+.headerList {
   display: flex;
   justify-content: flex-end;
   list-style: none;
   margin: 20px 0;
 }
 
-.topMenu {
+.headerMenu {
   padding: 0 10px 0 10px;
   font-weight: 300;
   color: #222222;
-  border-right: 1px solid gray;
+  border-right: 1px solid #222222;
 }
 
 .pointColor {
+  font-weight: 500;
   color: #46cfa7;
 }
 
-.topMenuBold {
+.headerMenuBold {
   padding: 0 10px 0 10px;
   color: #222222;
   font-weight: 400;
@@ -32,16 +32,18 @@
 }
 
 .navSticky {
+  padding: 0 140px;
   position: sticky;
   top: 0;
+  border-bottom: #222222;
+  background-color: white;
 }
 
 .navWrapper {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 5px 0;
-  // border: 1px solid red;
+  padding: 5px 0 0 0;
 }
 
 .navList {

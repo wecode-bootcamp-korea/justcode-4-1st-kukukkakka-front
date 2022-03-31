@@ -1,9 +1,15 @@
 import React from 'react';
-// import Nav from '../components/Nav/Nav';
-// import Footer from '../components/Footer/Footer';
+import styles from './Main.module.scss';
 
 function Main() {
-  return <> </>;
+  return (
+    <img
+      className={styles.left}
+      alt="kukukkakka 배너 이미지"
+      src="img/main_banner_1.jpg"
+      width="100%"
+    />
+  );
 }
 
 export default Main;

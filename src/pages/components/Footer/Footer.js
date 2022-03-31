@@ -29,28 +29,28 @@ function Footer() {
       </section>
 
       <section className={styles.infoWrapper}>
-        <p className={styles.infoContent}>
+        <article className={styles.infoContent}>
           <div>상호명: 꾸꾸까까(kukukkakka)</div>
           <div className={styles.infoContentMiddle}>
             사업자 등록번호: 264-81-32592
           </div>
-          <div>대표자: 송은우</div>
-        </p>
-        <p className={styles.infoContent}>
+          <div>대표자: 차은우</div>
+        </article>
+        <article className={styles.infoContent}>
           <div>
             소재지: 서울특별시 서초구 명달로 9 방배빌딩 지하 1층 kukukkakka
           </div>
           <div className={styles.infoContentMiddle}>기업공시</div>
           <div>통시판매신고번호 2018-서울서초-1690</div>
-        </p>
-        <p className={styles.infoRights}>
+        </article>
+        <article className={styles.infoRights}>
           <div>© 2014-2021 kukukkakka, Inc. All rights reserved</div>
           <div className={styles.infoTermsOfUse}>
             <div>이용약관</div>
             <div>개인정보 처리방침</div>
             <div>제휴안내</div>
           </div>
-        </p>
+        </article>
       </section>
     </footer>
   );
