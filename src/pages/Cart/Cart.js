@@ -19,7 +19,7 @@ function Cart() {
         <div className={styles.totalCheck}>
           <IoCheckmark className={styles.unchecked} />
         </div>
-        <p classNxame={styles.info}>상품정보</p>
+        <p className={styles.info}>상품정보</p>
         <p className={styles.option}>추가상품</p>
         <p className={styles.price}>합계금액</p>
       </div>

@@ -1,13 +1,27 @@
-import React from 'react';
-import Nav from '../components/Nav/Nav';
-import Footer from '../components/Footer/Footer';
+import React, { useEffect, useState } from 'react';
 import styles from '../List/List.module.scss';
 import { AiOutlineSearch } from 'react-icons/ai';
 import ListCard from '../List/ListCard';
 function List() {
+  const [lists, setLists] = useState({
+    productList: [],
+  });
+
+  console.log(lists);
+
+  useEffect(() => {
+    fetch('http://localhost:8000/products')
+      .then(res => res.json())
+      .then(res => {
+        console.log(res.message);
+        setLists(res);
+      });
+  }, []);
+
+  console.log(lists.productList);
+
   return (
     <>
-      {/* <Nav /> */}
       <section className={styles.listBanner}>
         <div className={styles.bannerContainer}>
           <p>꾸꾸까까 꽃다발</p>
@@ -36,8 +50,12 @@ function List() {
           </div>
         </div>
       </section>
-      <ListCard />
-      {/* <Footer /> */}
+      {/* <ListCard lists={lists} /> */}
+      <div className={styles.listContainer}>
+        {lists.productList.map(list => (
+          <ListCard list={list} key={list.id} />
+        ))}
+      </div>
     </>
   );
 }
