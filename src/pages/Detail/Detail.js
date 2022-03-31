@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import style from './Detail.module.scss';
-import OptionBtn from '../components/OptionBtn/OptionBtn';
+import OptionBtn from './OptionBtn';
 
 function Detail() {
   const [count, setcount] = useState(1);

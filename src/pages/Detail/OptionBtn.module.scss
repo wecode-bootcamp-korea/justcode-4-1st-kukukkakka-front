@@ -12,7 +12,6 @@ $padding-bottom: 20px;
 
 .optionBtnBox {
   padding-left: 110px;
-  padding-bottom: $padding-bottom;
 }
 
 .optionBtn {
@@ -21,7 +20,7 @@ $padding-bottom: 20px;
   justify-content: space-between;
   padding: 8px 20px 15px 20px;
   border: 1px solid $gray-color;
-  border-radius: 5px;
+  border-radius: 3px;
   background-color: white;
   cursor: pointer;
 
@@ -35,4 +34,18 @@ $padding-bottom: 20px;
     font-size: $large-font-size;
     font-weight: 100;
   }
+}
+
+.hidden_option_btn {
+  @include fontStyle(8px, lighter, $small-font-size);
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 20px 15px 20px;
+  border-top: 1px solid white;
+  border-left: 1px solid $gray-color;
+  border-right: 1px solid $gray-color;
+  border-bottom: 1px solid $gray-color;
+  border-radius: 3px;
+  background-color: white;
+  cursor: pointer;
 }
