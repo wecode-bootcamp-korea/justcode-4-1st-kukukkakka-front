@@ -11,7 +11,7 @@ $padding-bottom: 20px;
 }
 
 .option_btn_box {
-  margin-left: 110px;
+  margin-left: 130px;
   margin-bottom: 50px;
   border: 1px solid $gray-color;
   border-radius: 5px;
@@ -21,7 +21,7 @@ $padding-bottom: 20px;
   @include fontStyle(8px, lighter, $medium-font-size);
   display: flex;
   justify-content: space-between;
-  padding: 8px 20px 15px 15px;
+  padding: 5px 20px 15px 30px;
   border: 1px solid white;
   border-radius: 5px;
   background-color: white;

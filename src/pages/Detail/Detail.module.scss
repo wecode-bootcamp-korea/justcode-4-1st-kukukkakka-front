@@ -1,8 +1,8 @@
 $gray_color: #b1b1b1;
-$large_font_size: 20px;
-$medium_font_size: 13px;
+$large_font_size: 25px;
+$medium_font_size: 16px;
 $small_font_size: 11px;
-$padding_bottom: 20px;
+$padding_bottom: 25px;
 
 @mixin sidePadding($px) {
   padding-left: $px;
@@ -77,9 +77,9 @@ $padding_bottom: 20px;
 
 .eventTittle {
   @include fontStyle($padding_bottom, normal, $medium_font_size);
-  padding-top: 20px;
-  border-top: 1px solid $gray_color;
-  border-bottom: 1px solid $gray_color;
+  padding-top: 25px;
+  border-top: 1px solid lightgray;
+  border-bottom: 1px solid lightgray;
 
   :first-child {
     padding-left: 10px;
@@ -93,7 +93,7 @@ $padding_bottom: 20px;
 }
 
 .contentTittle {
-  @include fontStyle($padding_bottom, 500, 16px);
+  @include fontStyle($padding_bottom, 500, $medium-font-size);
   padding-top: 10px;
 }
 
