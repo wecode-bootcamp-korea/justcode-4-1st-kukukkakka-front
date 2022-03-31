@@ -22,7 +22,6 @@ function List() {
 
   return (
     <>
-      {/* <Nav /> */}
       <section className={styles.listBanner}>
         <div className={styles.bannerContainer}>
           <p>꾸꾸까까 꽃다발</p>
@@ -52,11 +51,11 @@ function List() {
         </div>
       </section>
       {/* <ListCard lists={lists} /> */}
-      {lists.productList.map(list => (
-        <ListCard list={list} />
-      ))}
-
-      {/* <Footer /> */}
+      <div className={styles.listContainer}>
+        {lists.productList.map(list => (
+          <ListCard list={list} key={list.id} />
+        ))}
+      </div>
     </>
   );
 }
