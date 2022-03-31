@@ -4,21 +4,21 @@ import { AiOutlineSearch } from 'react-icons/ai';
 import ListCard from '../List/ListCard';
 function List() {
   const [lists, setLists] = useState({
-    id: 0,
-    name: '',
-    description: '',
-    image_url: '',
-    price: 0,
+    productList: [],
   });
-  console.log('list useEffect 전  :', lists);
+
+  console.log(lists);
+
   useEffect(() => {
-    fetch('https://localhost:8000/products') //fetch 기능을 확인하자!
+    fetch('http://localhost:8000/products')
       .then(res => res.json())
       .then(res => {
+        console.log(res.message);
         setLists(res);
       });
   }, []);
-  console.log('list useEffect 후  :', lists);
+
+  console.log(lists.productList);
 
   return (
     <>
@@ -51,7 +51,11 @@ function List() {
           </div>
         </div>
       </section>
-      <ListCard />
+      {/* <ListCard lists={lists} /> */}
+      {lists.productList.map(list => (
+        <ListCard list={list} />
+      ))}
+
       {/* <Footer /> */}
     </>
   );
