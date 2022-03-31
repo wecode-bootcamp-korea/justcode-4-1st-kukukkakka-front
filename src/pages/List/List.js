@@ -1,10 +1,25 @@
-import React from 'react';
-import Nav from '../components/Nav/Nav';
-import Footer from '../components/Footer/Footer';
+import React, { useEffect, useState } from 'react';
 import styles from '../List/List.module.scss';
 import { AiOutlineSearch } from 'react-icons/ai';
 import ListCard from '../List/ListCard';
 function List() {
+  const [lists, setLists] = useState({
+    id: 0,
+    name: '',
+    description: '',
+    image_url: '',
+    price: 0,
+  });
+  console.log('list useEffect 전  :', lists);
+  useEffect(() => {
+    fetch('https://localhost:8000/products') //fetch 기능을 확인하자!
+      .then(res => res.json())
+      .then(res => {
+        setLists(res);
+      });
+  }, []);
+  console.log('list useEffect 후  :', lists);
+
   return (
     <>
       {/* <Nav /> */}
