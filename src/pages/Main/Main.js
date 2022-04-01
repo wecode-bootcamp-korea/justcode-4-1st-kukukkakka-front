@@ -80,6 +80,12 @@ function Main() {
           text="더보기"
         />
 
+        <img
+          alt="kukukkakka 서브 배너 이미지"
+          src="img/main_sub_banner.png"
+          width="100%"
+        />
+
         <MainListCard
           key={filtered_today_delivery_list.id}
           lists={filtered_today_delivery_list}
