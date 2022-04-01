@@ -28,6 +28,10 @@
   font-size: 14px;
   color: gray;
   cursor: pointer;
+
+  &:hover {
+    color: #ffcd32;
+  }
 }
 
 .flowerList {

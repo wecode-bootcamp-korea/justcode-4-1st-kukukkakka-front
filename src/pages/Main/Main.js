@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styles from './Main.module.scss';
 import MainListCard from './MainListCard';
 
@@ -22,6 +23,13 @@ function Main() {
   const filtered_today_delivery_list = lists.productList.filter(
     list => list.id > 4 && list.id <= 8
   );
+
+  const navigate = useNavigate();
+
+  const goToLink = () => {
+    navigate('/list');
+    window.scrollTo(0, 0);
+  };
 
   return (
     <main>
@@ -78,6 +86,7 @@ function Main() {
           title="꽃이 필요한 순간,"
           subTitle="꾸까 꽃다발"
           text="더보기"
+          linkTo={goToLink}
         />
 
         <img

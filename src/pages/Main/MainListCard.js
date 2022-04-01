@@ -9,6 +9,7 @@ function MainListCard({
   title,
   subTitle,
   text,
+  linkTo,
 }) {
   return (
     <section
@@ -23,7 +24,9 @@ function MainListCard({
           <h2 className={styles.mainSubTitle}>
             {title} <strong>{subTitle}</strong>
           </h2>
-          <span className={styles.viewMore}>{text}</span>
+          <span className={styles.viewMore} onClick={linkTo}>
+            {text}
+          </span>
         </div>
         <div className={styles.flowerList}>
           {lists.map(list => (

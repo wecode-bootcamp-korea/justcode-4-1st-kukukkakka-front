@@ -5,9 +5,9 @@ import { AiOutlineUser } from 'react-icons/ai';
 import { AiOutlineShopping } from 'react-icons/ai';
 
 function Nav() {
-  function goToTop() {
+  const goToTop = () => {
     window.scrollTo(0, 0);
-  }
+  };
 
   return (
     <>
