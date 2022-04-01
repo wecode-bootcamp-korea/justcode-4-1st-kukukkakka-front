@@ -1,33 +1,50 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './Login.module.scss';
+import Modal from './Modal';
 
 function Login() {
-  // const [modal, setModal] = useState(false);
-
-  // const openUp = () => {
-  //   setModal(true);
-  // };
-  // const onClose = () => {
-  //   setModal(false);
-  // };
+  const [modalOpen, setModalOpen] = useState(false);
+  const modalClose = () => {
+    setModalOpen(!modalOpen);
+  };
 
   const [id, setId] = useState('');
-  const [pw, setPw] = useState('');
+  const [password, setPassword] = useState('');
   const navigate = useNavigate();
   const loginSuccess = () => {
-    navigate('/');
+    navigate('/signup');
   };
 
   const idInput = e => {
     setId(e.target.value);
   };
   const pwInput = e => {
-    setPw(e.target.value);
+    setPassword(e.target.value);
+  };
+  const scrollToTop = () => {
+    window.scrollTo(0, 0);
   };
 
-  const preparing = () => {
-    alert('준비중입니다! 조금만 기다려주세요');
+  const postLogin = () => {
+    fetch('http://localhost:8000/users/login', {
+      method: 'POST',
+      headers: {
+        'content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        id: id,
+        password: password,
+      }),
+    })
+      .then(res => {
+        if (res.status === 200) {
+          loginSuccess();
+        } else if (res.status === 400 || 500) return res.json();
+      })
+      .then(res => {
+        console.log('에러발생 : ', res.message);
+      });
   };
 
   return (
@@ -45,14 +62,17 @@ function Login() {
         type="password"
         onChange={pwInput}
       />
-      <button className={styles.loginBtn}>로그인</button>
+      <button className={styles.loginBtn} onClick={postLogin}>
+        로그인
+      </button>
       <section className={styles.searchLoginInfo}>
         <span className={styles.searchId}>아이디 찾기</span>
         <span className={styles.searchPw}>비밀번호 찾기</span>
       </section>
       <hr className={styles.line} />
       <span className={styles.noticeText}> SNS계정으로 간편 로그인</span>
-      <section className={styles.snsIcon} onClick={preparing}>
+      <section className={styles.snsIcon} onClick={() => window.scrollTo(0, 0)}>
+        {/* {modalOpen && <Modal modalClose={modalClose} />} */}
         <img
           className={styles.facebookIcon}
           src="https://ifh.cc/g/4mMCRP.png"
@@ -70,12 +90,23 @@ function Login() {
         />
       </section>
       <span className={styles.noticeText}>
-        지금 회원가입 하시면{' '}
-        <span className={styles.signupPoint}> 1,000p </span>바로 지급!
+        지금 회원가입 하시면 <span className={styles.signupPoint}>1,000p</span>
+        바로 지급!
       </span>
-      <button className={styles.signupBtn}>회원가입</button>
+      <button className={styles.signupBtn} onClick={modalClose} Link to="0">
+        회원가입
+      </button>
+      {modalOpen && <Modal modalClose={modalClose} />}
       <span className={styles.nonMemberOrder}>비회원 주문조회</span>
-      {/* <modal> 모달창이 뜨나? </modal> */}
+      <div className={styles.btnWrap}>
+        <button className={styles.scrollToTopBtn} onClick={scrollToTop}>
+          <img
+            className={styles.scrollToTopImg}
+            src="https://ifh.cc/g/lxlmg7.png"
+            alt="crollToTopButton"
+          />
+        </button>
+      </div>
     </section>
   );
 }
