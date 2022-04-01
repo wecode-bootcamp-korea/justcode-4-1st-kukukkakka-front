@@ -7,7 +7,7 @@ function List() {
     productList: [],
   });
 
-  // const [lowerPrice, setLowerPrice] = useState([]);
+  const [lowerPrice, setLowerPrice] = useState([]);
   const [inputs, setInputs] = useState('');
 
   useEffect(() => {
@@ -21,32 +21,31 @@ function List() {
 
   //유저가 찾은 키워드를 백엔드에 보내주기
 
-  const sendKeywords = () => {
-    fetch('/keywords', {
-      method: 'post',
-      body: JSON.stringify({
-        keyword: inputs,
-      }),
-    })
-      .then(res => res.json())
-      .then(result => console.log({ message: result }));
-  };
+  // const sendKeywords = () => {
+  //   fetch('/keywords', {
+  //     method: 'post',
+  //     body: JSON.stringify({
+  //       keyword: inputs,
+  //     }),
+  //   })
+  //     .then(res => res.json())
+  //     .then(result => console.log({ message: result }));
+  // };
 
   const inputValue = e => {
     e.preventDefault();
     if (e.key === 'Enter') setInputs(e.target.value);
   };
 
-  // const filterWords = lists.productList.filter(list =>
-  //   list.name.includes(inputs)
-  // );
-  const getPrice = lists.productList.sort((a, b) => a.price - b.price);
-  console.log(getPrice);
-  console.log('list:', lists.productList);
-  // const sortByPrice = () => {
-  //   console.log('clicked');
-  //   return setLowerPrice(getPrice);
-  // };
+  const filterWords = lists.productList.filter(list =>
+    list.name.includes(inputs)
+  );
+
+  const sortByPrice = () => {
+    const getPrice = lists.productList.sort((a, b) => a.price - b.price);
+    return setLowerPrice(getPrice);
+  };
+
   return (
     <>
       <section className={styles.listBanner}>
@@ -66,7 +65,7 @@ function List() {
               onChange={inputValue}
               onKeyUp={inputValue}
             />
-            <div className={styles.icons} onClick={sendKeywords}>
+            <div className={styles.icons}>
               <AiOutlineSearch size="1.5em" color="#ddd" />
             </div>
           </div>
@@ -74,13 +73,13 @@ function List() {
           <div className={styles.filterBox}>
             <ul>
               <li>사이즈순</li>
-              <li onClick={() => {}}>가격 낮은 순</li>
+              <li onClick={sortByPrice}>가격 낮은 순</li>
             </ul>
           </div>
         </div>
       </section>
       <div className={styles.listContainer}>
-        {lists.productList.map(list => (
+        {filterWords.map(list => (
           <ListCard list={list} key={list.id} />
         ))}
       </div>
