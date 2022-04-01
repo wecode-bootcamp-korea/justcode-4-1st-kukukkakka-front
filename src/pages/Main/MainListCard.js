@@ -2,18 +2,28 @@ import React from 'react';
 import styles from './MainListCard.module.scss';
 import ListCard from '../List/ListCard';
 
-function MainListCard({ lists, bgColor, text1, text2 }) {
+function MainListCard({
+  lists,
+  bgColor,
+  containerMargin,
+  title,
+  subTitle,
+  text,
+}) {
   return (
     <section
       className={styles.mainContainer}
-      style={{ backgroundColor: bgColor }}
+      style={{
+        backgroundColor: bgColor,
+        margin: containerMargin,
+      }}
     >
       <div className={styles.mainSubContainer}>
         <div className={styles.mainSubFlex}>
           <h2 className={styles.mainSubTitle}>
-            {text1} <strong>{text2}</strong>
+            {title} <strong>{subTitle}</strong>
           </h2>
-          <span className={styles.viewMore}>더보기</span>
+          <span className={styles.viewMore}>{text}</span>
         </div>
         <div className={styles.flowerList}>
           {lists.map(list => (
