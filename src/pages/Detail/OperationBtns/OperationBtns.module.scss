@@ -6,14 +6,15 @@ $padding_bottom: 20px;
 
 .operationButtons {
   display: flex;
-  padding-left: 160px;
-  padding-bottom: $padding_bottom;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-right: 150px;
 }
 
 .btns {
   padding: 0 10px 3px 10px;
   border-radius: 90%;
-  border: 1px solid white;
+  border: 1px solid whitesmoke;
   color: #7e7e7e;
   font-size: 17px;
   cursor: pointer;

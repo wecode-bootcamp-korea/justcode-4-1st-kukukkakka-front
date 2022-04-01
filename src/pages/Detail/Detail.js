@@ -1,10 +1,25 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import OperationBtns from './OperationBtns/OperationBtns';
 import style from './Detail.module.scss';
 import OptionBtn from './OptionBtn/OptionBtn';
+import AddedOptionBox from './AddedOptionBox/AddedOptionBox';
 
 function Detail() {
   const [totalPrice, setTotalPrice] = useState(45000);
+  const [showOptionItem, setShowOptionItem] = useState({ display: 'none' });
+
+  const navigate = useNavigate();
+
+  const goToCart = () => {
+    navigate('/cart');
+  };
+
+  const onClickItem = () => {
+    showOptionItem.display === 'none'
+      ? setShowOptionItem({ display: 'block' })
+      : setShowOptionItem({ display: 'none' });
+  };
 
   return (
     <div className={style.container}>
@@ -31,18 +46,19 @@ function Detail() {
           </div>
           <div className={style.inBox}>
             <div className={style.contentTittle}>추가옵션</div>
-            <OptionBtn />
+            <OptionBtn show={onClickItem} />
           </div>
           <div className={style.priceBox}>
             <div>상품가격</div>
-            <div>53900원</div>
+            <div>{totalPrice}원</div>
           </div>
+          <AddedOptionBox display={showOptionItem} />
           <div className={style.totalPriceBox}>
             <span>총 주문금액</span>
             <span>{totalPrice}원</span>
           </div>
           <div className={style.contentBtnBox}>
-            <button>장바구니</button>
+            <button onClick={goToCart}>장바구니</button>
             <button>바로 구매</button>
           </div>
         </article>

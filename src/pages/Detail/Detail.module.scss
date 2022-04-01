@@ -60,6 +60,9 @@ $padding_bottom: 25px;
 }
 
 .productInfo {
+  display: flex;
+  flex-direction: column;
+
   :first-child {
     @include fontStyle($padding_bottom, 300, 13px);
     padding-top: 10px;
@@ -89,12 +92,14 @@ $padding_bottom: 25px;
 
 .inBox {
   display: flex;
+  justify-content: space-between;
   padding-top: 20px;
 }
 
 .contentTittle {
   @include fontStyle($padding_bottom, 500, $medium-font-size);
-  padding-top: 10px;
+  display: flex;
+  padding-top: 18px;
 }
 
 .priceBox {
@@ -120,13 +125,13 @@ $padding_bottom: 25px;
   display: flex;
   justify-content: space-between;
   padding-top: 20px;
-
   :first-child {
     padding: 10px 65px;
     border: 1px solid white;
     border-radius: 5px;
     background-color: #ececec;
     font-size: $medium-font-size;
+    cursor: pointer;
   }
 
   :last-child {
@@ -135,5 +140,6 @@ $padding_bottom: 25px;
     border-radius: 5px;
     background-color: #ffcd32;
     font-size: $medium-font-size;
+    cursor: pointer;
   }
 }

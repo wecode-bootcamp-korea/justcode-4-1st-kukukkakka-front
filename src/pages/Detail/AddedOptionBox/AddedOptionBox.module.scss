@@ -1,8 +1,14 @@
 $gray_color: #b1b1b1;
 $large_font_size: 20px;
-$medium_font_size: 13px;
+$medium_font_size: 16px;
 $small_font_size: 11px;
 $padding_bottom: 20px;
+
+@mixin fontStyle($bottom, $weight, $size) {
+  padding-bottom: $bottom;
+  font-weight: $weight;
+  font-size: $size;
+}
 
 @mixin grayBox {
   @include fontStyle(15px, 400, $medium-font-size);
@@ -12,4 +18,26 @@ $padding_bottom: 20px;
   background-color: #f7f7f7;
   border: 1px solid white;
   border-radius: 5px;
+}
+
+.priceBox {
+  @include grayBox;
+  display: flex;
+  flex-direction: column;
+  margin-top: 5px;
+}
+
+ul {
+  display: flex;
+  justify-content: space-between;
+}
+
+.closeBtn {
+  margin-bottom: 15px;
+  border: 1px solid lightgray;
+  background-color: #f7f7f7;
+  color: gray;
+  font-size: $small_font_size;
+  font-weight: 300;
+  cursor: pointer;
 }
