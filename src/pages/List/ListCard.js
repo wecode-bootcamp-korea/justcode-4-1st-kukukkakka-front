@@ -9,7 +9,7 @@ function ListCard({ list }) {
       <p className={styles.desc}>{list.description}</p>
       <span className={styles.title}>{list.name}</span>
       <span className={styles.price}>
-        {Math.floor(parseInt(list.price / 100) * 100)}
+        {Math.floor(parseInt(list.price / 100) * 100).toLocaleString('en')}
       </span>
       <div className={styles.tags}>
         <span className={styles.size}>{list.sizename}</span>

@@ -5,6 +5,10 @@ import { AiOutlineUser } from 'react-icons/ai';
 import { AiOutlineShopping } from 'react-icons/ai';
 
 function Nav() {
+  function goToTop() {
+    window.scrollTo(0, 0);
+  }
+
   return (
     <>
       <header className={styles.headerWrapper}>
@@ -31,6 +35,7 @@ function Nav() {
               alt="main-logo"
               src="img/main_logo.png"
               width="200"
+              onClick={goToTop}
             />
           </Link>
           <ul className={styles.navList}>
