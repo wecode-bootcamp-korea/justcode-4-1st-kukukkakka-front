@@ -1,0 +1,137 @@
+* {
+  box-sizing: border-box;
+  font-family: Noto Sans KR, sans-serif;
+}
+
+.signupHeader {
+  text-align: center;
+  font-size: xx-large;
+  font-weight: 500;
+  margin-top: 15px;
+  margin-bottom: 50px;
+  padding: 0 140px;
+}
+
+.bar {
+  margin-top: 50px;
+  margin-bottom: 50px;
+  opacity: 0.5;
+}
+
+.boxWrapper {
+  width: 70vh;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-left: 50%;
+  margin-top: 250px;
+  transform: translate(-60%, -50%);
+}
+
+.setWrapperId {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 5px;
+  width: 133%;
+}
+
+.setWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 5px;
+}
+
+.genderBtn_true {
+  border: none;
+  border-radius: 3px;
+  background-color: #ffcd32;
+  padding: 15px 35px;
+  margin-right: 10px;
+  font-size: large;
+}
+
+.genderBtn_false {
+  border: none;
+  border-radius: 3px;
+  padding: 15px 35px;
+  background-color: #ececec;
+  margin-right: 10px;
+  font-size: large;
+}
+
+.idDuplicateCheck {
+  border: none;
+  border-radius: 5px;
+  padding: 15px 35px;
+  background-color: #ececec;
+  margin-right: 10px;
+  font-size: large;
+  color: #787878;
+}
+
+input:focus {
+  outline: solid 1px #ffcd32;
+}
+
+.inputBox {
+  border: solid 1px #d3d3d3;
+  border-radius: 5px;
+  margin: 10px;
+  width: 50vh;
+  padding: 15px 10px;
+  font-size: medium;
+  font-weight: lighter;
+}
+.policyCheck {
+  border: solid 1px #ececec;
+  border-radius: 5px;
+  margin-left: 50%;
+  margin-top: 50px;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 10px;
+  font-weight: lighter;
+}
+
+.bottonWrapper {
+  margin-left: 50%;
+  margin-top: 20px;
+  transform: translate(-48%, -50%);
+  padding: 25px;
+}
+
+.checkbox {
+  margin-right: 5px;
+}
+.signuoBtn_true {
+  background-color: #74cca9;
+  color: #ffffff;
+  border: none;
+  font-size: large;
+  margin-top: 25px;
+  border-radius: 10px;
+  padding: 15px 100px;
+  width: 100%;
+}
+
+.signuoBtn_false {
+  background-color: #ececec;
+  color: #ffffff;
+  border: none;
+  font-size: large;
+  margin-top: 25px;
+  border-radius: 10px;
+  padding: 15px 100px;
+  width: 100%;
+}
+.redText {
+  color: red;
+}
+.policyBrowse {
+  font-size: small;
+  text-align: center;
+}
