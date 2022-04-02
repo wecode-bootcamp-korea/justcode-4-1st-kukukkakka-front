@@ -1,13 +1,23 @@
-import React from 'react';
+import { React, useState } from 'react';
 import styles from './Nav.module.scss';
 import { Link } from 'react-router-dom';
 import { AiOutlineUser } from 'react-icons/ai';
 import { AiOutlineShopping } from 'react-icons/ai';
 
 function Nav() {
+  const [borderLine, setBorderLine] = useState('');
+
   const goToTop = () => {
     window.scrollTo(0, 0);
   };
+
+  const changeNavbarColor = () => {
+    window.scrollY > 65
+      ? setBorderLine('1px solid #ffcd32')
+      : setBorderLine('');
+  };
+
+  window.addEventListener('scroll', changeNavbarColor);
 
   return (
     <>
@@ -27,7 +37,7 @@ function Nav() {
         </ul>
       </header>
 
-      <nav className={styles.navSticky}>
+      <nav className={styles.navSticky} style={{ borderBottom: borderLine }}>
         <div className={styles.navWrapper}>
           <Link to="/">
             <img

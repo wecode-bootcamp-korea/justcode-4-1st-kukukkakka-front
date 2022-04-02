@@ -41,7 +41,7 @@
   padding: 0 140px;
   position: sticky;
   top: 0;
-  border-bottom: #222222;
+  // border-bottom: 1px solid red;
   background-color: white;
   z-index: 99;
 }
@@ -74,3 +74,7 @@
 .iconBlank {
   margin-left: 20px;
 }
+
+// .borderLine {
+//   border-bottom: 1px solid #ffcd32;
+// }

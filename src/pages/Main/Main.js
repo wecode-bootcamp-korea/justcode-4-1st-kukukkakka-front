@@ -93,6 +93,7 @@ function Main() {
           alt="kukukkakka 서브 배너 이미지"
           src="img/main_sub_banner.png"
           width="100%"
+          style={{ marginTop: '-20px' }}
         />
 
         <MainListCard
