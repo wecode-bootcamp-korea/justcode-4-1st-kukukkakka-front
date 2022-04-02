@@ -41,7 +41,6 @@
   padding: 0 140px;
   position: sticky;
   top: 0;
-  // border-bottom: 1px solid red;
   background-color: white;
   z-index: 99;
 }
@@ -50,7 +49,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 5px 0 0 0;
 }
 
 .navList {
@@ -74,7 +72,3 @@
 .iconBlank {
   margin-left: 20px;
 }
-
-// .borderLine {
-//   border-bottom: 1px solid #ffcd32;
-// }

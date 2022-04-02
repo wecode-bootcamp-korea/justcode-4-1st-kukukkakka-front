@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './Main.module.scss';
 import MainListCard from './MainListCard';
@@ -7,6 +7,31 @@ function Main() {
   const [lists, setLists] = useState({
     productList: [],
   });
+  const [nowSlide, setNowSlide] = useState(0);
+  const slideRef = useRef(null);
+
+  const TOTAL_SLIDES = 2;
+
+  const nextImg = () => {
+    if (nowSlide >= TOTAL_SLIDES) {
+      setNowSlide(0);
+    } else {
+      setNowSlide(nowSlide + 1);
+    }
+  };
+
+  const prevImg = () => {
+    if (nowSlide === 0) {
+      setNowSlide(TOTAL_SLIDES);
+    } else {
+      setNowSlide(nowSlide - 1);
+    }
+  };
+
+  useEffect(() => {
+    slideRef.current.style.transition = 'all 0.7s ease-out';
+    slideRef.current.style.transform = `translateX(-${nowSlide}00%)`;
+  }, [nowSlide]);
 
   useEffect(() => {
     fetch('http://localhost:8000/products')
@@ -33,11 +58,42 @@ function Main() {
 
   return (
     <main>
-      <img
-        alt="kukukkakka 배너 이미지"
-        src="img/main_banner_1.jpg"
-        width="100%"
-      />
+      <div className={styles.imgContainer}>
+        <div className={styles.slideContainer} ref={slideRef}>
+          <img
+            className={styles.bannerImg}
+            alt="kukukkakka 배너 이미지1"
+            src="img/main_banner_1.jpg"
+          />
+          <img
+            className={styles.bannerImg}
+            alt="kukukkakka 배너 이미지2"
+            src="img/main_banner_2.jpg"
+          />
+          <img
+            className={styles.bannerImg}
+            alt="kukukkakka 배너 이미지3"
+            src="img/main_banner_3.jpg"
+          />
+        </div>
+      </div>
+
+      <div className={styles.imgBtnWrapper}>
+        <button type="button" className={styles.turnImgBtn} onClick={prevImg}>
+          〈
+        </button>
+        <button type="button" className={styles.turnImgCounter}>
+          {nowSlide + 1} / 3
+        </button>
+        <button
+          type="button"
+          className={styles.turnImgBtn}
+          style={{ padding: '5px 5px 5px 13px' }}
+          onClick={nextImg}
+        >
+          〉
+        </button>
+      </div>
 
       <article>
         <section className={styles.mainTitleContainer}>

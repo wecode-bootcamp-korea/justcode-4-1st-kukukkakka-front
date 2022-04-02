@@ -1,7 +1,47 @@
+.imgContainer {
+  overflow: hidden;
+}
+
+.slideContainer {
+  width: 100%;
+  display: flex;
+}
+
+.bannerImg {
+  position: relative;
+  width: 100%;
+}
+
+.imgBtnWrapper {
+  position: absolute;
+  top: 67%;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+
+.turnImgBtn {
+  border-radius: 50%;
+  border: none;
+  padding: 5px 13px 5px 5px;
+  font-size: 15px;
+  color: rgb(241, 239, 239);
+  background-color: rgba(150, 150, 150, 0.5);
+}
+
+.turnImgCounter {
+  border: none;
+  background-color: rgba(52, 50, 50, 0.4);
+  color: white;
+  font-size: 14px;
+  border-radius: 20px;
+  padding: 6px 17px;
+  margin: 0 15px;
+}
+
 .mainTitleContainer {
   display: flex;
-  margin: 0 auto;
   justify-content: space-evenly;
+  margin: 0 auto;
 }
 
 .mainTitleWrapper {
