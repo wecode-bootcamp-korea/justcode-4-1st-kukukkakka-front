@@ -15,11 +15,12 @@ function Detail() {
     navigate('/cart');
   };
 
-  const onClickItem = () => {
+  const onClickOptionItem = () => {
     showOptionItem.display === 'none'
       ? setShowOptionItem({ display: 'block' })
       : setShowOptionItem({ display: 'none' });
   };
+  console.log('optionItemBox display: ', showOptionItem.display);
 
   return (
     <div className={style.container}>
@@ -46,13 +47,16 @@ function Detail() {
           </div>
           <div className={style.inBox}>
             <div className={style.contentTittle}>추가옵션</div>
-            <OptionBtn show={onClickItem} />
+            <OptionBtn
+              addOptionItem={onClickOptionItem}
+              optionItem={showOptionItem}
+            />
           </div>
           <div className={style.priceBox}>
             <div>상품가격</div>
             <div>{totalPrice}원</div>
           </div>
-          <AddedOptionBox display={showOptionItem} />
+          <AddedOptionBox changeStyle={showOptionItem} />
           <div className={style.totalPriceBox}>
             <span>총 주문금액</span>
             <span>{totalPrice}원</span>

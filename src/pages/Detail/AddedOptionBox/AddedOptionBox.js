@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import OperationBtns from '../OperationBtns/OperationBtns';
 import style from './AddedOptionBox.module.scss';
 
-function AddedOptionBox(display) {
+function AddedOptionBox(changeStyle) {
   return (
     <div>
-      <div className={style.priceBox} style={display.display}>
+      <div className={style.priceBox} style={changeStyle.changeStyle}>
         <ul>
           <li>추가상품: </li>
           <li className={style.closeBox}>
