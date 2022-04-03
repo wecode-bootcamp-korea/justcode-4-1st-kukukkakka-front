@@ -7,7 +7,14 @@ import AddedOptionBox from './AddedOptionBox/AddedOptionBox';
 
 function Detail() {
   const [totalPrice, setTotalPrice] = useState(45000);
-  const [showOptionItem, setShowOptionItem] = useState({ display: 'none' });
+  const [optionPrice, setOptionPrice] = useState(2500);
+  const [changeText, setChangeText] = useState('함께하면 좋은 추천상품');
+  const [showItemBox, setShowItemBox] = useState({ display: 'none' });
+  const [optionList, setOptionList] = useState({ display: 'none' });
+  const [changeBorder, setChangeBorder] = useState({
+    border: '1px solid $gray-color',
+  });
+  const [count, setCount] = useState(1);
 
   const navigate = useNavigate();
 
@@ -15,12 +22,69 @@ function Detail() {
     navigate('/cart');
   };
 
-  const onClickOptionItem = () => {
-    showOptionItem.display === 'none'
-      ? setShowOptionItem({ display: 'block' })
-      : setShowOptionItem({ display: 'none' });
+  const selectItem = () => {
+    onClickOptionItem();
+    setOptionList({ display: 'none' });
+    setChangeBorder({ border: '1px solid #b1b1b1' });
+    if (showItemBox.display === 'block') {
+      setChangeText('함께하면 좋은 추천상품');
+      setTotalPrice(totalPrice - optionPrice);
+    } else {
+      setChangeText('롱 모던 베이직 화분');
+      setTotalPrice(totalPrice + optionPrice);
+    }
   };
-  console.log('optionItemBox display: ', showOptionItem.display);
+
+  console.log('optionItemBox display in OptionBtn: ', showItemBox.display);
+
+  const notSelectItem = () => {
+    setChangeText('선택안함');
+    setOptionList({ display: 'none' });
+    setChangeBorder({ border: '1px solid #b1b1b1' });
+
+    // 추가상품 눌렀다가 선택안함 눌렀을 때 추가상품박스 없애기
+    if (showItemBox.display === 'block') {
+      onClickOptionItem();
+      setTotalPrice(totalPrice - optionPrice);
+    }
+  };
+
+  const onClickOptionToggle = () => {
+    if (optionList.display === 'none') {
+      setOptionList({ display: 'block' });
+      setChangeBorder({ border: '1px solid #FFCD32' });
+    } else {
+      setOptionList({ display: 'none' });
+      setChangeBorder({ border: '1px solid #b1b1b1' });
+    }
+    return optionList;
+  };
+
+  const minusPrice = () => {
+    if (count - 1 < 1) return;
+    setCount(count - 1);
+    setTotalPrice(totalPrice / count);
+  };
+
+  const plusPrice = () => {
+    setCount(count + 1);
+    setTotalPrice((count + 1) * totalPrice);
+  };
+
+  // 추가상품박스 보이게 하는 함수
+  const onClickOptionItem = () => {
+    showItemBox.display === 'none'
+      ? setShowItemBox({ display: 'block' })
+      : setShowItemBox({ display: 'none' });
+  };
+
+  console.log('optionItemBox display: ', showItemBox.display);
+
+  const deleteItemBox = () => {
+    setShowItemBox({ display: 'none' });
+    setTotalPrice(totalPrice - optionPrice);
+    setChangeText('함께하면 좋은 추천상품');
+  };
 
   return (
     <div className={style.container}>
@@ -43,20 +107,33 @@ function Detail() {
           </div>
           <div className={style.inBox}>
             <span className={style.contentTittle}>수량</span>
-            <OperationBtns props={setTotalPrice} totalPrice={totalPrice} />
+            <OperationBtns
+              plusPrice={plusPrice}
+              count={count}
+              minusPrice={minusPrice}
+            />
           </div>
           <div className={style.inBox}>
             <div className={style.contentTittle}>추가옵션</div>
             <OptionBtn
-              addOptionItem={onClickOptionItem}
-              optionItem={showOptionItem}
+              optionPrice={optionPrice}
+              text={changeText}
+              changeBorder={changeBorder}
+              optionList={optionList}
+              onClickOptionToggle={onClickOptionToggle}
+              selectItem={selectItem}
+              notSelectItem={notSelectItem}
             />
           </div>
           <div className={style.priceBox}>
             <div>상품가격</div>
             <div>{totalPrice}원</div>
           </div>
-          <AddedOptionBox changeStyle={showOptionItem} />
+          <AddedOptionBox
+            changeStyle={showItemBox}
+            deleteItem={deleteItemBox}
+            optionPrice={optionPrice}
+          />
           <div className={style.totalPriceBox}>
             <span>총 주문금액</span>
             <span>{totalPrice}원</span>

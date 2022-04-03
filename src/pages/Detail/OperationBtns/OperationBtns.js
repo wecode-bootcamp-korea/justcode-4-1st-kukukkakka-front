@@ -1,20 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import style from './OperationBtns.module.scss';
 
-function OperationBtns({ props, totalPrice }) {
-  const [count, setCount] = useState(1);
-
-  const minusPrice = () => {
-    if (count - 1 < 1) return;
-    setCount(count - 1);
-    props(totalPrice / count);
-  };
-
-  const plusPrice = () => {
-    setCount(count + 1);
-    props((count + 1) * totalPrice);
-  };
-
+function OperationBtns({ plusPrice, count, minusPrice }) {
   return (
     <div className={style.operationButtons}>
       <button className={style.btns} onClick={minusPrice}>
