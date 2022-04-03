@@ -7,53 +7,52 @@
 .mainContainer {
   position: relative;
   padding: 90px 0;
-}
 
-.mainSubContainer {
-  @include container();
-}
+  .mainSubContainer {
+    @include container();
 
-.mainSubFlex {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-}
+    .mainSubFlex {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
 
-.mainSubTitle {
-  font-size: 30px;
-  font-weight: 400;
-  margin-bottom: 60px;
-}
+      .mainSubTitle {
+        margin-bottom: 60px;
+        font-size: 30px;
+        font-weight: 400;
+      }
+      .viewMore {
+        color: gray;
+        font-size: 14px;
+        cursor: pointer;
 
-.viewMore {
-  font-size: 14px;
-  color: gray;
-  cursor: pointer;
-
-  &:hover {
-    color: #ffcd32;
+        &:hover {
+          color: #ffcd32;
+        }
+      }
+    }
   }
 }
 
 .flowerListContainer {
   overflow: hidden;
-}
 
-.flowerList {
-  display: flex;
-  gap: 15px;
-  width: 102%;
+  .flowerList {
+    display: flex;
+    width: 102%;
+    gap: 15px;
+  }
 }
 
 .turn_list_card_btn {
   position: absolute;
   top: 44%;
   right: 7%;
+  padding: 13px 11px 13px 23px;
   border-radius: 50%;
   border: none;
-  padding: 13px 11px 13px 23px;
-  font-size: 20px;
+  box-shadow: 1px 1px 1px 1px rgb(208, 207, 207);
   color: rgb(145, 145, 145);
   background-color: white;
-  box-shadow: 1px 1px 1px 1px rgb(208, 207, 207);
+  font-size: 20px;
 }

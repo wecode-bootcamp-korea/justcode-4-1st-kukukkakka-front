@@ -1,15 +1,17 @@
+$yellowColor: #ffcd32;
+
 .bannerContainer {
   overflow: hidden;
-}
 
-.slideContainer {
-  width: 100%;
-  display: flex;
-}
+  .slideContainer {
+    display: flex;
+    width: 100%;
 
-.bannerImg {
-  position: relative;
-  width: 100%;
+    .bannerImg {
+      position: relative;
+      width: 100%;
+    }
+  }
 }
 
 .turn_banner_btn_wrapper {
@@ -17,76 +19,73 @@
   top: 67%;
   left: 50%;
   transform: translate(-50%, 0);
-}
 
-.turnBannerBtn {
-  border-radius: 50%;
-  border: none;
-  padding: 5px 13px 5px 5px;
-  font-size: 15px;
-  color: rgb(241, 239, 239);
-  background-color: rgba(150, 150, 150, 0.5);
-}
-
-.turnBannerCounter {
-  border: none;
-  background-color: rgba(52, 50, 50, 0.4);
-  color: white;
-  font-size: 14px;
-  border-radius: 20px;
-  padding: 6px 17px;
-  margin: 0 15px;
+  .turnBannerBtn {
+    padding: 5px 13px 5px 5px;
+    border-radius: 50%;
+    border: none;
+    color: rgb(241, 239, 239);
+    background-color: rgba(150, 150, 150, 0.5);
+    font-size: 15px;
+  }
+  .turnBannerCounter {
+    padding: 6px 17px;
+    margin: 0 15px;
+    border: none;
+    border-radius: 20px;
+    color: white;
+    background-color: rgba(52, 50, 50, 0.4);
+    font-size: 14px;
+  }
 }
 
 .mainTitleContainer {
   display: flex;
   justify-content: space-evenly;
   margin: 0 auto;
-}
 
-.mainTitleWrapper {
-  padding-top: 150px;
-}
+  .mainTitleWrapper {
+    padding-top: 150px;
 
-.mainTitle {
-  font-size: 30px;
-  font-weight: 400;
-  margin-bottom: 15px;
-}
-
-.mainTitleBottom {
-  font-size: 30px;
-}
-
-.mainTitleContent {
-  color: #787878;
-  margin: 25px 0;
-  font-weight: 300;
+    .mainTitle {
+      margin-bottom: 15px;
+      font-size: 30px;
+      font-weight: 400;
+    }
+    .mainTitleBottom {
+      font-size: 30px;
+    }
+    .mainTitleContent {
+      margin: 25px 0;
+      color: #787878;
+      font-weight: 300;
+    }
+  }
 }
 
 .sizeWrapper {
   margin-bottom: 40px;
-}
 
-.size {
-  margin-right: 20px;
-  padding: 3px 7px;
-  border-radius: 50%;
-  font-size: 10px;
-  background-color: #ffcd32;
-  letter-spacing: -0.1px;
-  color: #fff;
+  .size {
+    margin-right: 20px;
+    padding: 3px 7px;
+    border-radius: 50%;
+    color: #fff;
+    background-color: $yellowColor;
+    font-size: 10px;
+    letter-spacing: -0.1px;
+  }
 }
 
 .learn_more_subscription {
-  font-size: 15px;
-  background-color: #f7f7f7;
+  padding: 15px 50px;
   border: none;
   border-radius: 30px;
-  padding: 15px 50px;
+  background-color: #f7f7f7;
+  font-size: 15px;
   cursor: pointer;
 
   &:hover {
-    background-color: #ffcd32;
+    background-color: $yellowColor;
   }
 }

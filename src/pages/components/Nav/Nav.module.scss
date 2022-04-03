@@ -1,3 +1,7 @@
+$paddingValue: 0 10px 0 10px;
+$darkColor: #222222;
+$yellowColor: #ffcd32;
+
 @mixin container {
   max-width: 1100px;
   width: 100%;
@@ -6,66 +10,64 @@
 
 .headerWrapper {
   @include container();
-}
 
-.headerList {
-  display: flex;
-  justify-content: flex-end;
-  list-style: none;
-  margin: 20px 0;
-}
+  .headerList {
+    display: flex;
+    justify-content: flex-end;
+    margin: 20px 0;
+    list-style: none;
 
-.headerMenu {
-  padding: 0 10px 0 10px;
-  font-weight: 300;
-  color: #222222;
-  border-right: 1px solid #222222;
-}
+    .headerMenu {
+      padding: $paddingValue;
+      color: $darkColor;
+      border-right: 1px solid $darkColor;
+      font-weight: 300;
 
-.pointColor {
-  font-weight: 500;
-  color: #46cfa7;
-}
-
-.headerMenuBold {
-  padding: 0 10px 0 10px;
-  color: #222222;
-  font-weight: 400;
-}
-
-.mainLogo {
-  padding-top: 20px;
+      .pointColor {
+        color: #46cfa7;
+        font-weight: 500;
+      }
+    }
+    .headerMenuBold {
+      padding: $paddingValue;
+      color: $darkColor;
+      font-weight: 400;
+    }
+  }
 }
 
 .navSticky {
-  padding: 0 140px;
   position: sticky;
   top: 0;
   background-color: white;
   z-index: 99;
-}
 
-.navWrapper {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+  .navWrapper {
+    @include container();
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
-.navList {
-  display: flex;
-  justify-content: space-around;
-  gap: 60px;
-}
+    .mainLogo {
+      padding-top: 20px;
+    }
+    .navList {
+      display: flex;
+      justify-content: space-around;
+      gap: 60px;
 
-.navMenu {
-  height: 30px;
-  font-size: 18px;
-  font-weight: 400;
-  color: #222222;
+      .navMenu {
+        height: 30px;
+        color: $darkColor;
+        font-size: 18px;
+        font-weight: 400;
 
-  &:hover {
-    bottom: -14px;
-    border-bottom: 5px solid #ffcd32;
+        &:hover {
+          bottom: -14px;
+          border-bottom: 5px solid $yellowColor;
+        }
+      }
+    }
   }
 }
 
@@ -78,8 +80,8 @@
   position: absolute;
   top: 20%;
   right: 9.4%;
-  background-color: #ffcd32;
-  font-size: 12px;
-  border-radius: 50%;
   padding: 3px 6px;
+  border-radius: 50%;
+  background-color: $yellowColor;
+  font-size: 12px;
 }
