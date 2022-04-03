@@ -1,23 +1,41 @@
 import React, { useEffect, useState } from 'react';
 import styles from '../List/List.module.scss';
 import { AiOutlineSearch } from 'react-icons/ai';
+
 import ListCard from '../List/ListCard';
 function List() {
+  //back 데이터 가져오기
+  // const [lists, setLists] = useState({
+  //   productList: [],
+  // });
+
+  //mockData
   const [lists, setLists] = useState({
     productList: [],
   });
 
-  const [lowerPrice, setLowerPrice] = useState([]);
+  const [lowPrice, setLowPrice] = useState([]);
+  const [highPrice, setHighPrice] = useState([]);
   const [inputs, setInputs] = useState('');
+  const [showRecommend, setShowRecommend] = useState(false);
 
   useEffect(() => {
-    fetch('http://localhost:8000/products')
+    fetch(`http://localhost:3000/data/products.json`, {
+      method: 'GET',
+    })
       .then(res => res.json())
-      .then(res => {
-        console.log(res.message);
-        setLists(res);
+      .then(data => {
+        setLists(data);
       });
   }, []);
+
+  // useEffect(() => {
+  //   fetch('http://localhost:8000/products')
+  //     .then(res => res.json())
+  //     .then(res => {
+  //       setLists(res);
+  //     });
+  // }, []);
 
   //유저가 찾은 키워드를 백엔드에 보내주기
 
@@ -37,15 +55,23 @@ function List() {
     if (e.key === 'Enter') setInputs(e.target.value);
   };
 
+  const showRecommendBox = () => {
+    setShowRecommend(!showRecommend);
+    console.log(showRecommend);
+  };
+
   const filterWords = lists.productList.filter(list =>
     list.name.includes(inputs)
   );
 
-  const sortByPrice = () => {
+  const sortByLowPrice = () => {
     const getPrice = lists.productList.sort((a, b) => a.price - b.price);
-    return setLowerPrice(getPrice);
+    return setLowPrice(getPrice);
   };
-
+  const sortByHighPrice = () => {
+    const getPrice = lists.productList.sort((a, b) => b.price - a.price);
+    return setHighPrice(getPrice);
+  };
   return (
     <>
       <section className={styles.listBanner}>
@@ -69,12 +95,17 @@ function List() {
               <AiOutlineSearch size="1.5em" color="#ddd" />
             </div>
           </div>
-
           <div className={styles.filterBox}>
-            <ul>
-              <li>사이즈순</li>
-              <li onClick={sortByPrice}>가격 낮은 순</li>
-            </ul>
+            <div className={styles.recommendBox}>
+              <span onClick={showRecommendBox} className={styles.recommend}>
+                추천순
+              </span>
+              <ul style={{ display: showRecommend ? 'block' : 'none' }}>
+                <li>추천순</li>
+                <li onClick={sortByHighPrice}>가격 높은순</li>
+                <li onClick={sortByLowPrice}>가격 낮은순</li>
+              </ul>
+            </div>
           </div>
         </div>
       </section>
