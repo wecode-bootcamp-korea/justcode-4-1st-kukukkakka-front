@@ -1,4 +1,4 @@
-.imgContainer {
+.bannerContainer {
   overflow: hidden;
 }
 
@@ -12,14 +12,14 @@
   width: 100%;
 }
 
-.imgBtnWrapper {
+.turn_banner_btn_wrapper {
   position: absolute;
   top: 67%;
   left: 50%;
   transform: translate(-50%, 0);
 }
 
-.turnImgBtn {
+.turnBannerBtn {
   border-radius: 50%;
   border: none;
   padding: 5px 13px 5px 5px;
@@ -28,7 +28,7 @@
   background-color: rgba(150, 150, 150, 0.5);
 }
 
-.turnImgCounter {
+.turnBannerCounter {
   border: none;
   background-color: rgba(52, 50, 50, 0.4);
   color: white;

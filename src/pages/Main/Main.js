@@ -10,22 +10,15 @@ function Main() {
   const [nowSlide, setNowSlide] = useState(0);
   const slideRef = useRef(null);
 
+  //메인 배너 슬라이드
   const TOTAL_SLIDES = 2;
 
   const nextImg = () => {
-    if (nowSlide >= TOTAL_SLIDES) {
-      setNowSlide(0);
-    } else {
-      setNowSlide(nowSlide + 1);
-    }
+    nowSlide >= TOTAL_SLIDES ? setNowSlide(0) : setNowSlide(nowSlide + 1);
   };
 
   const prevImg = () => {
-    if (nowSlide === 0) {
-      setNowSlide(TOTAL_SLIDES);
-    } else {
-      setNowSlide(nowSlide - 1);
-    }
+    nowSlide === 0 ? setNowSlide(TOTAL_SLIDES) : setNowSlide(nowSlide - 1);
   };
 
   useEffect(() => {
@@ -33,6 +26,7 @@ function Main() {
     slideRef.current.style.transform = `translateX(-${nowSlide}00%)`;
   }, [nowSlide]);
 
+  //메인 리스트 카드 컴포넌트
   useEffect(() => {
     fetch('http://localhost:8000/products')
       .then(res => res.json())
@@ -44,9 +38,9 @@ function Main() {
   const filtered_subscriptrion_list = lists.productList.filter(
     list => list.id > 9 && list.id <= 11
   );
-  const filtered_bouquet_list = lists.productList.filter(list => list.id <= 4);
+  const filtered_bouquet_list = lists.productList.filter(list => list.id <= 10);
   const filtered_today_delivery_list = lists.productList.filter(
-    list => list.id > 4 && list.id <= 8
+    list => list.id > 6 && list.id <= 13
   );
 
   const navigate = useNavigate();
@@ -58,7 +52,7 @@ function Main() {
 
   return (
     <main>
-      <div className={styles.imgContainer}>
+      <div className={styles.bannerContainer}>
         <div className={styles.slideContainer} ref={slideRef}>
           <img
             className={styles.bannerImg}
@@ -78,16 +72,20 @@ function Main() {
         </div>
       </div>
 
-      <div className={styles.imgBtnWrapper}>
-        <button type="button" className={styles.turnImgBtn} onClick={prevImg}>
+      <div className={styles.turn_banner_btn_wrapper}>
+        <button
+          type="button"
+          className={styles.turnBannerBtn}
+          onClick={prevImg}
+        >
           〈
         </button>
-        <button type="button" className={styles.turnImgCounter}>
+        <button type="button" className={styles.turnBannerCounter}>
           {nowSlide + 1} / 3
         </button>
         <button
           type="button"
-          className={styles.turnImgBtn}
+          className={styles.turnBannerBtn}
           style={{ padding: '5px 5px 5px 13px' }}
           onClick={nextImg}
         >
@@ -132,6 +130,7 @@ function Main() {
             key={filtered_subscriptrion_list.id}
             lists={filtered_subscriptrion_list}
             containerMargin="0"
+            hide="none"
           />
         </section>
 

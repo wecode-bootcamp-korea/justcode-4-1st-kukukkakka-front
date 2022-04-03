@@ -5,6 +5,7 @@
 }
 
 .mainContainer {
+  position: relative;
   padding: 90px 0;
 }
 
@@ -34,8 +35,25 @@
   }
 }
 
+.flowerListContainer {
+  overflow: hidden;
+}
+
 .flowerList {
   display: flex;
-  justify-content: center;
   gap: 15px;
+  width: 102%;
+}
+
+.turn_list_card_btn {
+  position: absolute;
+  top: 44%;
+  right: 7%;
+  border-radius: 50%;
+  border: none;
+  padding: 13px 11px 13px 23px;
+  font-size: 20px;
+  color: rgb(145, 145, 145);
+  background-color: white;
+  box-shadow: 1px 1px 1px 1px rgb(208, 207, 207);
 }

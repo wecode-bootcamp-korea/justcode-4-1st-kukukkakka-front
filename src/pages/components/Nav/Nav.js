@@ -6,6 +6,7 @@ import { AiOutlineShopping } from 'react-icons/ai';
 
 function Nav() {
   const [borderLine, setBorderLine] = useState('');
+  // const [cartCounter, setCartCounter] = useState(0);
 
   const goToTop = () => {
     window.scrollTo(0, 0);
@@ -18,6 +19,10 @@ function Nav() {
   };
 
   window.addEventListener('scroll', changeNavbarColor);
+
+  // useEffect(()=>{
+  //   fetch('').then(res=>res.json()).then(res=>{setCartCounter(res)})
+  // },[cartCounter])
 
   return (
     <>
@@ -68,6 +73,13 @@ function Nav() {
                 size="40"
                 color="#707070"
               />
+              {/* <span className={styles.cartCounterCss}>
+                style=
+                {{
+                  display: `${cartCounter} > 0 ? "" : "none"`,
+                }}
+                {cartCounter}
+              </span> */}
             </Link>
           </div>
         </div>

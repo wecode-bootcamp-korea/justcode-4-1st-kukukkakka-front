@@ -70,5 +70,16 @@
 }
 
 .iconBlank {
+  position: relative;
   margin-left: 20px;
+}
+
+.cartCounterCss {
+  position: absolute;
+  top: 20%;
+  right: 9.4%;
+  background-color: #ffcd32;
+  font-size: 12px;
+  border-radius: 50%;
+  padding: 3px 6px;
 }
