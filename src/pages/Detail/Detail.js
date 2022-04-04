@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import OperationBtns from './OperationBtns/OperationBtns';
 import style from './Detail.module.scss';
@@ -6,6 +6,9 @@ import OptionList from './OptionList/OptionList';
 import AddedOptionBox from './AddedOptionBox/AddedOptionBox';
 
 function Detail() {
+  const [product, setProduct] = useState({
+    product: [],
+  });
   const [totalPrice, setTotalPrice] = useState(45000);
   const [price, setPrice] = useState(45000);
   const [optionPrice, setOptionPrice] = useState(2500);
@@ -16,6 +19,14 @@ function Detail() {
     border: '1px solid $gray-color',
   });
   const [count, setCount] = useState(1);
+
+  useEffect(() => {
+    fetch('http://localhost:8000/products/:id')
+      .then(res => res.json())
+      .then(res => {
+        setProduct(res);
+      });
+  }, []);
 
   const navigate = useNavigate();
 
@@ -94,7 +105,8 @@ function Detail() {
     <div className={style.container}>
       <header>
         <div className={style.category}>
-          HOME '{'>'}' 꽃다발 '{'>'}' 블루 버터플라이 에디션
+          HOME {`>`} 꽃다발 {`>`} 블루 버터플라이 에디션
+          {/* HOME {`>`} 꽃다발 {`>`} {product.name} */}
         </div>
       </header>
       <main className={style.content}>
@@ -102,8 +114,11 @@ function Detail() {
         <article className={style.detailBox}>
           <ul className={style.productInfo}>
             <li> 꽃밭에 앉은 파란 나비</li>
+            {/* <li> {product.description}</li> */}
             <li>블루 버터플라이 에디션</li>
+            {/* <li> {product.name}</li> */}
             <li>53900원</li>
+            {/* <li>{product.price}원</li> */}
           </ul>
           <div className={style.eventTittle}>
             회원 구매 시,
@@ -137,6 +152,7 @@ function Detail() {
           <div className={style.priceBox}>
             <div>상품가격</div>
             <div>{price}원</div>
+            {/* <li>{product.price}원</li> */}
           </div>
           <AddedOptionBox
             changeStyle={showItemBox}
@@ -146,6 +162,7 @@ function Detail() {
           <div className={style.totalPriceBox}>
             <span>총 주문금액</span>
             <span>{totalPrice}원</span>
+            {/* <li>{product.price}원</li> */}
           </div>
           <div className={style.contentBtnBox}>
             <button onClick={goToCart}>장바구니</button>

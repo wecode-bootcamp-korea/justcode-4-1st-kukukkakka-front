@@ -32,7 +32,7 @@ $padding_bottom: 25px;
 .container {
   @include sideMargin(40px);
   @include sidePadding(40px);
-  padding-top: 100px;
+  padding-top: 20px;
   padding-bottom: 300px;
 }
 
