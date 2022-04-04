@@ -36,8 +36,6 @@ function Detail() {
     }
   };
 
-  console.log('optionItemBox display in OptionBtn: ', showItemBox.display);
-
   const notSelectItem = () => {
     setChangeText('선택안함');
     setOptionList({ display: 'none' });
@@ -69,7 +67,6 @@ function Detail() {
     setTotalPrice(price / count);
     showItemBox.display === 'block' &&
       setTotalPrice(price / count + optionPrice);
-    console.log('count:', count);
   };
 
   const plusPrice = () => {
@@ -86,8 +83,6 @@ function Detail() {
       ? setShowItemBox({ display: 'block' })
       : setShowItemBox({ display: 'none' });
   };
-
-  // console.log('optionItemBox display: ', showItemBox.display);
 
   const deleteItemBox = () => {
     setShowItemBox({ display: 'none' });
