@@ -111,29 +111,28 @@ function Detail() {
           </div>
           <div className={style.inBox}>
             <span className={style.contentTittle}>수량</span>
-            <OperationBtns
-              plusPrice={plusPrice}
-              count={count}
-              minusPrice={minusPrice}
-            />
+            <div>
+              <OperationBtns
+                plusPrice={plusPrice}
+                count={count}
+                minusPrice={minusPrice}
+              />
+            </div>
           </div>
           <div className={style.inBox}>
-            {/* <div className={style.contentTittle}>추가옵션</div>
+            <div className={style.contentTittle}>추가옵션</div>
             <div className={style.option_btn_box} style={changeBorder}>
               <button className={style.optionBtn} onClick={onClickOptionToggle}>
                 <div>{changeText}</div>
                 <i className={style.btnDown}>⌵</i>
-              </button> */}
-            <OptionList
-              text={changeText}
-              optionPrice={optionPrice}
-              optionList={optionList}
-              changeBorder={changeBorder}
-              selectItem={selectItem}
-              notSelectItem={notSelectItem}
-              onClickOptionToggle={onClickOptionToggle}
-            />
-            {/* </div> */}
+              </button>
+              <OptionList
+                optionPrice={optionPrice}
+                optionList={optionList}
+                selectItem={selectItem}
+                notSelectItem={notSelectItem}
+              />
+            </div>
           </div>
           <div className={style.priceBox}>
             <div>상품가격</div>

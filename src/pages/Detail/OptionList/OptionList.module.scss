@@ -16,24 +16,19 @@ $padding-bottom: 20px;
   border-radius: 5px;
 }
 
-.optionBtn {
-  @include fontStyle(8px, lighter, $medium-font-size);
-  display: flex;
-  justify-content: space-between;
-  padding: 5px 20px 15px 30px;
-  border: 1px solid white;
-  border-radius: 5px;
-  background-color: white;
-  cursor: pointer;
+.toggleList {
+  padding-left: 20px;
+  padding-bottom: 20px;
+  border-top: 1px solid rgb(237, 237, 237);
 
+  cursor: pointer;
   :first-child {
     padding-top: 10px;
+    padding-bottom: 10px;
   }
 
   :last-child {
-    padding-left: 60px;
-    font-size: $large-font-size;
-    font-weight: 100;
+    @include fontStyle(0, 400, 15px);
   }
 }
 
