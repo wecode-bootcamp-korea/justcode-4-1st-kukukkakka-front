@@ -4,125 +4,171 @@ import { useNavigate } from 'react-router-dom';
 import stylse from './Signup.module.scss';
 
 function Signup() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [passwordAgain, setPasswordAgain] = useState('');
-  const [username, setUsername] = useState('');
-  const [gender, setGender] = useState('1');
-  const [checked, setChecked] = useState(false);
   const navigate = useNavigate();
-
+  const [inputs, setInputs] = useState([
+    {
+      email: '',
+      password: '',
+      passwordAgain: '',
+      username: '',
+      gender: '1',
+      checked: false,
+    },
+  ]);
+  //값을 할당
+  const { email, password, passwordAgain, username, gender, checked } = inputs;
   const [errtext, setErrtext] = useState({
-    text: '',
-    color: false,
+    text_email: '',
+    color_email: false,
     idCheck: false,
+    text_pw: '',
+    color_pw: false,
+    text_pw_again: '',
+    color_pw_again: false,
   });
-  const [pwErrtext, setPwErrtext] = useState({
-    text: '',
-    color: false,
-  });
-  const [pwAgainErrtext, setPwAgainErrtext] = useState({
-    text: '',
-    color: false,
-  });
-
- const signupHandler = () => {
-
-  useEffect(() => {
-    fetch('회원가입 API url', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        email: email,
-        password: password,
-        username: username,
-        gender_id : Number(gender),
-        policyAgree: checked,
-      }),
-    })
-      .then(res =>  {
-        if (res.status === 201) {
-          alert('회원가입을 축하드립니다!');
-          navigate ('/main')
-        }
-        else if (res. status === 400) {
-        return res.json()}
-      })
-      .then(res => {console.log("에러메시지 : " , res.message)});
-  }, []);
-
-  const policyAgree = () => {
-    setChecked(!checked);
-  };
-  const genderChoice = (e, data) => {
-    setGender(data);
-  };
 
   const emailHandler = e => {
-    setEmail(e.target.value);
+    setInputs({ ...inputs, email: e.target.value });
     if (e.target.value === '') {
-      setErrtext({ text: '', color: false, idCheck: false });
+      setErrtext({
+        ...errtext,
+        text_email: '',
+        color_email: false,
+        idCheck: false,
+      });
     } else if (!email.includes('@')) {
       setErrtext({
-        text: '아이디는 이메일형식 이어야 합니다.',
-        color: false,
+        ...errtext,
+        text_email: '아이디는 이메일형식 이어야 합니다.',
+        color_email: false,
         idCheck: false,
       });
     } else if (email.includes('@')) {
       setErrtext({
-        text: '형식에 맞는 아이디입니다.',
-        color: true,
+        ...errtext,
+        text_email: '형식에 맞는 아이디입니다.',
+        color_email: true,
         idCheck: true,
       });
     }
   };
 
   const passwordHandler = e => {
-    setPassword(e.target.value);
+    setInputs({ ...inputs, password: e.target.value });
     let regExp = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,20}$/;
     if (e.target.value === '') {
-      setPwErrtext({ text: '', color: false });
+      setErrtext({ ...errtext, text_pw: '', color_pw: false });
     } else if (password.length < 8) {
-      setPwErrtext({
-        text: '비밀번호는 8자리 이상이어야 합니다.',
-        color: false,
+      setErrtext({
+        ...errtext,
+        text_pw: '비밀번호는 8자리 이상이어야 합니다.',
+        color_pw: false,
       });
     } else if (password.length >= 8 && regExp.test(password)) {
-      setPwErrtext({ text: '사용가능한 비밀번호 입니다', color: true });
+      setErrtext({
+        ...errtext,
+        text_pw: '사용가능한 비밀번호 입니다',
+        color_pw: true,
+      });
     } else if (password.length >= 8 && !regExp.test(password)) {
-      setPwErrtext({
-        text: '영문, 숫자가 모두 포함되어야 합니다',
-        color: false,
+      setErrtext({
+        ...errtext,
+        text_pw: '영문, 숫자가 모두 포함되어야 합니다',
+        color_pw: false,
       });
     }
   };
 
   const passwordAgainHandler = e => {
-    setPasswordAgain(e.target.value);
+    setInputs({ ...inputs, passwordAgain: e.target.value });
     if (e.target.value === '') {
-      setPwAgainErrtext({ text: '', color: false });
+      setErrtext({ ...errtext, text_pw_again: '', color_pw_again: false });
     } else if (e.target.value !== password) {
-      setPwAgainErrtext({
-        text: '비밀번호가 일치하지 않습니다.',
-        color: false,
+      setErrtext({
+        ...errtext,
+        text_pw_again: '비밀번호가 일치하지 않습니다.',
+        color_pw_again: false,
       });
     } else if (e.target.value === password) {
-      setPwAgainErrtext({ text: '비밀번호가 일치합니다', color: true });
+      setErrtext({
+        ...errtext,
+        text_pw_again: '비밀번호가 일치합니다',
+        color_pw_again: true,
+      });
     }
   };
 
-  const usernameHandler = e => {
-    setUsername(e.target.value);
+  const policyAgree = () => {
+    setInputs({ ...inputs, checked: !checked });
+  };
+  const genderChoice = (e, value) => {
+    setInputs({ ...inputs, gender: value });
   };
 
+  const usernameHandler = e => {
+    setInputs({ ...inputs, username: e.target.value });
+  };
+  // console.log('값이 잘 들어왔나?:', inputs);
+  // console.log('값이 잘 들어왔나?222:', email, password, passwordAgain);
+
   const isPassedSignup =
-    errtext.idCheck === true &&
-    pwErrtext.color === true &&
-    pwAgainErrtext.color === true &&
+    errtext.idCheck &&
+    errtext.color_email &&
+    errtext.color_pw &&
+    errtext.color_pw_again &&
+    gender &&
     username !== '' &&
-    checked === true;
+    checked;
+
+  // useEffect(() => {
+  //   fetch('회원가입 중복회원 체크 API url', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify({
+  //       email: email,
+  //     }),
+  //   });
+  // })
+  //   .then(res => {
+  //     if (res.status == 201) {
+  //       alert('가입 가능한 이메일입니다.');
+  //     } else if (res.status == 400) {
+  //       alert('이미 가입한 이메일입니다. 로그인페이지로 이동합니다.');
+  //       navigate('/login');
+  //     }
+  //   })
+  //   .then(res => {
+  //     console.log('에러메시지 : ', res.message);
+  //   });
+
+  // useEffect(() => {
+  //   fetch('회원가입 API url', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify({
+  //       email: email,
+  //       password: password,
+  //       username: username,
+  //       gender_id: Number(gender),
+  //       policyAgree: checked,
+  //     }),
+  //   })
+  //     .then(res => {
+  //       if (res.status === 201) {
+  //         alert('회원가입을 축하드립니다!');
+  //         navigate('/main');
+  //       } else if (res.status === 400) {
+  //         return res.json();
+  //       }
+  //     })
+  //     .then(res => {
+  //       console.log('에러메시지 : ', res.message);
+  //     });
+  // }, []);
 
   return (
     <div>
@@ -137,6 +183,7 @@ function Signup() {
             className={stylse.inputBox}
             placeholder="예)kukukkakka@kukukkakka.kr"
             onChange={emailHandler}
+            value={email}
           />
           <button
             className={
@@ -144,16 +191,18 @@ function Signup() {
                 ? stylse.idDuplicateCheck_true
                 : stylse.idDuplicateCheck_false
             }
+            disabled={!errtext.idCheck}
+            // onClick={duplicateCheck}
           >
             중복확인
           </button>
         </div>
         <div
           className={
-            errtext.color ? stylse.validateGuide : stylse.unvalidateGuide
+            errtext.color_email ? stylse.validateGuide : stylse.unvalidateGuide
           }
         >
-          {errtext.text}
+          {errtext.text_email}
         </div>
         <div className={stylse.setWrapper}>
           <span>비밀번호</span>
@@ -162,14 +211,15 @@ function Signup() {
             placeholder="영문,숫자를 포함하여 8자리-20자리"
             onChange={passwordHandler}
             type="password"
+            value={password}
           />
         </div>
         <div
           className={
-            pwErrtext.color ? stylse.validateGuide : stylse.unvalidateGuide
+            errtext.color_pw ? stylse.validateGuide : stylse.unvalidateGuide
           }
         >
-          {pwErrtext.text}
+          {errtext.text_pw}
         </div>
         <div className={stylse.setWrapper}>
           <span> 비밀번호 확인 </span>
@@ -177,15 +227,18 @@ function Signup() {
             className={stylse.inputBox}
             placeholder="비밀번호를 한 번 더 입력해주세요."
             onChange={passwordAgainHandler}
+            value={passwordAgain}
+            type="password"
           />
         </div>
         <div
           className={
-            pwAgainErrtext.color ? stylse.validateGuide : stylse.unvalidateGuide
+            errtext.color_pw_again
+              ? stylse.validateGuide
+              : stylse.unvalidateGuide
           }
         >
-          {' '}
-          {pwAgainErrtext.text}{' '}
+          {errtext.text_pw_again}
         </div>
         <div className={stylse.setWrapper}>
           <span>이름</span>
@@ -193,6 +246,7 @@ function Signup() {
             className={stylse.inputBox}
             placeholder="이름을 입력해주세요."
             onChange={usernameHandler}
+            value={username}
           />
         </div>
         <div className={stylse.genderWrapper}>
@@ -200,31 +254,28 @@ function Signup() {
           <section className={stylse.genderWrap}>
             <button
               className={
-                gender === '1'
-                  ? stylse.genderBtn_true
-                  : stylse.genderBtn_false
+                gender === '1' ? stylse.genderBtn_true : stylse.genderBtn_false
               }
               value="1"
               onClick={e => genderChoice(e, e.target.value)}
+              type="button"
             >
               여성
             </button>
             <button
               className={
-                gender === "2"
-                  ? stylse.genderBtn_true
-                  : stylse.genderBtn_false
+                gender === '2' ? stylse.genderBtn_true : stylse.genderBtn_false
               }
-              value = "2"
+              value="2"
               onClick={e => genderChoice(e, e.target.value)}
+              type="button"
             >
               남성
             </button>
             <button
+              type="button"
               className={
-                gender === '3'
-                  ? stylse.genderBtn_true
-                  : stylse.genderBtn_false
+                gender === '3' ? stylse.genderBtn_true : stylse.genderBtn_false
               }
               value="3"
               onClick={e => genderChoice(e, e.target.value)}
@@ -249,6 +300,7 @@ function Signup() {
               size="30"
               className={stylse.checkbox_true}
               onClick={policyAgree}
+              value={checked}
             />
           )}
           동의합니다. <span className={stylse.redText}>(필수)</span>
@@ -257,14 +309,13 @@ function Signup() {
           이용약관보기 · 개인정보처리방침 보기{' '}
         </section>
         <button
+          disabled={!isPassedSignup}
           className={
             isPassedSignup === true
               ? stylse.signuoBtn_true
               : stylse.signuoBtn_false
           }
-          type="submit"
-          disabled={!isPassedSignup}
-          onClick={signupHandler}
+          // onClick={signupHandler}
         >
           회원가입
         </button>
