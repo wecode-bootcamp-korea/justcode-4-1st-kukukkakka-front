@@ -5,15 +5,16 @@ import Modal from './Modal';
 
 function Login() {
   const [modalOpen, setModalOpen] = useState(false);
-  const modalClose = () => {
+  const modalClick = () => {
     setModalOpen(!modalOpen);
   };
 
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
+
   const loginSuccess = () => {
-    navigate('/signup');
+    alert('로그인 성공!');
   };
 
   const idInput = e => {
@@ -93,10 +94,10 @@ function Login() {
         지금 회원가입 하시면 <span className={styles.signupPoint}>1,000p</span>
         바로 지급!
       </span>
-      <button className={styles.signupBtn} onClick={modalClose} Link to="0">
+      <button className={styles.signupBtn} onClick={modalClick}>
         회원가입
       </button>
-      {modalOpen && <Modal modalClose={modalClose} />}
+      {modalOpen && <Modal modalClick={modalClick} />}
       <span className={styles.nonMemberOrder}>비회원 주문조회</span>
       <div className={styles.btnWrap}>
         <button className={styles.scrollToTopBtn} onClick={scrollToTop}>

@@ -7,7 +7,7 @@
   text-align: center;
   font-size: xx-large;
   font-weight: 500;
-  margin-top: 15px;
+  margin-top: 25px;
   margin-bottom: 50px;
   padding: 0 140px;
 }
@@ -43,6 +43,13 @@
   margin-top: 5px;
 }
 
+.genderWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
 .genderBtn_true {
   border: none;
   border-radius: 3px;
@@ -61,7 +68,7 @@
   font-size: large;
 }
 
-.idDuplicateCheck {
+.idDuplicateCheck_false {
   border: none;
   border-radius: 5px;
   padding: 15px 35px;
@@ -69,6 +76,16 @@
   margin-right: 10px;
   font-size: large;
   color: #787878;
+}
+
+.idDuplicateCheck_true {
+  border: none;
+  border-radius: 5px;
+  padding: 15px 35px;
+  background-color: #222222;
+  margin-right: 10px;
+  font-size: large;
+  color: #ffffff;
 }
 
 input:focus {
@@ -83,6 +100,26 @@ input:focus {
   padding: 15px 10px;
   font-size: medium;
   font-weight: lighter;
+}
+
+.unvalidateGuide {
+  color: red;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-left: 145px;
+  font-size: small;
+  height: 9px;
+}
+
+.validateGuide {
+  color: #46cfa7;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-left: 145px;
+  font-size: small;
+  height: 9px;
 }
 .policyCheck {
   border: solid 1px #ececec;
@@ -104,9 +141,16 @@ input:focus {
   padding: 25px;
 }
 
-.checkbox {
+.checkbox_false {
   margin-right: 5px;
+  color: gray;
 }
+
+.checkbox_true {
+  margin-right: 5px;
+  color: #ffcd32;
+}
+
 .signuoBtn_true {
   background-color: #74cca9;
   color: #ffffff;
