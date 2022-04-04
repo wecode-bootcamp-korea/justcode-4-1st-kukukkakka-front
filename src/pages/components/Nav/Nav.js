@@ -55,7 +55,11 @@ function Nav() {
           </Link>
           <ul className={styles.navList}>
             <li className={styles.navMenu}>꽃 정기구독</li>
-            <Link to="/list" style={{ textDecoration: 'none' }}>
+            <Link
+              to="/list"
+              style={{ textDecoration: 'none' }}
+              onClick={goToTop}
+            >
               <li className={styles.navMenu}>꽃다발</li>
             </Link>
             <li className={styles.navMenu}>당일배송</li>
@@ -65,13 +69,14 @@ function Nav() {
           </ul>
           <div>
             <Link to="/login">
-              <AiOutlineUser size="40" color="#707070" />
+              <AiOutlineUser size="40" color="#707070" onClick={goToTop} />
             </Link>
             <Link to="/cart">
               <AiOutlineShopping
                 className={styles.iconBlank}
                 size="40"
                 color="#707070"
+                onClick={goToTop}
               />
               {/* <span className={styles.cartCounterCss}>
                 style=

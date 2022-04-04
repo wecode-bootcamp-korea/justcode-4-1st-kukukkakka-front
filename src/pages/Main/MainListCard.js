@@ -22,7 +22,8 @@ function MainListCard({
   };
 
   useEffect(() => {
-    cardRef.current.style.transition = 'all 0.7s ease-out';
+    console.log(cardRef);
+    cardRef.current.style.transition = 'all 0.3s ease-in-out';
     cardRef.current.style.transform = `translateX(-${nowCard * 25}%)`;
   }, [nowCard]);
 
