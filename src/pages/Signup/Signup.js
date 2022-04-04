@@ -8,7 +8,7 @@ function Signup() {
   const [password, setPassword] = useState('');
   const [passwordAgain, setPasswordAgain] = useState('');
   const [username, setUsername] = useState('');
-  const [gender, setGender] = useState('female');
+  const [gender, setGender] = useState('1');
   const [checked, setChecked] = useState(false);
   const navigate = useNavigate();
 
@@ -26,14 +26,33 @@ function Signup() {
     color: false,
   });
 
-  // useEffect(() => {
-  //   isPassedSignup();
-  // }, []);
+ const signupHandler = () => {
 
-  const signupSuccess = () => {
-    alert('회원가입을 축하드립니다!');
-    navigate('/main');
-  };
+  useEffect(() => {
+    fetch('회원가입 API url', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: email,
+        password: password,
+        username: username,
+        gender_id : Number(gender),
+        policyAgree: checked,
+      }),
+    })
+      .then(res =>  {
+        if (res.status === 201) {
+          alert('회원가입을 축하드립니다!');
+          navigate ('/main')
+        }
+        else if (res. status === 400) {
+        return res.json()}
+      })
+      .then(res => {console.log("에러메시지 : " , res.message)});
+  }, []);
+
   const policyAgree = () => {
     setChecked(!checked);
   };
@@ -104,13 +123,6 @@ function Signup() {
     pwAgainErrtext.color === true &&
     username !== '' &&
     checked === true;
-
-  console.log('errtext : ', errtext);
-  console.log('pwErrtext : ', pwErrtext);
-  console.log(pwAgainErrtext);
-  console.log(username !== '');
-  console.log(checked);
-  console.log(' ispassedSignup:', isPassedSignup);
 
   return (
     <div>
@@ -188,33 +200,33 @@ function Signup() {
           <section className={stylse.genderWrap}>
             <button
               className={
-                gender === 'female'
+                gender === '1'
                   ? stylse.genderBtn_true
                   : stylse.genderBtn_false
               }
-              value="female"
+              value="1"
               onClick={e => genderChoice(e, e.target.value)}
             >
               여성
             </button>
             <button
               className={
-                gender === 'male'
+                gender === "2"
                   ? stylse.genderBtn_true
                   : stylse.genderBtn_false
               }
-              value="male"
+              value = "2"
               onClick={e => genderChoice(e, e.target.value)}
             >
               남성
             </button>
             <button
               className={
-                gender === 'no_reply'
+                gender === '3'
                   ? stylse.genderBtn_true
                   : stylse.genderBtn_false
               }
-              value="no_reply"
+              value="3"
               onClick={e => genderChoice(e, e.target.value)}
             >
               제공안함
@@ -252,7 +264,7 @@ function Signup() {
           }
           type="submit"
           disabled={!isPassedSignup}
-          // onClick={signupSuccess}
+          onClick={signupHandler}
         >
           회원가입
         </button>
