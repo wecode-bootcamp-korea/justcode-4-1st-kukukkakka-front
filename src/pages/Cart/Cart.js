@@ -9,8 +9,21 @@ import {
 
 function Cart() {
   const [isChecked, setIsChecked] = useState(false);
+  const [count, setCount] = useState(1);
   const checkProduct = () => {
     setIsChecked(prev => !prev);
+  };
+
+  const plusCount = () => {
+    setCount(prev => prev + 1);
+    console.log(count);
+  };
+
+  const minsCount = () => {
+    if (count === 1) {
+      return 1;
+    }
+    setCount(prev => prev - 1);
   };
   return (
     <section className={styles.cartSection}>
@@ -43,11 +56,11 @@ function Cart() {
               <span className={styles.price}>17,000원</span>
               <div className={styles.quantityBox}>
                 <button>
-                  <FaMinus />
+                  <FaMinus onClick={minsCount} />
                 </button>
-                <span className={styles.count}>1</span>
+                <span className={styles.count}>{count}</span>
                 <button className={styles.plus}>
-                  <FaPlus />
+                  <FaPlus onClick={plusCount} />
                 </button>
               </div>
               <div className={styles.delete}>
