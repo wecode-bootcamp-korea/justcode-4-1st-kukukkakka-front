@@ -1,22 +1,48 @@
-import React from 'react';
+import { React, useState } from 'react';
 import styles from './Nav.module.scss';
 import { Link } from 'react-router-dom';
 import { AiOutlineUser } from 'react-icons/ai';
 import { AiOutlineShopping } from 'react-icons/ai';
 
 function Nav() {
-  return (
-    <header className={styles.headerWrapper}>
-      <ul className={styles.topList}>
-        <li className={styles.topMenu}>로그인</li>
-        <li className={styles.topMenu}>
-          회원가입<span className={styles.pointColor}>(1000포인트 지급!)</span>
-        </li>
-        <li className={styles.topMenu}>꾸까 고객센터</li>
-        <li className={styles.topMenuBold}>기업제휴</li>
-      </ul>
+  const [borderLine, setBorderLine] = useState('');
+  // const [cartCounter, setCartCounter] = useState(0);
 
-      <nav className={styles.navSticky}>
+  const goToTop = () => {
+    window.scrollTo(0, 0);
+  };
+
+  const changeNavbarColor = () => {
+    window.scrollY > 65
+      ? setBorderLine('1px solid #ffcd32')
+      : setBorderLine('');
+  };
+
+  window.addEventListener('scroll', changeNavbarColor);
+
+  // useEffect(()=>{
+  //   fetch('').then(res=>res.json()).then(res=>{setCartCounter(res)})
+  // },[cartCounter])
+
+  return (
+    <>
+      <header className={styles.headerWrapper}>
+        <ul className={styles.headerList}>
+          <Link to="/login" style={{ textDecoration: 'none' }}>
+            <li className={styles.headerMenu}>로그인</li>
+          </Link>
+          <Link to="/signup" style={{ textDecoration: 'none' }}>
+            <li className={styles.headerMenu}>
+              회원가입
+              <span className={styles.pointColor}>(1000포인트 지급!)</span>
+            </li>
+          </Link>
+          <li className={styles.headerMenu}>꾸까 고객센터</li>
+          <li className={styles.headerMenuBold}>기업제휴</li>
+        </ul>
+      </header>
+
+      <nav className={styles.navSticky} style={{ borderBottom: borderLine }}>
         <div className={styles.navWrapper}>
           <Link to="/">
             <img
@@ -24,11 +50,16 @@ function Nav() {
               alt="main-logo"
               src="img/main_logo.png"
               width="200"
+              onClick={goToTop}
             />
           </Link>
           <ul className={styles.navList}>
             <li className={styles.navMenu}>꽃 정기구독</li>
-            <Link to="/list" style={{ textDecoration: 'none' }}>
+            <Link
+              to="/list"
+              style={{ textDecoration: 'none' }}
+              onClick={goToTop}
+            >
               <li className={styles.navMenu}>꽃다발</li>
             </Link>
             <li className={styles.navMenu}>당일배송</li>
@@ -37,16 +68,28 @@ function Nav() {
             <li className={styles.navMenu}>이벤트</li>
           </ul>
           <div>
-            <AiOutlineUser size="40" color="#707070" />
-            <AiOutlineShopping
-              className={styles.iconBlank}
-              size="40"
-              color="#707070"
-            />
+            <Link to="/login">
+              <AiOutlineUser size="40" color="#707070" onClick={goToTop} />
+            </Link>
+            <Link to="/cart">
+              <AiOutlineShopping
+                className={styles.iconBlank}
+                size="40"
+                color="#707070"
+                onClick={goToTop}
+              />
+              {/* <span className={styles.cartCounterCss}>
+                style=
+                {{
+                  display: `${cartCounter} > 0 ? "" : "none"`,
+                }}
+                {cartCounter}
+              </span> */}
+            </Link>
           </div>
         </div>
       </nav>
-    </header>
+    </>
   );
 }
 
