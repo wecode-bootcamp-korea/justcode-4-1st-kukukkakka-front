@@ -4,32 +4,15 @@ import { useNavigate } from 'react-router-dom';
 import stylse from './Signup.module.scss';
 
 function Signup() {
-  // const [lists, setLists] = useState({
-  //   productList: [],
-  // });
-  // input창에 기입되는 info 상태
-  const [inputs, setInputs] = useState([
-    {
-      id: '',
-      password: '',
-      passwordAgain: '',
-      username: '',
-      gender: 'female',
-    },
-  ]);
-  console.log('할당전 : ', inputs, inputs[0].gender);
-
-  const { id, password, passwordAgain, username, gender } = inputs[0];
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [passwordAgain, setPasswordAgain] = useState('');
+  const [username, setUsername] = useState('');
+  const [gender, setGender] = useState('female');
   const [checked, setChecked] = useState(false);
+  const [isPassed, setIsPassed] = useState(false);
+  const navigate = useNavigate();
 
-  // const [email, setEmail] = useState('');
-  // const [password, setPassword] = useState('');
-  // const [passwordAgain, setPasswordAgain] = useState('');
-  // const [username, setUsername] = useState('');
-  // const [gender, setGender] = useState('female');
-  // const [checked, setChecked] = useState(false);
-
-  // input창 내용에 맞게 보여지는 errtext + color
   const [errtext, setErrtext] = useState({
     text: '',
     color: false,
@@ -44,47 +27,34 @@ function Signup() {
     color: false,
   });
 
-  // signup button 활성화를 위한 기입상태 확인
-  const [isPassed, setIsPassed] = useState(false);
-  const navigate = useNavigate();
-
   // useEffect(() => {
   //   isPassedSignup();
   // }, []);
 
-  // 회원가입 --> POST fetch로 로직 옮겨야함
+  console.log(isPassed);
+
   const signupSuccess = () => {
     alert('회원가입을 축하드립니다!');
     navigate('/main');
   };
-
-  //이용약관 동의여부 로직
   const policyAgree = () => {
-    setInputs(!checked);
+    setChecked(!checked);
   };
-
-  // 성별정보 선택 데이터 로직
   const genderChoice = (e, data) => {
-    const { value } = e.target.value;
-    setInputs({ ...inputs, [gender]: value });
+    setGender(data);
   };
 
-  console.log('inputs는 :', inputs[0].gender);
-  console.log('gender는: ', gender);
-
-  //
   const emailHandler = e => {
-    setInputs((id = e.target.value));
-    // setEmail(e.target.value);
+    setEmail(e.target.value);
     if (e.target.value === '') {
       setErrtext({ text: '', color: false, idCheck: false });
-    } else if (!id.includes('@')) {
+    } else if (!email.includes('@')) {
       setErrtext({
         text: '아이디는 이메일형식 이어야 합니다.',
         color: false,
         idCheck: false,
       });
-    } else if (id.includes('@')) {
+    } else if (email.includes('@')) {
       setErrtext({
         text: '형식에 맞는 아이디입니다.',
         color: true,
@@ -92,9 +62,9 @@ function Signup() {
       });
     }
   };
-  console.log(id);
+
   const passwordHandler = e => {
-    setInputs((password = e.target.value));
+    setPassword(e.target.value);
     let regExp = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,20}$/;
     if (e.target.value === '') {
       setPwErrtext({ text: '', color: false });
@@ -114,7 +84,7 @@ function Signup() {
   };
 
   const passwordAgainHandler = e => {
-    setInputs((passwordAgain = e.target.value));
+    setPasswordAgain(e.target.value);
     if (e.target.value === '') {
       setPwAgainErrtext({ text: '', color: false });
     } else if (e.target.value !== password) {
@@ -128,7 +98,7 @@ function Signup() {
   };
 
   const usernameHandler = e => {
-    setInputs((username = e.target.value));
+    setUsername(e.target.value);
   };
 
   // const isPassedSignup = () => {
@@ -143,9 +113,12 @@ function Signup() {
   //   } else setIsPassed(false);
   // };
 
-  console.log(username !== '');
-  console.log(checked);
-  console.log('ispassed값 : ', isPassed);
+  // console.log(textcolor_id);
+  // console.log(textcolor_pw);
+  // console.log(textcolor_pwagain);
+  // console.log(username !== '');
+  // console.log(checked);
+  // console.log('ispassed값 : ', isPassed);
 
   return (
     <div>
@@ -207,7 +180,8 @@ function Signup() {
             pwAgainErrtext.color ? stylse.validateGuide : stylse.unvalidateGuide
           }
         >
-          {pwAgainErrtext.text}
+          {' '}
+          {pwAgainErrtext.text}{' '}
         </div>
         <div className={stylse.setWrapper}>
           <span>이름</span>
@@ -280,9 +254,9 @@ function Signup() {
         </section>
         <button
           // className={
-          //   // isPassedSignup === true
-          //   //   ? stylse.signuoBtn_true
-          //   //   : stylse.signuoBtn_false
+          //   isPassedSignup === true
+          //     ? stylse.signuoBtn_true
+          //     : stylse.signuoBtn_false
           // }
           type="submit"
           // disabled={!isPassedSignup}
