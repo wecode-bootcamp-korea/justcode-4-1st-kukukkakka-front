@@ -11,7 +11,9 @@ function Detail() {
   });
   const [totalPrice, setTotalPrice] = useState(45000);
   const [price, setPrice] = useState(45000);
-  const [optionPrice, setOptionPrice] = useState(2500);
+  // const [totalPrice, setTotalPrice] = useState({product.price});
+  // const [price, setPrice] = useState({product.price});
+
   const [changeText, setChangeText] = useState('함께하면 좋은 추천상품');
   const [showItemBox, setShowItemBox] = useState({ display: 'none' });
   const [optionList, setOptionList] = useState({ display: 'none' });
@@ -19,6 +21,8 @@ function Detail() {
     border: '1px solid $gray-color',
   });
   const [count, setCount] = useState(1);
+
+  const optionPrice = 2500;
 
   useEffect(() => {
     fetch('http://localhost:8000/products/:id')
@@ -76,6 +80,7 @@ function Detail() {
     setCount(count - 1);
     setPrice(price / count);
     setTotalPrice(price / count);
+
     showItemBox.display === 'block' &&
       setTotalPrice(price / count + optionPrice);
   };
@@ -152,7 +157,7 @@ function Detail() {
           <div className={style.priceBox}>
             <div>상품가격</div>
             <div>{price}원</div>
-            {/* <li>{product.price}원</li> */}
+            {/* <li>{sudoPrice}원</li> */}
           </div>
           <AddedOptionBox
             changeStyle={showItemBox}
@@ -162,7 +167,7 @@ function Detail() {
           <div className={style.totalPriceBox}>
             <span>총 주문금액</span>
             <span>{totalPrice}원</span>
-            {/* <li>{product.price}원</li> */}
+            {/* <li>{sudoPrice}원</li> */}
           </div>
           <div className={style.contentBtnBox}>
             <button onClick={goToCart}>장바구니</button>
