@@ -19,16 +19,6 @@ function List() {
   const [inputs, setInputs] = useState('');
   const [showRecommend, setShowRecommend] = useState(false);
 
-  // useEffect(() => {
-  //   fetch(`http://localhost:3000/data/products.json`, {
-  //     method: 'GET',
-  //   })
-  //     .then(res => res.json())
-  //     .then(data => {
-  //       setLists(data);
-  //     });
-  // }, []);
-
   useEffect(() => {
     fetch('http://localhost:8000/products')
       .then(res => res.json())
