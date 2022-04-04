@@ -8,6 +8,7 @@ $yellow: #ffcd32;
 
 .listBanner {
   height: 300px;
+  width: 100vw;
   background: url('https://images.unsplash.com/photo-1547687222-2b6ac0b7ec13?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1472&q=80')
     no-repeat center center;
   background-size: cover;
@@ -44,6 +45,7 @@ $yellow: #ffcd32;
     justify-content: space-between;
     align-items: center;
     padding: 30px 0;
+    gap: 15px;
   }
 }
 
@@ -71,17 +73,33 @@ $yellow: #ffcd32;
 }
 
 .filterBox {
-  ul {
-    display: flex;
-    gap: 25px;
-    li {
-      height: 30px;
-      vertical-align: center;
-      text-align: center;
+  .recommendBox {
+    position: relative;
+    .recommend {
       font-size: 18px;
+      font-weight: 500;
       cursor: pointer;
-      &:hover {
-        border-bottom: 5px solid $yellow;
+    }
+    ul {
+      display: none;
+      position: absolute;
+      padding: 15px;
+      z-index: 2;
+      top: 40px;
+      right: 0;
+      width: 150px;
+      background-color: #fff;
+      box-shadow: 1px 1px 10px #efefef;
+      border-radius: 5px;
+      li {
+        padding: 10px;
+        height: 40px;
+        vertical-align: center;
+        font-size: 18px;
+        cursor: pointer;
+        &:hover {
+          border-bottom: 5px solid $yellow;
+        }
       }
     }
   }
@@ -93,4 +111,61 @@ $yellow: #ffcd32;
   gap: 13px;
   flex-wrap: wrap;
   padding-bottom: 100px;
+}
+
+@media screen and (max-width: 1200px) {
+  .listTop {
+    padding: 0 30px;
+  }
+  .listContainer {
+    max-width: 100%;
+    width: 100%;
+    gap: 15px;
+    justify-content: space-between;
+    padding: 0 30px;
+  }
+}
+
+@media screen and (max-width: 676px) {
+  .listTop {
+    .container {
+      .searchContainer {
+        width: 80%;
+        box-sizing: border-box;
+        flex-grow: 1;
+        .searchBox {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .listTop {
+    .container {
+      gap: 0;
+    }
+  }
+  .searchContainer {
+    .searchBox {
+      width: 90% !important;
+      font-size: 14px !important;
+    }
+    .icons {
+      font-size: 13px;
+      right: 45px !important;
+      top: 11px !important;
+    }
+  }
+
+  .recommendBox {
+    .recommend {
+      font-size: 14px !important;
+    }
+
+    ul li {
+      font-size: 15px;
+    }
+  }
 }
