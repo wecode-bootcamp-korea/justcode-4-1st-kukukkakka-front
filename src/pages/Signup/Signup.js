@@ -10,7 +10,6 @@ function Signup() {
   const [username, setUsername] = useState('');
   const [gender, setGender] = useState('female');
   const [checked, setChecked] = useState(false);
-  const [isPassed, setIsPassed] = useState(false);
   const navigate = useNavigate();
 
   const [errtext, setErrtext] = useState({
@@ -30,8 +29,6 @@ function Signup() {
   // useEffect(() => {
   //   isPassedSignup();
   // }, []);
-
-  console.log(isPassed);
 
   const signupSuccess = () => {
     alert('회원가입을 축하드립니다!');
@@ -101,24 +98,19 @@ function Signup() {
     setUsername(e.target.value);
   };
 
-  // const isPassedSignup = () => {
-  //   if (
-  //     textcolor_id === true &&
-  //     textcolor_pw === true &&
-  //     textcolor_pwagain === true &&
-  //     username !== '' &&
-  //     checked === true
-  //   ) {
-  //     setIsPassed(true);
-  //   } else setIsPassed(false);
-  // };
+  const isPassedSignup =
+    errtext.idCheck === true &&
+    pwErrtext.color === true &&
+    pwAgainErrtext.color === true &&
+    username !== '' &&
+    checked === true;
 
-  // console.log(textcolor_id);
-  // console.log(textcolor_pw);
-  // console.log(textcolor_pwagain);
-  // console.log(username !== '');
-  // console.log(checked);
-  // console.log('ispassed값 : ', isPassed);
+  console.log('errtext : ', errtext);
+  console.log('pwErrtext : ', pwErrtext);
+  console.log(pwAgainErrtext);
+  console.log(username !== '');
+  console.log(checked);
+  console.log(' ispassedSignup:', isPassedSignup);
 
   return (
     <div>
@@ -253,14 +245,14 @@ function Signup() {
           이용약관보기 · 개인정보처리방침 보기{' '}
         </section>
         <button
-          // className={
-          //   isPassedSignup === true
-          //     ? stylse.signuoBtn_true
-          //     : stylse.signuoBtn_false
-          // }
+          className={
+            isPassedSignup === true
+              ? stylse.signuoBtn_true
+              : stylse.signuoBtn_false
+          }
           type="submit"
-          // disabled={!isPassedSignup}
-          onClick={signupSuccess}
+          disabled={!isPassedSignup}
+          // onClick={signupSuccess}
         >
           회원가입
         </button>
