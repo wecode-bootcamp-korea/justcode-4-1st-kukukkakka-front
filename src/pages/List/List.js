@@ -19,23 +19,23 @@ function List() {
   const [inputs, setInputs] = useState('');
   const [showRecommend, setShowRecommend] = useState(false);
 
-  useEffect(() => {
-    fetch(`http://localhost:3000/data/products.json`, {
-      method: 'GET',
-    })
-      .then(res => res.json())
-      .then(data => {
-        setLists(data);
-      });
-  }, []);
-
   // useEffect(() => {
-  //   fetch('http://localhost:8000/products')
+  //   fetch(`http://localhost:3000/data/products.json`, {
+  //     method: 'GET',
+  //   })
   //     .then(res => res.json())
-  //     .then(res => {
-  //       setLists(res);
+  //     .then(data => {
+  //       setLists(data);
   //     });
   // }, []);
+
+  useEffect(() => {
+    fetch('http://localhost:8000/products')
+      .then(res => res.json())
+      .then(res => {
+        setLists(res);
+      });
+  }, []);
 
   //유저가 찾은 키워드를 백엔드에 보내주기
 
