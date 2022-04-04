@@ -7,6 +7,7 @@ import AddedOptionBox from './AddedOptionBox/AddedOptionBox';
 
 function Detail() {
   const [totalPrice, setTotalPrice] = useState(45000);
+  const [price, setPrice] = useState(45000);
   const [optionPrice, setOptionPrice] = useState(2500);
   const [changeText, setChangeText] = useState('함께하면 좋은 추천상품');
   const [showItemBox, setShowItemBox] = useState({ display: 'none' });
@@ -45,7 +46,8 @@ function Detail() {
     // 추가상품 눌렀다가 선택안함 눌렀을 때 추가상품박스 없애기
     if (showItemBox.display === 'block') {
       onClickOptionItem();
-      setTotalPrice(totalPrice - optionPrice);
+      showItemBox.display === 'block' &&
+        setTotalPrice(totalPrice - optionPrice);
     }
   };
 
@@ -63,12 +65,19 @@ function Detail() {
   const minusPrice = () => {
     if (count - 1 < 1) return;
     setCount(count - 1);
-    setTotalPrice(totalPrice / count);
+    setPrice(price / count);
+    setTotalPrice(price / count);
+    showItemBox.display === 'block' &&
+      setTotalPrice(price / count + optionPrice);
+    console.log('count:', count);
   };
 
   const plusPrice = () => {
     setCount(count + 1);
-    setTotalPrice((count + 1) * totalPrice);
+    setPrice((count + 1) * price);
+    setTotalPrice((count + 1) * price);
+    showItemBox.display === 'block' &&
+      setTotalPrice(price * (count + 1) + optionPrice);
   };
 
   // 추가상품박스 보이게 하는 함수
@@ -78,7 +87,7 @@ function Detail() {
       : setShowItemBox({ display: 'none' });
   };
 
-  console.log('optionItemBox display: ', showItemBox.display);
+  // console.log('optionItemBox display: ', showItemBox.display);
 
   const deleteItemBox = () => {
     setShowItemBox({ display: 'none' });
@@ -127,7 +136,7 @@ function Detail() {
           </div>
           <div className={style.priceBox}>
             <div>상품가격</div>
-            <div>{totalPrice}원</div>
+            <div>{price}원</div>
           </div>
           <AddedOptionBox
             changeStyle={showItemBox}
