@@ -94,7 +94,7 @@ function Detail() {
     <div className={style.container}>
       <header>
         <div className={style.category}>
-          HOME > 꽃다발 > 블루 버터플라이 에디션
+          HOME '{'>'}' 꽃다발 '{'>'}' 블루 버터플라이 에디션
         </div>
       </header>
       <main className={style.content}>
