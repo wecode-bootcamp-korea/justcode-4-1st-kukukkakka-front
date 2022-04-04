@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
-import style from './OptionBtn.module.scss';
+import style from './OptionList.module.scss';
 
-function OptionBtn({
-  optionPrice,
+function OptionList({
   text,
-  changeBorder,
+  optionPrice,
   optionList,
-  onClickOptionToggle,
+  changeBorder,
   selectItem,
   notSelectItem,
+  onClickOptionToggle,
 }) {
   return (
-    <div>
+    <div className={style.option_btn_box} style={changeBorder}>
       <div className={style.option_btn_box} style={changeBorder}>
         <button className={style.optionBtn} onClick={onClickOptionToggle}>
           <div>{text}</div>
@@ -29,4 +29,4 @@ function OptionBtn({
   );
 }
 
-export default OptionBtn;
+export default OptionList;

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import OperationBtns from './OperationBtns/OperationBtns';
 import style from './Detail.module.scss';
-import OptionBtn from './OptionBtn/OptionBtn';
+import OptionList from './OptionList/OptionList';
 import AddedOptionBox from './AddedOptionBox/AddedOptionBox';
 
 function Detail() {
@@ -118,16 +118,22 @@ function Detail() {
             />
           </div>
           <div className={style.inBox}>
-            <div className={style.contentTittle}>추가옵션</div>
-            <OptionBtn
-              optionPrice={optionPrice}
+            {/* <div className={style.contentTittle}>추가옵션</div>
+            <div className={style.option_btn_box} style={changeBorder}>
+              <button className={style.optionBtn} onClick={onClickOptionToggle}>
+                <div>{changeText}</div>
+                <i className={style.btnDown}>⌵</i>
+              </button> */}
+            <OptionList
               text={changeText}
-              changeBorder={changeBorder}
+              optionPrice={optionPrice}
               optionList={optionList}
-              onClickOptionToggle={onClickOptionToggle}
+              changeBorder={changeBorder}
               selectItem={selectItem}
               notSelectItem={notSelectItem}
+              onClickOptionToggle={onClickOptionToggle}
             />
+            {/* </div> */}
           </div>
           <div className={style.priceBox}>
             <div>상품가격</div>
