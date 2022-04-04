@@ -22,9 +22,9 @@ function Login() {
   const pwInput = e => {
     setPassword(e.target.value);
   };
-  const scrollToTop = () => {
-    window.scrollTo(0, 0);
-  };
+  // const scrollToTop = () => {
+  //   window.scrollTo(0, 0);
+  // };
 
   const postLogin = () => {
     fetch('http://localhost:8000/users/login', {
@@ -71,8 +71,7 @@ function Login() {
       </section>
       <hr className={styles.line} />
       <span className={styles.noticeText}> SNS계정으로 간편 로그인</span>
-      <section className={styles.snsIcon} onClick={() => window.scrollTo(0, 0)}>
-        {/* {modalOpen && <Modal modalClose={modalClose} />} */}
+      <section className={styles.snsIcon}>
         <img
           className={styles.facebookIcon}
           src="https://ifh.cc/g/4mMCRP.png"
