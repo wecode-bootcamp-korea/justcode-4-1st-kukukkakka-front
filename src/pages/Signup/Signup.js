@@ -21,14 +21,6 @@ function Signup() {
 
   const { id, password, passwordAgain, username, gender } = inputs[0];
   const [checked, setChecked] = useState(false);
-  console.log(
-    '어떻게 찍히나 볼까 :',
-    inputs,
-    inputs.gender,
-    inputs[0].gender,
-    gender
-  );
-  // password, passwordAgain, username, gender, checked
 
   // const [email, setEmail] = useState('');
   // const [password, setPassword] = useState('');
@@ -60,8 +52,6 @@ function Signup() {
   //   isPassedSignup();
   // }, []);
 
-  console.log(isPassed);
-
   // 회원가입 --> POST fetch로 로직 옮겨야함
   const signupSuccess = () => {
     alert('회원가입을 축하드립니다!');
@@ -71,13 +61,12 @@ function Signup() {
   //이용약관 동의여부 로직
   const policyAgree = () => {
     setInputs(!checked);
-    // { checked: !checked }
   };
+
   // 성별정보 선택 데이터 로직
   const genderChoice = (e, data) => {
-    console.log(data);
-    setInputs(gender(data));
-    console.log(gender);
+    const { value } = e.target.value;
+    setInputs({ ...inputs, [gender]: value });
   };
 
   console.log('inputs는 :', inputs[0].gender);
