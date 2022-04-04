@@ -1,74 +1,85 @@
+$white: white;
+$border: 1px solid white;
+
+@mixin container {
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
+}
+
 footer {
-  color: white;
+  color: $white;
 }
 
 .footerWrapper {
-  padding: 80px 140px;
+  padding: 80px 0;
   background-color: #222222;
-}
 
-.iconWrapper {
-  display: flex;
-  gap: 10px;
+  .footerConatiner {
+    @include container();
+
+    .iconWrapper {
+      display: flex;
+      gap: 10px;
+    }
+  }
 }
 
 .serviceWrapper {
   display: flex;
   justify-content: space-between;
-  border-bottom: 0.5px solid #9b9b9b;
-  padding-bottom: 10px;
   margin-bottom: 25px;
-}
+  padding-bottom: 10px;
+  border-bottom: 0.5px solid #9b9b9b;
 
-.serviceSubWrapper {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
+  .serviceSubWrapper {
+    display: flex;
+    align-items: center;
+    gap: 20px;
 
-.serviceContent {
-  font-size: 22px;
-}
-
-.serviceTime {
-  font-size: 14px;
-  font-weight: 300;
-  color: #9b9b9b;
-}
-
-.serviceButton {
-  background: none;
-  color: white;
-  border: 1px solid white;
-  border-radius: 30px;
-  padding: 0 25px;
-  height: 40px;
+    .serviceContent {
+      font-size: 22px;
+    }
+    .serviceTime {
+      color: #9b9b9b;
+      font-size: 14px;
+      font-weight: 300;
+    }
+    .serviceButton {
+      height: 40px;
+      padding: 0 25px;
+      border: $border;
+      border-radius: 30px;
+      color: $white;
+      background: none;
+      cursor: pointer;
+    }
+  }
 }
 
 .infoWrapper {
   color: #d3d3d3;
   font-size: 14px;
-}
 
-.infoContent {
-  display: flex;
-  margin: 10px 0;
-  gap: 10px;
-}
+  .infoContent {
+    display: flex;
+    margin: 10px 0;
+    gap: 10px;
 
-.infoContentMiddle {
-  padding: 0 10px;
-  border-left: 1px solid white;
-  border-right: 1px solid white;
-}
+    .infoContentMiddle {
+      padding: 0 10px;
+      border-left: $border;
+      border-right: $border;
+    }
+  }
+  .infoRights {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
 
-.infoRights {
-  display: flex;
-  justify-content: space-between;
-  margin: 10px 0;
-}
-
-.infoTermsOfUse {
-  display: flex;
-  gap: 20px;
+    .infoTermsOfUse {
+      display: flex;
+      gap: 20px;
+    }
+  }
 }
