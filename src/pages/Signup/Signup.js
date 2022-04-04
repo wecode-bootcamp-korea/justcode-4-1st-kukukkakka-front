@@ -4,6 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import stylse from './Signup.module.scss';
 
 function Signup() {
+  // const [lists, setLists] = useState({
+  //   productList: [],
+  // });
   // input창에 기입되는 info 상태
   const [inputs, setInputs] = useState([
     {
@@ -12,14 +15,19 @@ function Signup() {
       passwordAgain: '',
       username: '',
       gender: 'female',
-      checked: false,
     },
   ]);
+  console.log('할당전 : ', inputs, inputs[0].gender);
 
-  console.log('할당전 : ', inputs, inputs.gender);
-
-  const { id, password, passwordAgain, username, gender, checked } = inputs;
-  console.log('어떻게 찍히나 볼까 :', inputs, inputs.gender, gender);
+  const { id, password, passwordAgain, username, gender } = inputs[0];
+  const [checked, setChecked] = useState(false);
+  console.log(
+    '어떻게 찍히나 볼까 :',
+    inputs,
+    inputs.gender,
+    inputs[0].gender,
+    gender
+  );
   // password, passwordAgain, username, gender, checked
 
   // const [email, setEmail] = useState('');
@@ -62,13 +70,17 @@ function Signup() {
 
   //이용약관 동의여부 로직
   const policyAgree = () => {
-    setInputs((checked = !checked));
+    setInputs(!checked);
+    // { checked: !checked }
   };
   // 성별정보 선택 데이터 로직
   const genderChoice = (e, data) => {
-    setInputs((gender = data));
+    console.log(data);
+    setInputs(gender(data));
+    console.log(gender);
   };
-  console.log('inputs는 :', inputs);
+
+  console.log('inputs는 :', inputs[0].gender);
   console.log('gender는: ', gender);
 
   //
@@ -91,9 +103,9 @@ function Signup() {
       });
     }
   };
-  console.log(inputs.id);
+  console.log(id);
   const passwordHandler = e => {
-    setInputs((inputs.password = e.target.value));
+    setInputs((password = e.target.value));
     let regExp = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,20}$/;
     if (e.target.value === '') {
       setPwErrtext({ text: '', color: false });
@@ -113,7 +125,7 @@ function Signup() {
   };
 
   const passwordAgainHandler = e => {
-    setInputs((inputs.passwordAgain = e.target.value));
+    setInputs((passwordAgain = e.target.value));
     if (e.target.value === '') {
       setPwAgainErrtext({ text: '', color: false });
     } else if (e.target.value !== password) {
@@ -127,7 +139,7 @@ function Signup() {
   };
 
   const usernameHandler = e => {
-    setInputs((inputs.username = e.target.value));
+    setInputs((username = e.target.value));
   };
 
   // const isPassedSignup = () => {
@@ -221,7 +233,7 @@ function Signup() {
           <section className={stylse.genderWrap}>
             <button
               className={
-                inputs.gender === 'female'
+                gender === 'female'
                   ? stylse.genderBtn_true
                   : stylse.genderBtn_false
               }
