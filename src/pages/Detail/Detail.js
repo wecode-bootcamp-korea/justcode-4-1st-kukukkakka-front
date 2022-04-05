@@ -19,10 +19,12 @@ function Detail() {
   });
 
   let value = product.productDetailData[0].price;
-  // const [totalPrice, setTotalPrice] = useState(45000);
-  // const [productPrice, setProductPrice] = useState(45000);
-  const [totalPrice, setTotalPrice] = useState(value);
+
   const [productPrice, setProductPrice] = useState(value);
+  const [totalPrice, setTotalPrice] = useState(value);
+  // const [totalPrice, setTotalPrice] = useState(value);
+  // const [productPrice, setProductPrice] = useState(value);
+  console.log('productPrice: ', productPrice);
   const [changeText, setChangeText] = useState('함께하면 좋은 추천상품');
   const [showItemBox, setShowItemBox] = useState({ display: 'none' });
   const [optionList, setOptionList] = useState({ display: 'none' });
@@ -39,6 +41,11 @@ function Detail() {
         setProduct(res);
       });
   }, [params.id]);
+
+  useEffect(() => {
+    setProductPrice(value);
+    setTotalPrice(value);
+  }, [value]);
 
   const navigate = useNavigate();
 
@@ -87,19 +94,21 @@ function Detail() {
   const minusPrice = () => {
     if (count - 1 < 1) return;
     setCount(count - 1);
-    setProductPrice(productPrice / count);
-    setTotalPrice(productPrice / count);
+    setProductPrice((count - 1) * value);
+    console.log('count: ', count);
+
+    setTotalPrice((count - 1) * value);
 
     showItemBox.display === 'block' &&
-      setTotalPrice(productPrice / count + optionPrice);
+      setTotalPrice((count - 1) * value + optionPrice);
   };
 
   const plusPrice = () => {
     setCount(count + 1);
-    setProductPrice((count + 1) * productPrice);
-    setTotalPrice((count + 1) * productPrice);
+    setProductPrice((count + 1) * value);
+    setTotalPrice((count + 1) * value);
     showItemBox.display === 'block' &&
-      setTotalPrice(productPrice * (count + 1) + optionPrice);
+      setTotalPrice(value * (count + 1) + optionPrice);
   };
 
   // 추가상품박스 보이게 하는 함수
