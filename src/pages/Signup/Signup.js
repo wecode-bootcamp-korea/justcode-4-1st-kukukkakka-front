@@ -57,7 +57,7 @@ function Signup() {
 
   const passwordHandler = e => {
     setInputs({ ...inputs, password: e.target.value });
-    let regPassword = /(?=.*\d)(?=.*[a-zA-ZS]).{8,20}/;
+    let regPassword = /(?=.*\d)(?=.*[a-zA-ZS]).{8,20}/; // 문자, 숫자 1개이상 포함, 8자리 이상
     if (e.target.value === '') {
       setErrtext({ ...errtext, text_pw: '', color_pw: false });
     } else if (password.length < 8) {
@@ -66,13 +66,13 @@ function Signup() {
         text_pw: '비밀번호는 8자리 이상이어야 합니다.',
         color_pw: false,
       });
-    } else if (password.length >= 8 && regPassword.test(password)) {
+    } else if (password.length >= 8 && regPassword.test(e.target.value)) {
       setErrtext({
         ...errtext,
         text_pw: '사용가능한 비밀번호 입니다',
         color_pw: true,
       });
-    } else if (password.length >= 8 && !regPassword.test(password)) {
+    } else if (password.length >= 8 && !regPassword.test(e.target.value)) {
       setErrtext({
         ...errtext,
         text_pw: '영문, 숫자가 모두 포함되어야 합니다',
@@ -80,7 +80,6 @@ function Signup() {
       });
     }
   };
-
   const passwordAgainHandler = e => {
     setInputs({ ...inputs, passwordAgain: e.target.value });
     if (e.target.value === '') {
