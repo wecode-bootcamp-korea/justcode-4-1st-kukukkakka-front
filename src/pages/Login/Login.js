@@ -124,6 +124,8 @@ function Login() {
       <div className={styles.btnWrap} />
     </section>
   );
+  return <div>Login</div>;
+
 }
 
 export default Login;
