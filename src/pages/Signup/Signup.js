@@ -29,6 +29,8 @@ function Signup() {
 
   const emailHandler = e => {
     setInputs({ ...inputs, email: e.target.value });
+    let regEmail =
+      /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
     if (e.target.value === '') {
       setErrtext({
         ...errtext,
@@ -36,14 +38,14 @@ function Signup() {
         color_email: false,
         idCheck: false,
       });
-    } else if (!email.includes('@')) {
+    } else if (!regEmail.test(email)) {
       setErrtext({
         ...errtext,
         text_email: '아이디는 이메일형식 이어야 합니다.',
         color_email: false,
         idCheck: false,
       });
-    } else if (email.includes('@')) {
+    } else if (regEmail.test(email)) {
       setErrtext({
         ...errtext,
         text_email: '형식에 맞는 아이디입니다.',
@@ -55,7 +57,7 @@ function Signup() {
 
   const passwordHandler = e => {
     setInputs({ ...inputs, password: e.target.value });
-    let regExp = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,20}$/;
+    let regPassword = /(?=.*\d)(?=.*[a-zA-ZS]).{8,20}/;
     if (e.target.value === '') {
       setErrtext({ ...errtext, text_pw: '', color_pw: false });
     } else if (password.length < 8) {
@@ -64,13 +66,13 @@ function Signup() {
         text_pw: '비밀번호는 8자리 이상이어야 합니다.',
         color_pw: false,
       });
-    } else if (password.length >= 8 && regExp.test(password)) {
+    } else if (password.length >= 8 && regPassword.test(password)) {
       setErrtext({
         ...errtext,
         text_pw: '사용가능한 비밀번호 입니다',
         color_pw: true,
       });
-    } else if (password.length >= 8 && !regExp.test(password)) {
+    } else if (password.length >= 8 && !regPassword.test(password)) {
       setErrtext({
         ...errtext,
         text_pw: '영문, 숫자가 모두 포함되어야 합니다',
