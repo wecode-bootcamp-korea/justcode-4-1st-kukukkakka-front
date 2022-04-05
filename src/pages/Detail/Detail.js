@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+
 import OperationBtns from './OperationBtns/OperationBtns';
 import style from './Detail.module.scss';
 import OptionBtn from './OptionBtn/OptionBtn';
@@ -16,12 +17,25 @@ function Detail() {
     border: '1px solid $gray-color',
   });
   const [count, setCount] = useState(1);
+  // const [product, setProduct] = useState({
+  //   productDetailData: [],
+  // });
 
+  // console.log(product);
+  // const params = useParams();
   const navigate = useNavigate();
 
   const goToCart = () => {
     navigate('/cart');
   };
+
+  // useEffect(() => {
+  //   fetch(`http://localhost:8000/products/${params.id}`)
+  //     .then(res => res.json())
+  //     .then(res => {
+  //       setProduct(res);
+  //     });
+  // }, [params.id]);
 
   const selectItem = () => {
     onClickOptionItem();
