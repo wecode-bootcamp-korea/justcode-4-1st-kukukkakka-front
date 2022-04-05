@@ -1,0 +1,111 @@
+* {
+  box-sizing: border-box;
+  font-family: Noto Sans KR, sans-serif;
+}
+
+.closeBtn {
+  border: none;
+  background-color: #ffffff;
+  position: absolute;
+  margin-left: 60vh;
+  margin-top: 3px;
+}
+
+.modalBackground {
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  opacity: 0.7;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+
+.modalContainer {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background-color: #ffffff;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  display: flex;
+  justify-content: center;
+}
+
+.textWrap {
+  background-color: #ffffff;
+  margin: 40px;
+  width: 100%;
+  text-align: center;
+}
+
+.signupTitle {
+  text-align: center;
+  font-size: larger;
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+.marketingText {
+  text-align: center;
+  font-size: small;
+  color: #46cfa7;
+  font-weight: 500;
+}
+.blackText {
+  color: black;
+}
+
+.signupBtn {
+  background-color: black;
+  color: #ffffff;
+  border: none;
+  font-size: medium;
+  margin: 25px 0px;
+  border-radius: 5px;
+  padding: 15px 50px;
+  width: 100%;
+}
+.areaLine {
+  color: #ececec;
+  opacity: 0.3;
+  margin-bottom: 30px;
+}
+.kakaoBtn {
+  display: block;
+  border: none;
+  font-size: medium;
+  margin-top: 25px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  padding: 15px 50px;
+  width: 100%;
+  background-color: #ffd800;
+}
+.naverBtn {
+  display: block;
+  border: none;
+  font-size: medium;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  padding: 15px 50px;
+  width: 100%;
+  background-color: #03cf5c;
+  color: #ffffff;
+}
+.facebookBtn {
+  display: block;
+  border: none;
+  font-size: medium;
+  border-radius: 5px;
+  padding: 15px;
+  width: 100%;
+  background-color: #1977f2;
+  color: #ffffff;
+}
+.facebookIcon {
+  height: 35px;
+  padding-right: 200px;
+}
