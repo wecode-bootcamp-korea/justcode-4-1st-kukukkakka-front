@@ -113,59 +113,59 @@ $yellow: #ffcd32;
   padding-bottom: 100px;
 }
 
-@media screen and (max-width: 1200px) {
-  .listTop {
-    padding: 0 30px;
-  }
-  .listContainer {
-    max-width: 100%;
-    width: 100%;
-    gap: 15px;
-    justify-content: space-between;
-    padding: 0 30px;
-  }
-}
+// @media screen and (max-width: 1200px) {
+//   .listTop {
+//     padding: 0 30px;
+//   }
+//   .listContainer {
+//     max-width: 100%;
+//     width: 100%;
+//     gap: 15px;
+//     justify-content: space-between;
+//     padding: 0 30px;
+//   }
+// }
 
-@media screen and (max-width: 676px) {
-  .listTop {
-    .container {
-      .searchContainer {
-        width: 80%;
-        box-sizing: border-box;
-        flex-grow: 1;
-        .searchBox {
-          width: 100%;
-        }
-      }
-    }
-  }
-}
+// @media screen and (max-width: 676px) {
+//   .listTop {
+//     .container {
+//       .searchContainer {
+//         width: 80%;
+//         box-sizing: border-box;
+//         flex-grow: 1;
+//         .searchBox {
+//           width: 100%;
+//         }
+//       }
+//     }
+//   }
+// }
 
-@media screen and (max-width: 480px) {
-  .listTop {
-    .container {
-      gap: 0;
-    }
-  }
-  .searchContainer {
-    .searchBox {
-      width: 90% !important;
-      font-size: 14px !important;
-    }
-    .icons {
-      font-size: 13px;
-      right: 45px !important;
-      top: 11px !important;
-    }
-  }
+// @media screen and (max-width: 480px) {
+//   .listTop {
+//     .container {
+//       gap: 0;
+//     }
+//   }
+//   .searchContainer {
+//     .searchBox {
+//       width: 90% !important;
+//       font-size: 14px !important;
+//     }
+//     .icons {
+//       font-size: 13px;
+//       right: 45px !important;
+//       top: 11px !important;
+//     }
+//   }
 
-  .recommendBox {
-    .recommend {
-      font-size: 14px !important;
-    }
+//   .recommendBox {
+//     .recommend {
+//       font-size: 14px !important;
+//     }
 
-    ul li {
-      font-size: 15px;
-    }
-  }
-}
+//     ul li {
+//       font-size: 15px;
+//     }
+//   }
+// }
