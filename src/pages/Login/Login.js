@@ -26,6 +26,10 @@ function Login() {
     window.scrollTo(0, 0);
   };
 
+  const servicePreparing = () => {
+    alert('꾸꾸까까가 열심히 서비스를 준비중입니다!');
+  };
+
   // 버튼활성화를 위한 정규식 체크
   let regEmail =
     /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
@@ -73,12 +77,16 @@ function Login() {
         로그인
       </button>
       <section className={styles.searchLoginInfo}>
-        <span className={styles.searchId}>아이디 찾기</span>
-        <span className={styles.searchPw}>비밀번호 찾기</span>
+        <span className={styles.searchId} onClick={servicePreparing}>
+          아이디 찾기
+        </span>
+        <span className={styles.searchPw} onClick={servicePreparing}>
+          비밀번호 찾기
+        </span>
       </section>
       <hr className={styles.line} />
       <span className={styles.noticeText}> SNS계정으로 간편 로그인</span>
-      <section className={styles.snsIcon}>
+      <section className={styles.snsIcon} onClick={servicePreparing}>
         <img
           className={styles.facebookIcon}
           src="https://ifh.cc/g/4mMCRP.png"
@@ -110,7 +118,9 @@ function Login() {
         회원가입
       </button>
       {modalOpen && <Modal modalHandler={modalHandler} />}
-      <span className={styles.nonMemberOrder}>비회원 주문조회</span>
+      <span className={styles.nonMemberOrder} onClick={servicePreparing}>
+        비회원 주문조회
+      </span>
       <div className={styles.btnWrap} />
     </section>
   );
