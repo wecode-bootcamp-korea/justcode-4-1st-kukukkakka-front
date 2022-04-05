@@ -73,7 +73,11 @@ function Login() {
         type="password"
         onChange={pwInput}
       />
-      <button className={styles.loginBtn} onClick={postLogin}>
+      <button
+        className={isValid ? styles.loginBtn_true : styles.loginBtn_false}
+        onClick={postLogin}
+        disabled={!isValid}
+      >
         로그인
       </button>
       <section className={styles.searchLoginInfo}>
@@ -108,12 +112,11 @@ function Login() {
         바로 지급!
       </span>
       <button
-        className={isValid ? styles.signupBtn_true : styles.signupBtn_false}
+        className={styles.signupBtn}
         onClick={() => {
           modalHandler();
           scrollToTop();
         }}
-        disabled={!isValid}
       >
         회원가입
       </button>
