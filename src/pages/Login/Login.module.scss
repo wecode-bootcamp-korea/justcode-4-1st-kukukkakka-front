@@ -1,0 +1,140 @@
+* {
+  box-sizing: border-box;
+  font-family: Noto Sans KR, sans-serif;
+}
+
+.header {
+  font-size: xx-large;
+  margin-top: 100px;
+  margin-bottom: 30px;
+}
+
+.wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.idBox {
+  border: solid 1px #d3d3d3;
+  border-radius: 5px;
+  margin: 10px;
+  width: 50vh;
+  padding: 15px 10px;
+  font-size: medium;
+  font-weight: lighter;
+}
+
+.pwBox {
+  border: solid 1px #d3d3d3;
+  border-radius: 5px;
+  margin-top: 5px;
+  width: 50vh;
+  padding: 15px 10px;
+  font-size: medium;
+  font-weight: lighter;
+}
+
+.loginBtn {
+  background-color: #ffcd32;
+  border: none;
+  font-size: large;
+  margin-top: 25px;
+  border-radius: 10px;
+  padding: 15px 100px;
+  width: 50vh;
+}
+
+.searchLoginInfo {
+  display: flex;
+  justify-content: space-around;
+  width: 40vh;
+  margin: 20px 0px;
+}
+
+.searchId {
+  color: #9e9e9e;
+  cursor: pointer;
+}
+
+.searchPw {
+  color: #9e9e9e;
+  cursor: pointer;
+}
+
+.line {
+  color: gray;
+  border: solid gray 1px;
+}
+
+.noticeText {
+  font-size: small;
+}
+
+.signupBtn_true {
+  background-color: #74cca9;
+  color: #ffffff;
+  border: none;
+  font-size: large;
+  margin-top: 25px;
+  border-radius: 10px;
+  padding: 15px 100px;
+  width: 50vh;
+  cursor: pointer;
+}
+
+.signupBtn_false {
+  background-color: #9e9e9e;
+  color: #ffffff;
+  border: none;
+  font-size: large;
+  margin-top: 25px;
+  border-radius: 10px;
+  padding: 15px 100px;
+  width: 50vh;
+}
+
+.snsIcon {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 10px;
+  margin-top: 15px;
+  margin-bottom: 35px;
+  cursor: pointer;
+  // width: 30px;
+}
+
+.facebookIcon,
+.naverIcon,
+.kakaoIcon {
+  margin: 0px 7px;
+}
+.signupPoint {
+  color: #46cfa7;
+}
+
+.nonMemberOrder {
+  margin-top: 20px;
+  margin-bottom: 100px;
+  text-decoration: underline;
+  color: #787878;
+  cursor: pointer;
+}
+
+.btnWrap {
+  text-align: center;
+  margin-top: 20px;
+}
+.scrollToTopBtn {
+  border: none;
+  border-radius: 15px;
+  position: fixed;
+  top: 85%;
+  left: 85%;
+  transform: translate(-50%, -50%);
+}
+
+.scrollToTopImg {
+  width: 100px;
+}
