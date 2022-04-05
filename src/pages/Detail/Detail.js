@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import OperationBtns from './OperationBtns/OperationBtns';
 import style from './Detail.module.scss';
 import OptionList from './OptionList/OptionList';
@@ -31,7 +31,7 @@ function Detail() {
     border: '1px solid $gray-color',
   });
   const [count, setCount] = useState(1);
-
+  const navigate = useNavigate();
   const optionPrice = 2500;
 
   useEffect(() => {
@@ -48,6 +48,13 @@ function Detail() {
   }, [value]);
 
   const openModal = () => {
+    // 비회원일 때
+    // if() {
+    //   alert('로그인을 먼저 해주세요!');
+    //   navigate('/login');
+    //   return;
+    // }
+
     if (showItemBox.display === 'none' && !notSelect) {
       alert('추가옵션을 선택해주세요 :-)');
       return;
