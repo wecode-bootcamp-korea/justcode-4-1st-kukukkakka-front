@@ -32,7 +32,7 @@ $padding_bottom: 25px;
 .container {
   @include sideMargin(40px);
   @include sidePadding(40px);
-  padding-top: 100px;
+  padding-top: 20px;
   padding-bottom: 300px;
 }
 
@@ -126,6 +126,26 @@ $padding_bottom: 25px;
     background-color: #ffcd32;
     font-size: $medium-font-size;
     cursor: pointer;
+  }
+}
+
+.option_btn_box {
+  margin-bottom: 50px;
+  border: 1px solid $gray-color;
+  border-radius: 5px;
+}
+
+.optionBtn {
+  @include fontStyle(8px, lighter, 14px);
+  display: flex;
+  padding: 20px 20px 20px 20px;
+  border: 1px solid white;
+  border-radius: 5px;
+  background-color: white;
+  cursor: pointer;
+
+  :first-child {
+    padding-right: 70px;
   }
 }
 
