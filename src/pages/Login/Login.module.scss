@@ -36,8 +36,20 @@
   font-weight: lighter;
 }
 
-.loginBtn {
+.loginBtn_true {
   background-color: #ffcd32;
+  border: none;
+  font-size: large;
+  margin-top: 25px;
+  border-radius: 10px;
+  padding: 15px 100px;
+  width: 50vh;
+  cursor: pointer;
+}
+
+.loginBtn_false {
+  background-color: #ececec;
+  color: #ffffff;
   border: none;
   font-size: large;
   margin-top: 25px;
@@ -72,7 +84,7 @@
   font-size: small;
 }
 
-.signupBtn_true {
+.signupBtn {
   background-color: #74cca9;
   color: #ffffff;
   border: none;
@@ -82,17 +94,6 @@
   padding: 15px 100px;
   width: 50vh;
   cursor: pointer;
-}
-
-.signupBtn_false {
-  background-color: #9e9e9e;
-  color: #ffffff;
-  border: none;
-  font-size: large;
-  margin-top: 25px;
-  border-radius: 10px;
-  padding: 15px 100px;
-  width: 50vh;
 }
 
 .snsIcon {
@@ -125,16 +126,4 @@
 .btnWrap {
   text-align: center;
   margin-top: 20px;
-}
-.scrollToTopBtn {
-  border: none;
-  border-radius: 15px;
-  position: fixed;
-  top: 85%;
-  left: 85%;
-  transform: translate(-50%, -50%);
-}
-
-.scrollToTopImg {
-  width: 100px;
 }
