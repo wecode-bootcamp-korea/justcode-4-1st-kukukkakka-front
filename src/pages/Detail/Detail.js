@@ -62,10 +62,19 @@ function Detail() {
     modal ? setModal(false) : setModal(true);
   };
 
+  // 추가상품박스 보이게 하는 함수
+  const onClickOptionItem = () => {
+    showItemBox.display === 'none'
+      ? setShowItemBox({ display: 'block' })
+      : setShowItemBox({ display: 'none' });
+  };
+
   const selectItem = () => {
     onClickOptionItem();
     setOptionList({ display: 'none' });
     setChangeBorder({ border: '1px solid #b1b1b1' });
+
+    // 추가상품 두번이상 눌렀을 때
     if (showItemBox.display === 'block') {
       setChangeText('함께하면 좋은 추천상품');
       setNotSelect(false);
@@ -117,13 +126,6 @@ function Detail() {
     setTotalPrice((count + 1) * value);
     showItemBox.display === 'block' &&
       setTotalPrice(value * (count + 1) + optionPrice);
-  };
-
-  // 추가상품박스 보이게 하는 함수
-  const onClickOptionItem = () => {
-    showItemBox.display === 'none'
-      ? setShowItemBox({ display: 'block' })
-      : setShowItemBox({ display: 'none' });
   };
 
   const deleteItemBox = () => {
