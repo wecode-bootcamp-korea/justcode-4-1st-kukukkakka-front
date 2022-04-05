@@ -3,16 +3,17 @@ import styles from './Modal.module.scss';
 import { AiOutlineClose } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
 
-function Modal({ modalClose }) {
+function Modal({ modalHandler }) {
   const navigate = useNavigate();
   const signupPage = () => {
     navigate('/signup');
   };
+  console.log();
   return (
     <>
       <div className={styles.modalBackground} />
       <div className={styles.modalContainer}>
-        <button onClick={modalClose} className={styles.closeBtn}>
+        <button onClick={modalHandler} className={styles.closeBtn}>
           <AiOutlineClose size="35" color="gray" />
         </button>
         <div className={styles.textWrap}>

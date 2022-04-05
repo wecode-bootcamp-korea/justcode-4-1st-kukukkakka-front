@@ -5,7 +5,7 @@ import Modal from './Modal';
 
 function Login() {
   const [modalOpen, setModalOpen] = useState(false);
-  const modalClose = () => {
+  const modalHandler = () => {
     setModalOpen(!modalOpen);
   };
 
@@ -22,9 +22,16 @@ function Login() {
   const pwInput = e => {
     setPassword(e.target.value);
   };
-  // const scrollToTop = () => {
-  //   window.scrollTo(0, 0);
-  // };
+  const scrollToTop = () => {
+    window.scrollTo(0, 0);
+  };
+
+  // 버튼활성화를 위한 정규식 체크
+  let regEmail =
+    /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
+  let regPassword = /(?=.*\d)(?=.*[a-zA-ZS]).{8,20}/; // 문자, 숫자 1개이상 포함, 8자리 이상
+  const isValid = regEmail.test(id) && regPassword.test(password);
+  console.log(isValid);
 
   const postLogin = () => {
     fetch('http://localhost:8000/users/login', {
@@ -92,20 +99,19 @@ function Login() {
         지금 회원가입 하시면 <span className={styles.signupPoint}>1,000p</span>
         바로 지급!
       </span>
-      <button className={styles.signupBtn} onClick={modalClose} Link to="0">
+      <button
+        className={isValid ? styles.signupBtn_true : styles.signupBtn_false}
+        onClick={() => {
+          modalHandler();
+          scrollToTop();
+        }}
+        disabled={!isValid}
+      >
         회원가입
       </button>
-      {modalOpen && <Modal modalClose={modalClose} />}
+      {modalOpen && <Modal modalHandler={modalHandler} />}
       <span className={styles.nonMemberOrder}>비회원 주문조회</span>
-      <div className={styles.btnWrap}>
-        <button className={styles.scrollToTopBtn} onClick={scrollToTop}>
-          <img
-            className={styles.scrollToTopImg}
-            src="https://ifh.cc/g/lxlmg7.png"
-            alt="crollToTopButton"
-          />
-        </button>
-      </div>
+      <div className={styles.btnWrap} />
     </section>
   );
 }

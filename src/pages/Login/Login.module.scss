@@ -70,8 +70,19 @@
   font-size: small;
 }
 
-.signupBtn {
+.signupBtn_true {
   background-color: #74cca9;
+  color: #ffffff;
+  border: none;
+  font-size: large;
+  margin-top: 25px;
+  border-radius: 10px;
+  padding: 15px 100px;
+  width: 50vh;
+}
+
+.signupBtn_false {
+  background-color: #9e9e9e;
   color: #ffffff;
   border: none;
   font-size: large;
