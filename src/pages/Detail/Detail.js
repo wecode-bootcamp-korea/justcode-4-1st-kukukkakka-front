@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import OperationBtns from './OperationBtns/OperationBtns';
 import style from './Detail.module.scss';
 import OptionList from './OptionList/OptionList';
 import AddedOptionBox from './AddedOptionBox/AddedOptionBox';
+import DetailModal from './DetailModal';
 
 function Detail() {
   const params = useParams();
+  const [modal, setModal] = useState(false);
+  const [notSelect, setNotSelect] = useState(false);
   const [product, setProduct] = useState({
     productDetailData: [
       {
@@ -19,12 +22,8 @@ function Detail() {
   });
 
   let value = product.productDetailData[0].price;
-
   const [productPrice, setProductPrice] = useState(value);
   const [totalPrice, setTotalPrice] = useState(value);
-  // const [totalPrice, setTotalPrice] = useState(value);
-  // const [productPrice, setProductPrice] = useState(value);
-  console.log('productPrice: ', productPrice);
   const [changeText, setChangeText] = useState('함께하면 좋은 추천상품');
   const [showItemBox, setShowItemBox] = useState({ display: 'none' });
   const [optionList, setOptionList] = useState({ display: 'none' });
@@ -32,6 +31,7 @@ function Detail() {
     border: '1px solid $gray-color',
   });
   const [count, setCount] = useState(1);
+
   const optionPrice = 2500;
 
   useEffect(() => {
@@ -47,11 +47,12 @@ function Detail() {
     setTotalPrice(value);
   }, [value]);
 
-  const navigate = useNavigate();
-
-  const goToCart = () => {
-    navigate('/cart');
-    window.scrollTo(0, 0);
+  const openModal = () => {
+    if (showItemBox.display === 'none' && !notSelect) {
+      alert('추가옵션을 선택해주세요 :-)');
+      return;
+    }
+    modal ? setModal(false) : setModal(true);
   };
 
   const selectItem = () => {
@@ -60,10 +61,12 @@ function Detail() {
     setChangeBorder({ border: '1px solid #b1b1b1' });
     if (showItemBox.display === 'block') {
       setChangeText('함께하면 좋은 추천상품');
+      setNotSelect(false);
       setTotalPrice(totalPrice - optionPrice);
     } else {
       setChangeText('롱 모던 베이직 화분');
       setTotalPrice(totalPrice + optionPrice);
+      setNotSelect(false);
     }
   };
 
@@ -71,12 +74,13 @@ function Detail() {
     setChangeText('선택안함');
     setOptionList({ display: 'none' });
     setChangeBorder({ border: '1px solid #b1b1b1' });
+    setNotSelect(true);
 
     // 추가상품 눌렀다가 선택안함 눌렀을 때 추가상품박스 없애기
     if (showItemBox.display === 'block') {
       onClickOptionItem();
-      showItemBox.display === 'block' &&
-        setTotalPrice(totalPrice - optionPrice);
+      setTotalPrice(totalPrice - optionPrice);
+      setNotSelect(true);
     }
   };
 
@@ -95,10 +99,7 @@ function Detail() {
     if (count - 1 < 1) return;
     setCount(count - 1);
     setProductPrice((count - 1) * value);
-    console.log('count: ', count);
-
     setTotalPrice((count - 1) * value);
-
     showItemBox.display === 'block' &&
       setTotalPrice((count - 1) * value + optionPrice);
   };
@@ -122,6 +123,7 @@ function Detail() {
     setShowItemBox({ display: 'none' });
     setTotalPrice(totalPrice - optionPrice);
     setChangeText('함께하면 좋은 추천상품');
+    setNotSelect(false);
   };
 
   return (
@@ -133,7 +135,11 @@ function Detail() {
         </div>
       </header>
       <main className={style.content}>
-        <div className={style.imgBox} />
+        <img
+          className={style.imgBox}
+          src={product.productDetailData[0].image_url}
+          alt="detailShot"
+        />
         <article className={style.detailBox}>
           <ul className={style.productInfo}>
             <li> {product.productDetailData[0].description}</li>
@@ -173,6 +179,11 @@ function Detail() {
             <div>상품가격</div>
             <div>{productPrice}원</div>
           </div>
+          {notSelect && (
+            <div className={style.priceBox}>
+              <div>추가옵션 : 선택안함</div>
+            </div>
+          )}
           <AddedOptionBox
             changeStyle={showItemBox}
             deleteItem={deleteItemBox}
@@ -183,8 +194,11 @@ function Detail() {
             <span>{totalPrice}원</span>
           </div>
           <div className={style.contentBtnBox}>
-            <button>장바구니</button>
-            <button>바로 구매</button>
+            {modal && <DetailModal openModal={openModal} />}
+            <button className={style.yellowBtn} onClick={openModal}>
+              장바구니
+            </button>
+            <button className={style.whiteBtn}>바로 구매</button>
           </div>
         </article>
       </main>
