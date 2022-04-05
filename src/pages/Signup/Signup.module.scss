@@ -54,7 +54,7 @@
   border: none;
   border-radius: 3px;
   background-color: #ffcd32;
-  padding: 15px 39px;
+  padding: 15px 35px;
   margin-right: 10px;
   font-size: large;
 }
@@ -62,10 +62,11 @@
 .genderBtn_false {
   border: none;
   border-radius: 3px;
-  padding: 15px 39px;
+  padding: 15px 35px;
   background-color: #ececec;
   margin-right: 10px;
   font-size: large;
+  cursor: pointer;
 }
 
 .idDuplicateCheck_false {
@@ -86,6 +87,7 @@
   margin-right: 10px;
   font-size: large;
   color: #ffffff;
+  cursor: pointer;
 }
 
 input:focus {
@@ -145,6 +147,7 @@ input:focus {
 .checkbox_false {
   margin-right: 5px;
   color: gray;
+  cursor: pointer;
 }
 
 .checkbox_true {
@@ -161,6 +164,7 @@ input:focus {
   border-radius: 10px;
   padding: 15px 100px;
   width: 100%;
+  cursor: pointer;
 }
 
 .signuoBtn_false {

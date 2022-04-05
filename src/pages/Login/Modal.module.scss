@@ -9,6 +9,7 @@
   position: absolute;
   margin-left: 60vh;
   margin-top: 3px;
+  cursor: pointer;
 }
 
 .modalBackground {
@@ -27,7 +28,7 @@
   width: 500px;
   height: 500px;
   background-color: #ffffff;
-  top: 50%;
+  top: 60%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 3;
@@ -67,6 +68,7 @@
   border-radius: 5px;
   padding: 15px 50px;
   width: 100%;
+  cursor: pointer;
 }
 .areaLine {
   color: #ececec;
