@@ -21,7 +21,7 @@ function Detail() {
   let value = product.productDetailData[0].price;
   // const [totalPrice, setTotalPrice] = useState(45000);
   // const [productPrice, setProductPrice] = useState(45000);
-  const [totalPrice, setTotalPrice] = useState(value);
+  const [totalPrice, setTotalPrice] = useState('');
   const [productPrice, setProductPrice] = useState(value);
   const [changeText, setChangeText] = useState('함께하면 좋은 추천상품');
   const [showItemBox, setShowItemBox] = useState({ display: 'none' });
