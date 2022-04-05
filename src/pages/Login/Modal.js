@@ -1,18 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './Modal.module.scss';
 import { AiOutlineClose } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
 
-function Modal({ modalClick }) {
+function Modal({ modalHandler }) {
   const navigate = useNavigate();
-  const goToSignup = () => {
+  const signupPage = () => {
     navigate('/signup');
   };
+  console.log();
   return (
     <>
       <div className={styles.modalBackground} />
       <div className={styles.modalContainer}>
-        <button onClick={modalClick} className={styles.closeBtn}>
+        <button onClick={modalHandler} className={styles.closeBtn}>
           <AiOutlineClose size="35" color="gray" />
         </button>
         <div className={styles.textWrap}>
@@ -21,7 +22,7 @@ function Modal({ modalClick }) {
             바로 사용할 수 있는 1,000p{' '}
             <span className={styles.blackText}>를 드려요!</span>
           </p>
-          <button className={styles.signupBtn} onClick={goToSignup}>
+          <button className={styles.signupBtn} onClick={signupPage}>
             이메일 회원가입
           </button>
           <hr className={styles.areaLine} />

@@ -1,20 +1,19 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './Login.module.scss';
 import Modal from './Modal';
 
 function Login() {
   const [modalOpen, setModalOpen] = useState(false);
-  const modalClick = () => {
+  const modalHandler = () => {
     setModalOpen(!modalOpen);
   };
 
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
-  // const navigate = useNavigate();
-
+  const navigate = useNavigate();
   const loginSuccess = () => {
-    alert('로그인 성공!');
+    navigate('/signup');
   };
 
   const idInput = e => {
@@ -26,6 +25,17 @@ function Login() {
   const scrollToTop = () => {
     window.scrollTo(0, 0);
   };
+
+  const servicePreparing = () => {
+    alert('꾸꾸까까가 열심히 서비스를 준비중입니다!');
+  };
+
+  // 버튼활성화를 위한 정규식 체크
+  let regEmail =
+    /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
+  let regPassword = /(?=.*\d)(?=.*[a-zA-ZS]).{8,20}/; // 문자, 숫자 1개이상 포함, 8자리 이상
+  const isValid = regEmail.test(id) && regPassword.test(password);
+  console.log(isValid);
 
   const postLogin = () => {
     fetch('http://localhost:8000/users/login', {
@@ -63,17 +73,24 @@ function Login() {
         type="password"
         onChange={pwInput}
       />
-      <button className={styles.loginBtn} onClick={postLogin}>
+      <button
+        className={isValid ? styles.loginBtn_true : styles.loginBtn_false}
+        onClick={postLogin}
+        disabled={!isValid}
+      >
         로그인
       </button>
       <section className={styles.searchLoginInfo}>
-        <span className={styles.searchId}>아이디 찾기</span>
-        <span className={styles.searchPw}>비밀번호 찾기</span>
+        <span className={styles.searchId} onClick={servicePreparing}>
+          아이디 찾기
+        </span>
+        <span className={styles.searchPw} onClick={servicePreparing}>
+          비밀번호 찾기
+        </span>
       </section>
       <hr className={styles.line} />
       <span className={styles.noticeText}> SNS계정으로 간편 로그인</span>
-      <section className={styles.snsIcon} onClick={() => window.scrollTo(0, 0)}>
-        {/* {modalOpen && <Modal modalClose={modalClose} />} */}
+      <section className={styles.snsIcon} onClick={servicePreparing}>
         <img
           className={styles.facebookIcon}
           src="https://ifh.cc/g/4mMCRP.png"
@@ -94,20 +111,20 @@ function Login() {
         지금 회원가입 하시면 <span className={styles.signupPoint}>1,000p</span>
         바로 지급!
       </span>
-      <button className={styles.signupBtn} onClick={modalClick}>
+      <button
+        className={styles.signupBtn}
+        onClick={() => {
+          modalHandler();
+          scrollToTop();
+        }}
+      >
         회원가입
       </button>
-      {modalOpen && <Modal modalClick={modalClick} />}
-      <span className={styles.nonMemberOrder}>비회원 주문조회</span>
-      <div className={styles.btnWrap}>
-        <button className={styles.scrollToTopBtn} onClick={scrollToTop}>
-          <img
-            className={styles.scrollToTopImg}
-            src="https://ifh.cc/g/lxlmg7.png"
-            alt="crollToTopButton"
-          />
-        </button>
-      </div>
+      {modalOpen && <Modal modalHandler={modalHandler} />}
+      <span className={styles.nonMemberOrder} onClick={servicePreparing}>
+        비회원 주문조회
+      </span>
+      <div className={styles.btnWrap} />
     </section>
   );
 }
