@@ -38,8 +38,6 @@ function Detail() {
 
   const optionPrice = 2500;
 
-  console.log(product.productDetailData[0]);
-
   useEffect(() => {
     fetch(`http://localhost:8000/products/${params.id}`)
       .then(res => res.json())
@@ -184,9 +182,9 @@ function Detail() {
         />
         <article className={style.detailBox}>
           <ul className={style.productInfo}>
-            <li> {product.productDetailData[0].description}</li>
-            <li> {product.productDetailData[0].name}</li>
-            <li>{product.productDetailData[0].price}원</li>
+            <li> {description}</li>
+            <li> {name}</li>
+            <li> {price} 원</li>
           </ul>
           <div className={style.eventTittle}>
             회원 구매 시,
