@@ -1,15 +1,11 @@
 import React, { useEffect, useState } from 'react';
+
 import styles from '../List/List.module.scss';
 import { AiOutlineSearch } from 'react-icons/ai';
 
 import ListCard from '../List/ListCard';
+import { useLocation } from 'react-router-dom';
 function List() {
-  //back 데이터 가져오기
-  // const [lists, setLists] = useState({
-  //   productList: [],
-  // });
-
-  //mockData
   const [lists, setLists] = useState({
     productList: [],
   });
@@ -18,6 +14,10 @@ function List() {
   const [highPrice, setHighPrice] = useState([]);
   const [inputs, setInputs] = useState('');
   const [showRecommend, setShowRecommend] = useState(false);
+  const location = useLocation();
+
+  const url = `http://localhost:8000/products/search?${inputs}`;
+  console.log(url.search);
 
   useEffect(() => {
     fetch('http://localhost:8000/products')
@@ -39,6 +39,8 @@ function List() {
   //     .then(res => res.json())
   //     .then(result => console.log({ message: result }));
   // };
+
+  // useEffect(() => {}, []);
 
   const inputValue = e => {
     e.preventDefault();
