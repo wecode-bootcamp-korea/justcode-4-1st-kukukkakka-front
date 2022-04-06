@@ -109,8 +109,6 @@ function Signup() {
   const usernameHandler = e => {
     setInputs({ ...inputs, username: e.target.value });
   };
-  // console.log('값이 잘 들어왔나?:', inputs);
-  // console.log('값이 잘 들어왔나?222:', email, password, passwordAgain);
 
   const isPassedSignup =
     errtext.idCheck &&
@@ -121,56 +119,57 @@ function Signup() {
     username !== '' &&
     checked;
 
-  // useEffect(() => {
-  //   fetch('회원가입 중복회원 체크 API url', {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify({
-  //       email: email,
-  //     }),
-  //   });
-  // })
-  //   .then(res => {
-  //     if (res.status == 201) {
-  //       alert('가입 가능한 이메일입니다.');
-  //     } else if (res.status == 400) {
-  //       alert('이미 가입한 이메일입니다. 로그인페이지로 이동합니다.');
-  //       navigate('/login');
-  //     }
-  //   })
-  //   .then(res => {
-  //     console.log('에러메시지 : ', res.message);
-  //   });
+  const duplicatePost = () => {
+    fetch('http://localhost:8000/users/signup/duplicate', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: email,
+      }),
+    })
+      .then(res => {
+        if (res.status === 201) {
+          alert('가입 가능한 이메일입니다.');
+          return res.json();
+        } else if (res.status === 400) {
+          alert('이미 가입한 이메일입니다. 로그인페이지로 이동합니다.');
+          navigate('/login');
+          return res.json();
+        }
+      })
+      .then(res => {
+        console.log('에러메시지 : ', res.message);
+      });
+  };
 
-  // useEffect(() => {
-  //   fetch('회원가입 API url', {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify({
-  //       email: email,
-  //       password: password,
-  //       username: username,
-  //       gender_id: Number(gender),
-  //       policyAgree: checked,
-  //     }),
-  //   })
-  //     .then(res => {
-  //       if (res.status === 201) {
-  //         alert('회원가입을 축하드립니다!');
-  //         navigate('/main');
-  //       } else if (res.status === 400) {
-  //         return res.json();
-  //       }
-  //     })
-  //     .then(res => {
-  //       console.log('에러메시지 : ', res.message);
-  //     });
-  // }, []);
-
+  const signUpPost = () => {
+    fetch('http://localhost:8000/users/signup', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: email,
+        password: password,
+        username: username,
+        genderId: Number(gender),
+        policyAgreed: checked,
+      }),
+    })
+      .then(res => {
+        if (res.status === 201) {
+          alert('회원가입을 축하드립니다!');
+          navigate('/main');
+        } else if (res.status === 400 || res.status === 500) {
+          return res.json();
+        }
+      })
+      .then(res => {
+        console.log('에러메시지 : ', res.message);
+      });
+  };
   return (
     <div>
       <header className={stylse.signupHeader}>
@@ -193,7 +192,7 @@ function Signup() {
                 : stylse.idDuplicateCheck_false
             }
             disabled={!errtext.idCheck}
-            // onClick={duplicateCheck}
+            onClick={duplicatePost}
           >
             중복확인
           </button>
@@ -316,7 +315,7 @@ function Signup() {
               ? stylse.signuoBtn_true
               : stylse.signuoBtn_false
           }
-          // onClick={signupHandler}
+          onClick={signUpPost}
         >
           회원가입
         </button>

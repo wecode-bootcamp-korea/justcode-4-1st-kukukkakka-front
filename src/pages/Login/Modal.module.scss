@@ -20,7 +20,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 2;
+  z-index: 100;
 }
 
 .modalContainer {
@@ -31,7 +31,7 @@
   top: 60%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 3;
+  z-index: 101;
   display: flex;
   justify-content: center;
 }
