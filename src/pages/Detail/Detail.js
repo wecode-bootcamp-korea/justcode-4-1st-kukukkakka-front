@@ -1,28 +1,31 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import OperationBtns from './OperationBtns/OperationBtns';
 import style from './Detail.module.scss';
 import OptionList from './OptionList/OptionList';
 import AddedOptionBox from './AddedOptionBox/AddedOptionBox';
+import DetailModal from './DetailModal';
 
 function Detail() {
   const params = useParams();
+
+  const [modal, setModal] = useState(false);
+  const [notSelect, setNotSelect] = useState(false);
   const [product, setProduct] = useState({
     productDetailData: [
       {
+        id: 0,
         name: '',
         discription: '',
-        image_url: '',
+        imageUrl: '',
         price: 0,
       },
     ],
   });
 
   let value = product.productDetailData[0].price;
-  // const [totalPrice, setTotalPrice] = useState(45000);
-  // const [productPrice, setProductPrice] = useState(45000);
-  const [totalPrice, setTotalPrice] = useState('');
   const [productPrice, setProductPrice] = useState(value);
+  const [totalPrice, setTotalPrice] = useState(value);
   const [changeText, setChangeText] = useState('함께하면 좋은 추천상품');
   const [showItemBox, setShowItemBox] = useState({ display: 'none' });
   const [optionList, setOptionList] = useState({ display: 'none' });
@@ -31,7 +34,11 @@ function Detail() {
   });
   const [count, setCount] = useState(1);
 
+  const navigate = useNavigate();
+
   const optionPrice = 2500;
+
+  console.log(product.productDetailData[0]);
 
   useEffect(() => {
     fetch(`http://localhost:8000/products/${params.id}`)
@@ -41,13 +48,50 @@ function Detail() {
       });
   }, [params.id]);
 
-  // console.log(product);
-  // const params = useParams();
-  const navigate = useNavigate();
+  const postCart = () => {
+    fetch('http://localhost:8000/carts', {
+      method: 'post',
+      body: JSON.stringify({
+        productId: product.productDetailData[0].id,
+        addOptionId: [],
+        quantity: count,
+        totalPrice: totalPrice,
+      }),
+    })
+      .then(res => res.json())
+      .then(res => {
+        if (res.success) {
+          console.log('SUCCESS');
+        }
+      });
+  };
 
-  const goToCart = () => {
-    navigate('/cart');
-    window.scrollTo(0, 0);
+  useEffect(() => {
+    setProductPrice(value);
+    setTotalPrice(value);
+  }, [value]);
+
+  const openModal = () => {
+    // 비회원일 때
+    // if() {
+    //   alert('로그인을 먼저 해주세요!');
+    //   navigate('/login');
+    //   return;
+    // }
+
+    if (showItemBox.display === 'none' && !notSelect) {
+      alert('추가옵션을 선택해주세요 :-)');
+      return;
+    }
+    postCart();
+    modal ? setModal(false) : setModal(true);
+  };
+
+  // 추가상품박스 보이게 하는 함수
+  const onClickOptionItem = () => {
+    showItemBox.display === 'none'
+      ? setShowItemBox({ display: 'block' })
+      : setShowItemBox({ display: 'none' });
   };
 
   // useEffect(() => {
@@ -62,12 +106,16 @@ function Detail() {
     onClickOptionItem();
     setOptionList({ display: 'none' });
     setChangeBorder({ border: '1px solid #b1b1b1' });
+
+    // 추가상품 두번이상 눌렀을 때
     if (showItemBox.display === 'block') {
       setChangeText('함께하면 좋은 추천상품');
+      setNotSelect(false);
       setTotalPrice(totalPrice - optionPrice);
     } else {
       setChangeText('롱 모던 베이직 화분');
       setTotalPrice(totalPrice + optionPrice);
+      setNotSelect(false);
     }
   };
 
@@ -75,12 +123,13 @@ function Detail() {
     setChangeText('선택안함');
     setOptionList({ display: 'none' });
     setChangeBorder({ border: '1px solid #b1b1b1' });
+    setNotSelect(true);
 
     // 추가상품 눌렀다가 선택안함 눌렀을 때 추가상품박스 없애기
     if (showItemBox.display === 'block') {
       onClickOptionItem();
-      showItemBox.display === 'block' &&
-        setTotalPrice(totalPrice - optionPrice);
+      setTotalPrice(totalPrice - optionPrice);
+      setNotSelect(true);
     }
   };
 
@@ -98,32 +147,25 @@ function Detail() {
   const minusPrice = () => {
     if (count - 1 < 1) return;
     setCount(count - 1);
-    setProductPrice(productPrice / count);
-    setTotalPrice(productPrice / count);
-
+    setProductPrice((count - 1) * value);
+    setTotalPrice((count - 1) * value);
     showItemBox.display === 'block' &&
-      setTotalPrice(productPrice / count + optionPrice);
+      setTotalPrice((count - 1) * value + optionPrice);
   };
 
   const plusPrice = () => {
     setCount(count + 1);
-    setProductPrice((count + 1) * productPrice);
-    setTotalPrice((count + 1) * productPrice);
+    setProductPrice((count + 1) * value);
+    setTotalPrice((count + 1) * value);
     showItemBox.display === 'block' &&
-      setTotalPrice(productPrice * (count + 1) + optionPrice);
-  };
-
-  // 추가상품박스 보이게 하는 함수
-  const onClickOptionItem = () => {
-    showItemBox.display === 'none'
-      ? setShowItemBox({ display: 'block' })
-      : setShowItemBox({ display: 'none' });
+      setTotalPrice(value * (count + 1) + optionPrice);
   };
 
   const deleteItemBox = () => {
     setShowItemBox({ display: 'none' });
     setTotalPrice(totalPrice - optionPrice);
     setChangeText('함께하면 좋은 추천상품');
+    setNotSelect(false);
   };
 
   return (
@@ -135,7 +177,11 @@ function Detail() {
         </div>
       </header>
       <main className={style.content}>
-        <div className={style.imgBox} />
+        <img
+          className={style.imgBox}
+          src={product.productDetailData[0].image_url}
+          alt="detailShot"
+        />
         <article className={style.detailBox}>
           <ul className={style.productInfo}>
             <li> {product.productDetailData[0].description}</li>
@@ -175,6 +221,11 @@ function Detail() {
             <div>상품가격</div>
             <div>{productPrice}원</div>
           </div>
+          {notSelect && (
+            <div className={style.priceBox}>
+              <div>추가옵션 : 선택안함</div>
+            </div>
+          )}
           <AddedOptionBox
             changeStyle={showItemBox}
             deleteItem={deleteItemBox}
@@ -185,8 +236,11 @@ function Detail() {
             <span>{totalPrice}원</span>
           </div>
           <div className={style.contentBtnBox}>
-            <button>장바구니</button>
-            <button>바로 구매</button>
+            {modal && <DetailModal openModal={openModal} />}
+            <button className={style.yellowBtn} onClick={openModal}>
+              장바구니
+            </button>
+            <button className={style.whiteBtn}>바로 구매</button>
           </div>
         </article>
       </main>

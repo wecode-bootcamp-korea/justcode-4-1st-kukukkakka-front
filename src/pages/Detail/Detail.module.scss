@@ -1,7 +1,7 @@
 $gray_color: #b1b1b1;
 $large_font_size: 25px;
 $medium_font_size: 16px;
-$small_font_size: 11px;
+$small_font_size: 12px;
 $padding_bottom: 25px;
 
 @mixin sidePadding($px) {
@@ -17,6 +17,7 @@ $padding_bottom: 25px;
   @include fontStyle(15px, 400, $medium_font_size);
   display: flex;
   justify-content: space-between;
+  margin-bottom: 5px;
   padding: 20px 15px;
   background-color: #f7f7f7;
   border: 1px solid white;
@@ -29,31 +30,43 @@ $padding_bottom: 25px;
   font-size: $size;
 }
 
+@mixin btns($color) {
+  padding: 10px 80px;
+  border: 1px solid white;
+  border-radius: 5px;
+  background-color: $color;
+  font-size: $medium-font-size;
+  cursor: pointer;
+}
 .container {
   @include sideMargin(40px);
   @include sidePadding(40px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   padding-top: 20px;
+
   padding-bottom: 300px;
 }
 
 .category {
   @include fontStyle($padding_bottom, 300, $small_font_size);
-  @include sidePadding(70px);
-
-  display: flex;
+  @include sidePadding(30px);
+  position: relative;
   padding-top: 50px;
+  padding-right: 800px;
   color: $gray_color;
 }
 .content {
   display: flex;
-  justify-content: center;
 }
 
 .imgBox {
   width: 400px;
   height: 400px;
-  border: 1px solid black;
 }
+
 .detailBox {
   @include sidePadding(50px);
   width: 550px;
@@ -110,22 +123,12 @@ $padding_bottom: 25px;
   display: flex;
   justify-content: space-between;
   padding-top: 20px;
-  :first-child {
-    padding: 10px 65px;
-    border: 1px solid white;
-    border-radius: 5px;
-    background-color: #ececec;
-    font-size: $medium-font-size;
-    cursor: pointer;
+  .whiteBtn {
+    @include btns(#ececec);
   }
 
-  :last-child {
-    padding: 10px 65px;
-    border: 1px solid white;
-    border-radius: 5px;
-    background-color: #ffcd32;
-    font-size: $medium-font-size;
-    cursor: pointer;
+  .yellowBtn {
+    @include btns(#ffcd32);
   }
 }
 
