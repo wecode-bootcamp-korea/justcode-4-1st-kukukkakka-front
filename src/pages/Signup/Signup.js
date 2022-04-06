@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { AiFillCheckCircle, AiOutlineCheckCircle } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
 import stylse from './Signup.module.scss';
@@ -26,6 +26,7 @@ function Signup() {
     text_pw_again: '',
     color_pw_again: false,
   });
+  const [duplicated, setDuplicated] = useState('false');
 
   const emailHandler = e => {
     setInputs({ ...inputs, email: e.target.value });
