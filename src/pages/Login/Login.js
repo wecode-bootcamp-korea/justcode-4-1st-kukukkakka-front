@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './Login.module.scss';
 import Modal from './Modal';
@@ -12,9 +12,6 @@ function Login() {
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
-  const loginSuccess = () => {
-    navigate('/signup');
-  };
 
   const idInput = e => {
     setId(e.target.value);
@@ -35,7 +32,11 @@ function Login() {
     /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
   let regPassword = /(?=.*\d)(?=.*[a-zA-ZS]).{8,20}/; // 문자, 숫자 1개이상 포함, 8자리 이상
   const isValid = regEmail.test(id) && regPassword.test(password);
-  console.log(isValid);
+
+  const loginSuccess = () => {
+    alert('로그인 성공!');
+    navigate('/signup');
+  };
 
   const postLogin = () => {
     fetch('http://localhost:8000/users/login', {
@@ -44,17 +45,28 @@ function Login() {
         'content-Type': 'application/json',
       },
       body: JSON.stringify({
-        id: id,
+        email: id,
         password: password,
       }),
     })
       .then(res => {
-        if (res.status === 200) {
+        if (res.status === 201) {
           loginSuccess();
-        } else if (res.status === 400 || 500) return res.json();
+          return res.json();
+        } else if (res.status === 400) {
+          alert('아이디와 비밀번호를 다시 확인해주세요 :)');
+          return res.json();
+        } else if (res.statuse === 500) {
+          alert('서버 점검중입니다. 불편을 드려 죄송합니다.');
+        } else return res.json();
       })
       .then(res => {
-        console.log('에러발생 : ', res.message);
+        if (res.token) {
+          localStorage.setItem('token', res.token);
+          console.log('저장되었냐', res.token);
+        } else {
+          console.log('에러발생 : ', res.message);
+        }
       });
   };
 
