@@ -1,17 +1,9 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
-
 import styles from '../List/ListCard.module.scss';
 function ListCard({ list }) {
-  const navigate = useNavigate();
   return (
     <div className={styles.listBox}>
-      <div
-        className={styles.listImg}
-        onClick={() => {
-          navigate(`/detail/${list.id}`);
-        }}
-      >
+      <div className={styles.listImg}>
         <img src={list.image_url} alt={list.name} />
       </div>
       <p className={styles.desc}>{list.description}</p>

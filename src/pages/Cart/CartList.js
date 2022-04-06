@@ -8,24 +8,24 @@ function CartList({ cart }) {
   const [isChecked, setIsChecked] = useState(false);
   const [count, setCount] = useState(1);
   console.log(cart.addOptionName);
-  // const mytoken =
-  //   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjksImlhdCI6MTY0OTIzMDQyMn0.XYN20e8Kv1xMCMx4nzSn0MtaM87ehaYEEZrevAEfsfA';
-  // const handleCartChange = () => {
-  //   fetch('/carts', {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       Authorization: mytoken,
-  //     },
-  //     body: JSON.stringify({
-  //       productQuantity: count,
-  //       totalPrice: '',
-  //       addOptionPrice: '',
-  //     }),
-  //   })
-  //     .then(response => response.json())
-  //     .then(result => console.log('result : ', result));
-  // };
+  const mytoken =
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjksImlhdCI6MTY0OTIzMDQyMn0.XYN20e8Kv1xMCMx4nzSn0MtaM87ehaYEEZrevAEfsfA';
+  const handleCartChange = () => {
+    fetch('/carts', {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: mytoken,
+      },
+      body: JSON.stringify({
+        productQuantity: count,
+        totalPrice: '',
+        addOptionPrice: [],
+      }),
+    })
+      .then(response => response.json())
+      .then(result => console.log('result : ', result));
+  };
 
   const checkProduct = () => {
     setIsChecked(prev => !prev);
