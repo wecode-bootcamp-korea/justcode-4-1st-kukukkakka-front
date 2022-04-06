@@ -8,14 +8,16 @@ import DetailModal from './DetailModal';
 
 function Detail() {
   const params = useParams();
+
   const [modal, setModal] = useState(false);
   const [notSelect, setNotSelect] = useState(false);
   const [product, setProduct] = useState({
     productDetailData: [
       {
+        id: 0,
         name: '',
         discription: '',
-        image_url: '',
+        imageUrl: '',
         price: 0,
       },
     ],
@@ -34,6 +36,8 @@ function Detail() {
   const navigate = useNavigate();
   const optionPrice = 2500;
 
+  console.log(product.productDetailData[0]);
+
   useEffect(() => {
     fetch(`http://localhost:8000/products/${params.id}`)
       .then(res => res.json())
@@ -41,6 +45,24 @@ function Detail() {
         setProduct(res);
       });
   }, [params.id]);
+
+  const postCart = () => {
+    fetch('http://localhost:8000/carts', {
+      method: 'post',
+      body: JSON.stringify({
+        productId: product.productDetailData[0].id,
+        addOptionId: [],
+        quantity: count,
+        totalPrice: totalPrice,
+      }),
+    })
+      .then(res => res.json())
+      .then(res => {
+        if (res.success) {
+          console.log('SUCCESS');
+        }
+      });
+  };
 
   useEffect(() => {
     setProductPrice(value);
@@ -59,6 +81,7 @@ function Detail() {
       alert('추가옵션을 선택해주세요 :-)');
       return;
     }
+    postCart();
     modal ? setModal(false) : setModal(true);
   };
 
