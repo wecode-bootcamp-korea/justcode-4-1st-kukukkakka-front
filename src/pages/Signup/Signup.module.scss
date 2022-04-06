@@ -69,7 +69,7 @@
   cursor: pointer;
 }
 
-.idDuplicateCheck_false {
+.idDuplicateCheck_disabled {
   border: none;
   border-radius: 5px;
   padding: 15px 35px;
@@ -79,7 +79,7 @@
   color: #787878;
 }
 
-.idDuplicateCheck_true {
+.idDuplicateCheck_abled {
   border: none;
   border-radius: 5px;
   padding: 15px 35px;
@@ -88,6 +88,16 @@
   font-size: large;
   color: #ffffff;
   cursor: pointer;
+}
+
+.idDuplicateCheck_finished {
+  border: none;
+  border-radius: 5px;
+  padding: 15px 35px;
+  background-color: #ffcd32;
+  margin-right: 10px;
+  font-size: large;
+  color: #5d4d1d;
 }
 
 input:focus {

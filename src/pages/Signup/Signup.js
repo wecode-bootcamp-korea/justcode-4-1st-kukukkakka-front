@@ -26,7 +26,12 @@ function Signup() {
     text_pw_again: '',
     color_pw_again: false,
   });
-  const [duplicated, setDuplicated] = useState('false');
+
+  const [buttonUi, setButtonUi] = useState({
+    name: stylse.idDuplicateCheck_disabled,
+    text: '중복확인',
+    disabled: false,
+  });
 
   const emailHandler = e => {
     setInputs({ ...inputs, email: e.target.value });
@@ -39,6 +44,11 @@ function Signup() {
         color_email: false,
         idCheck: false,
       });
+      setButtonUi({
+        ...buttonUi,
+        name: stylse.idDuplicateCheck_disabled,
+        disabled: true,
+      });
     } else if (!regEmail.test(email)) {
       setErrtext({
         ...errtext,
@@ -46,12 +56,23 @@ function Signup() {
         color_email: false,
         idCheck: false,
       });
+      setButtonUi({
+        ...buttonUi,
+        name: stylse.idDuplicateCheck_disabled,
+        text: '중복확인',
+        disabled: true,
+      });
     } else if (regEmail.test(email)) {
       setErrtext({
         ...errtext,
         text_email: '형식에 맞는 아이디입니다.',
         color_email: true,
         idCheck: true,
+      });
+      setButtonUi({
+        ...buttonUi,
+        name: stylse.idDuplicateCheck_abled,
+        disabled: false,
       });
     }
   };
@@ -118,7 +139,8 @@ function Signup() {
     errtext.color_pw_again &&
     gender &&
     username !== '' &&
-    checked;
+    checked &&
+    buttonUi.text === '확인완료';
 
   const duplicatePost = () => {
     fetch('http://localhost:8000/users/signup/duplicate', {
@@ -133,6 +155,12 @@ function Signup() {
       .then(res => {
         if (res.status === 201) {
           alert('가입 가능한 이메일입니다.');
+          setButtonUi({
+            ...buttonUi,
+            name: stylse.idDuplicateCheck_finished,
+            text: '확인완료',
+            disabled: true,
+          });
           return res.json();
         } else if (res.status === 400) {
           alert('이미 가입한 이메일입니다. 로그인페이지로 이동합니다.');
@@ -162,7 +190,8 @@ function Signup() {
       .then(res => {
         if (res.status === 201) {
           alert('회원가입을 축하드립니다!');
-          navigate('/main');
+          navigate('/');
+          window.scrollTo(0, 0);
         } else if (res.status === 400 || res.status === 500) {
           return res.json();
         }
@@ -187,15 +216,11 @@ function Signup() {
             value={email}
           />
           <button
-            className={
-              errtext.idCheck
-                ? stylse.idDuplicateCheck_true
-                : stylse.idDuplicateCheck_false
-            }
-            disabled={!errtext.idCheck}
+            className={buttonUi.name}
+            disabled={buttonUi.disabled}
             onClick={duplicatePost}
           >
-            중복확인
+            {buttonUi.text}
           </button>
         </div>
         <div

@@ -35,7 +35,8 @@ function Login() {
 
   const loginSuccess = () => {
     alert('로그인 성공!');
-    navigate('/signup');
+    navigate('/');
+    window.scrollTo(0, 0);
   };
 
   const postLogin = () => {
