@@ -12,6 +12,10 @@ function Nav() {
     window.scrollTo(0, 0);
   };
 
+  const alertGoToLogin = () => {
+    alert('장바구니는 로그인한 회원만 이용 가능합니다.');
+  };
+
   const changeNavbarColor = () => {
     window.scrollY > 65
       ? setBorderLine('1px solid #ffcd32')
@@ -71,21 +75,19 @@ function Nav() {
             <Link to="/login">
               <AiOutlineUser size="40" color="#707070" onClick={goToTop} />
             </Link>
-            <Link to="/cart">
-              <AiOutlineShopping
-                className={styles.iconBlank}
-                size="40"
-                color="#707070"
-                onClick={goToTop}
-              />
-              {/* <span className={styles.cartCounterCss}>
+            <AiOutlineShopping
+              className={styles.iconBlank}
+              size="40"
+              color="#707070"
+              onClick={alertGoToLogin}
+            />
+            {/* <span className={styles.cartCounterCss}>
                 style=
                 {{
                   display: `${cartCounter} > 0 ? "" : "none"`,
                 }}
                 {cartCounter}
               </span> */}
-            </Link>
           </div>
         </div>
       </nav>

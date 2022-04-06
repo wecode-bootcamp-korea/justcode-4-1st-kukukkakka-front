@@ -19,10 +19,11 @@ function Detail() {
   });
 
   let value = product.productDetailData[0].price;
+  console.log(value);
   // const [totalPrice, setTotalPrice] = useState(45000);
   // const [productPrice, setProductPrice] = useState(45000);
-  const [totalPrice, setTotalPrice] = useState(value);
-  const [productPrice, setProductPrice] = useState(value);
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [productPrice, setProductPrice] = useState(0);
   const [changeText, setChangeText] = useState('함께하면 좋은 추천상품');
   const [showItemBox, setShowItemBox] = useState({ display: 'none' });
   const [optionList, setOptionList] = useState({ display: 'none' });
@@ -32,6 +33,8 @@ function Detail() {
   const [count, setCount] = useState(1);
   const optionPrice = 2500;
 
+  console.log(totalPrice);
+
   useEffect(() => {
     fetch(`http://localhost:8000/products/${params.id}`)
       .then(res => res.json())
@@ -39,6 +42,11 @@ function Detail() {
         setProduct(res);
       });
   }, [params.id]);
+
+  useEffect(() => {
+    setTotalPrice(value);
+    setProductPrice(totalPrice);
+  }, [value]);
 
   const navigate = useNavigate();
 
