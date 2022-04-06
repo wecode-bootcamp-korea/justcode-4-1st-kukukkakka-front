@@ -1,9 +1,44 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from '../Cart/Cart.module.scss';
 import { IoCheckmark, IoAlertCircleOutline } from 'react-icons/io5';
 import CartList from './CartList';
 
 function Cart() {
+  const token =
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjksImlhdCI6MTY0OTIzMDQyMn0.XYN20e8Kv1xMCMx4nzSn0MtaM87ehaYEEZrevAEfsfA';
+  const [cartData, setCartData] = useState({ userCart: [] });
+  console.log(cartData.userCart);
+  useEffect(() => {
+    fetch('http://localhost:8000/carts', {
+      headers: {
+        token: token,
+      },
+    })
+      .then(res => res.json())
+      .then(data => {
+        setCartData(data);
+        console.log(data);
+      });
+  }, []);
+
+  console.log(cartData);
+
+  // const {
+  //   userId,
+  //   productName,
+  //   imageUrl,
+  //   productPrice,
+  //   productQuantity,
+  //   totalPrice,
+  //   addOptionName,
+  //   addOptionPrice,
+  //   orderStatus,
+  // } = cartData.useCart
+  // const onRemove = id => {
+  //   const tempList = lists.filter(list => list.id !== id);
+  //   setLists(tempList);
+  // };
+
   return (
     <section className={styles.cartSection}>
       <h1 className={styles.title}>장바구니</h1>
@@ -16,8 +51,8 @@ function Cart() {
         <p className={styles.price}>합계금액</p>
       </div>
       <div className={styles.cartCenter}>
-        {[1, 2, 3, 4, 5].map(a => (
-          <CartList key={a.index} />
+        {cartData.userCart.map(cart => (
+          <CartList key={cart.id} cart={cart} />
         ))}
       </div>
       <div className={styles.noticeBox}>

@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "name": "핑크 버터플라이 에디션",
+    "description": "꽃밭에 앉은 분홍 나비",
+    "image_url": "https://ifh.cc/g/vYl7ca.jpg",
+    "price": 41900,
+    "sizename": "S"
+  },
+  {
+    "id": 2,
+    "name": "한송이 두송이 에디션",
+    "description": "봄날의 송이투더뮤직 에디션",
+    "image_url": "https://ifh.cc/g/M3SGkf.jpg",
+    "price": 86000,
+    "sizename": "L"
+  },
+  {
+    "id": 3,
+    "name": "꽃보다 민경 에디션",
+    "description": "시켜줘 명예 꽃받침 에디션",
+    "image_url": "https://ifh.cc/g/8BXSlX.jpg",
+    "price": 50900,
+    "sizename": "M"
+  }
+]
