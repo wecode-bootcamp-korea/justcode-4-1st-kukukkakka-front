@@ -81,7 +81,6 @@ function Signup() {
       });
     }
   };
-
   const passwordAgainHandler = e => {
     setInputs({ ...inputs, passwordAgain: e.target.value });
     if (e.target.value === '') {
