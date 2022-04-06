@@ -17,7 +17,7 @@ function AddedOptionBox({ changeStyle, deleteItem, optionPrice }) {
         </ul>
         <ul>
           <OperationBtns count={count} />
-          <li>{optionPrice}원</li>
+          <li>{optionPrice.toLocaleString('en')}원</li>
         </ul>
       </div>
     </div>
