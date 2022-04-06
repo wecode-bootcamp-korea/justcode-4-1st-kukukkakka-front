@@ -182,9 +182,9 @@ function Detail() {
         />
         <article className={style.detailBox}>
           <ul className={style.productInfo}>
-            <li> {description}</li>
-            <li> {name}</li>
-            <li> {price} 원</li>
+            <li> {product.productDetailData[0].discription}</li>
+            <li> {product.productDetailData[0].name}</li>
+            <li> {productPrice} 원</li>
           </ul>
           <div className={style.eventTittle}>
             회원 구매 시,

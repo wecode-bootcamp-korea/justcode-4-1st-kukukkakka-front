@@ -4,8 +4,7 @@ import { IoCheckmark, IoAlertCircleOutline } from 'react-icons/io5';
 import CartList from './CartList';
 
 function Cart() {
-  const token =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjksImlhdCI6MTY0OTIzMDQyMn0.XYN20e8Kv1xMCMx4nzSn0MtaM87ehaYEEZrevAEfsfA';
+  const token = localStorage.getItem('token');
   const [cartData, setCartData] = useState({ userCart: [] });
   console.log(cartData.userCart);
 
@@ -21,8 +20,6 @@ function Cart() {
         console.log(data);
       });
   }, []);
-
-  console.log(cartData);
 
   // const {
   //   userId,

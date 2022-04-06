@@ -9,11 +9,8 @@ function CartList({ cart }) {
 
   let value = cart.productPrice;
   const [itemPrice, setItemPrice] = useState(value);
-  console.log(itemPrice);
-
-  const token =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjksImlhdCI6MTY0OTIzMDQyMn0.XYN20e8Kv1xMCMx4nzSn0MtaM87ehaYEEZrevAEfsfA';
-
+  const token = localStorage.getItem('token');
+  console.log('cart 값:', cart);
   const handleCartChange = () => {
     fetch('/carts', {
       method: 'PATCH',
@@ -24,7 +21,7 @@ function CartList({ cart }) {
       body: JSON.stringify({
         // productId: cart.userCart.productId,
         quantity: count,
-        totalPrice: cart.userCart.totalPrice,
+        // totalPrice: cart.userCart.totalPrice,
       }),
     })
       .then(response => response.json())
@@ -63,7 +60,7 @@ function CartList({ cart }) {
           <span className={styles.price}>
             {cart.productPrice.toLocaleString('en')}원
           </span>
-          <div className={styles.quantityBox} onClick={handleCartChange}>
+          <div className={styles.quantityBox}>
             <button>
               <FaMinus onClick={minsCount} />
             </button>
