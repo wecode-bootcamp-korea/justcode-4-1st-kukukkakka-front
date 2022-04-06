@@ -1,26 +1,30 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styles from '../Cart/CartList.module.scss';
 import { IoCloseSharp, IoCheckmark } from 'react-icons/io5';
 import { FaPlus, FaMinus } from 'react-icons/fa';
 import Option from '../Cart/Option';
 function CartList({ cart }) {
-  console.log(cart);
   const [isChecked, setIsChecked] = useState(false);
   const [count, setCount] = useState(1);
-  console.log(cart.addOptionName);
-  const mytoken =
+
+  let value = cart.productPrice;
+  const [itemPrice, setItemPrice] = useState(value);
+  console.log(itemPrice);
+
+  const token =
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjksImlhdCI6MTY0OTIzMDQyMn0.XYN20e8Kv1xMCMx4nzSn0MtaM87ehaYEEZrevAEfsfA';
+
   const handleCartChange = () => {
     fetch('/carts', {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: mytoken,
+        token: token,
       },
       body: JSON.stringify({
-        productQuantity: count,
-        totalPrice: '',
-        addOptionPrice: [],
+        // productId: cart.userCart.productId,
+        quantity: count,
+        totalPrice: cart.userCart.totalPrice,
       }),
     })
       .then(response => response.json())
@@ -32,7 +36,6 @@ function CartList({ cart }) {
   };
   const plusCount = () => {
     setCount(prev => prev + 1);
-    console.log(count);
   };
 
   const minsCount = () => {
@@ -60,7 +63,7 @@ function CartList({ cart }) {
           <span className={styles.price}>
             {cart.productPrice.toLocaleString('en')}원
           </span>
-          <div className={styles.quantityBox}>
+          <div className={styles.quantityBox} onClick={handleCartChange}>
             <button>
               <FaMinus onClick={minsCount} />
             </button>

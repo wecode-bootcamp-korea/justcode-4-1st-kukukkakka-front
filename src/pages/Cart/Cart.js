@@ -8,6 +8,7 @@ function Cart() {
     'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjksImlhdCI6MTY0OTIzMDQyMn0.XYN20e8Kv1xMCMx4nzSn0MtaM87ehaYEEZrevAEfsfA';
   const [cartData, setCartData] = useState({ userCart: [] });
   console.log(cartData.userCart);
+
   useEffect(() => {
     fetch('http://localhost:8000/carts', {
       headers: {
