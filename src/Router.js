@@ -8,6 +8,7 @@ import Detail from './pages/Detail/Detail';
 import Cart from './pages/Cart/Cart';
 import Nav from './pages/components/Nav/Nav';
 import Footer from './pages/components/Footer/Footer';
+import Test from './pages/Login/Test';
 
 function Router() {
   return (
@@ -20,6 +21,7 @@ function Router() {
         <Route path="/list" element={<List />} />
         <Route path="/detail/:id" element={<Detail />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/test" element={<Test />} />
       </Routes>
       <Footer />
     </BrowserRouter>

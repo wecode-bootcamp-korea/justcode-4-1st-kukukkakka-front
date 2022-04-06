@@ -11,18 +11,24 @@ function Detail() {
     productDetailData: [
       {
         name: '',
-        discription: '',
+        description: '',
         image_url: '',
         price: 0,
       },
     ],
   });
+  const { name, description, image_url, price } = product.productDetailData[0];
+  console.log('할당이 되고있니? : ', name, price);
 
+  console.log(product.productDetailData);
   let value = product.productDetailData[0].price;
   // const [totalPrice, setTotalPrice] = useState(45000);
   // const [productPrice, setProductPrice] = useState(45000);
-  const [totalPrice, setTotalPrice] = useState(value);
-  const [productPrice, setProductPrice] = useState(value);
+  console.log('가격 :', price);
+  const [totalPrice, setTotalPrice] = useState(price);
+  console.log('토탈 프라이스 : ', totalPrice);
+  const [productPrice, setProductPrice] = useState(price);
+  console.log('토탈 프라이스 : ', productPrice);
   const [changeText, setChangeText] = useState('함께하면 좋은 추천상품');
   const [showItemBox, setShowItemBox] = useState({ display: 'none' });
   const [optionList, setOptionList] = useState({ display: 'none' });
@@ -31,6 +37,14 @@ function Detail() {
   });
   const [count, setCount] = useState(1);
   const optionPrice = 2500;
+
+  console.log(product);
+  console.log(price);
+
+  useEffect(() => {
+    setProductPrice(price);
+    setTotalPrice(totalPrice);
+  }, [product.productDetailData[0].price]);
 
   useEffect(() => {
     fetch(`http://localhost:8000/products/${params.id}`)
@@ -87,19 +101,19 @@ function Detail() {
   const minusPrice = () => {
     if (count - 1 < 1) return;
     setCount(count - 1);
-    setProductPrice(productPrice / count);
-    setTotalPrice(productPrice / count);
+    // setProductPrice(price / count);
+    setTotalPrice(totalPrice - price);
 
     showItemBox.display === 'block' &&
-      setTotalPrice(productPrice / count + optionPrice);
+      setTotalPrice(price / count + optionPrice);
   };
 
   const plusPrice = () => {
     setCount(count + 1);
-    setProductPrice((count + 1) * productPrice);
-    setTotalPrice((count + 1) * productPrice);
+    // setProductPrice((count + 1) * price);
+    setTotalPrice((count + 1) * price);
     showItemBox.display === 'block' &&
-      setTotalPrice(productPrice * (count + 1) + optionPrice);
+      setTotalPrice(price * (count + 1) + optionPrice);
   };
 
   // 추가상품박스 보이게 하는 함수
@@ -127,9 +141,9 @@ function Detail() {
         <div className={style.imgBox} />
         <article className={style.detailBox}>
           <ul className={style.productInfo}>
-            <li> {product.productDetailData[0].description}</li>
-            <li> {product.productDetailData[0].name}</li>
-            <li>{product.productDetailData[0].price}원</li>
+            <li> {description}</li>
+            <li> {name}</li>
+            <li> {price} 원</li>
           </ul>
           <div className={style.eventTittle}>
             회원 구매 시,
@@ -162,7 +176,7 @@ function Detail() {
           </div>
           <div className={style.priceBox}>
             <div>상품가격</div>
-            <div>{productPrice}원</div>
+            <div>{price}원</div>
           </div>
           <AddedOptionBox
             changeStyle={showItemBox}
