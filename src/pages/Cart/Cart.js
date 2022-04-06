@@ -6,7 +6,6 @@ import CartList from './CartList';
 function Cart() {
   const token = localStorage.getItem('token');
   const [cartData, setCartData] = useState({ userCart: [] });
-  console.log(cartData.userCart);
 
   useEffect(() => {
     fetch('http://localhost:8000/carts', {
@@ -17,7 +16,6 @@ function Cart() {
       .then(res => res.json())
       .then(data => {
         setCartData(data);
-        console.log(data);
       });
   }, []);
 

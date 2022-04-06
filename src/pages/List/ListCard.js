@@ -1,9 +1,16 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import styles from '../List/ListCard.module.scss';
 function ListCard({ list }) {
+  const navigate = useNavigate();
+  const clickImage = () => {
+    navigate(`/detail/${list.id}`);
+    window.scrollTo(0, 0);
+  };
   return (
     <div className={styles.listBox}>
-      <div className={styles.listImg}>
+      <div className={styles.listImg} onClick={clickImage}>
         <img src={list.image_url} alt={list.name} />
       </div>
       <p className={styles.desc}>{list.description}</p>

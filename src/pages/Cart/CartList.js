@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from '../Cart/CartList.module.scss';
 import { IoCloseSharp, IoCheckmark } from 'react-icons/io5';
 import { FaPlus, FaMinus } from 'react-icons/fa';
@@ -8,42 +8,55 @@ function CartList({ cart }) {
   const [count, setCount] = useState(1);
 
   let value = cart.productPrice;
-  const [itemPrice, setItemPrice] = useState(value);
+  let value2 = cart.addOptionPrice[0];
+
+  const [productPrice, setProductPrice] = useState(value);
+  const [sumPrice, setSumPrice] = useState(value2);
   const token = localStorage.getItem('token');
-  console.log('cart 값:', cart);
+  console.log(token);
   const handleCartChange = () => {
-    fetch('/carts', {
+    fetch('http://localhost:8000/carts', {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
         token: token,
       },
       body: JSON.stringify({
-        // productId: cart.userCart.productId,
-        quantity: count,
-        // totalPrice: cart.userCart.totalPrice,
+        id: cart.id,
+        productQuantity: count,
+        totalPrice: sumPrice,
       }),
     })
       .then(response => response.json())
-      .then(result => console.log('result : ', result));
+      .then(result => console.log(result));
   };
 
   const checkProduct = () => {
     setIsChecked(prev => !prev);
   };
+  useEffect(() => {
+    setProductPrice(value);
+    setSumPrice(value + value2);
+
+    // setTotalPrice(value);
+  }, [value, value2]);
   const plusCount = () => {
     setCount(prev => prev + 1);
+    setProductPrice((count + 1) * value);
+    setSumPrice((count + 1) * value + value2);
   };
-
   const minsCount = () => {
     if (count === 1) {
       return 1;
     }
     setCount(prev => prev - 1);
+    setProductPrice((count - 1) * value);
+    setSumPrice((count - 1) * value + value2);
   };
 
+  useEffect(() => {}, [cart]);
   return (
-    <div className={styles.cartItem}>
+    <div className={styles.cartItem} onClick={handleCartChange}>
       <div className={styles.checkbox}>
         <IoCheckmark
           onClick={checkProduct}
@@ -58,7 +71,8 @@ function CartList({ cart }) {
           <h2 className={styles.name}>{cart.productName}</h2>
           <p className={styles.dueDate}>수령일: 2022-04-01</p>
           <span className={styles.price}>
-            {cart.productPrice.toLocaleString('en')}원
+            {/* {cart.productPrice.toLocaleString('en')}원 */}
+            {productPrice}
           </span>
           <div className={styles.quantityBox}>
             <button>
@@ -80,7 +94,7 @@ function CartList({ cart }) {
         </ul>
       </div>
       <div className={styles.priceBox}>
-        <p className={styles.price}>69,300원</p>
+        <p className={styles.price}>{sumPrice}</p>
         <span className={styles.delivery}>무료배송</span>
       </div>
     </div>
