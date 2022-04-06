@@ -95,13 +95,13 @@ function Detail() {
       : setShowItemBox({ display: 'none' });
   };
 
-  // useEffect(() => {
-  //   fetch(`http://localhost:8000/products/${params.id}`)
-  //     .then(res => res.json())
-  //     .then(res => {
-  //       setProduct(res);
-  //     });
-  // }, [params.id]);
+  useEffect(() => {
+    fetch(`http://localhost:8000/products/${params.id}`)
+      .then(res => res.json())
+      .then(res => {
+        setProduct(res);
+      });
+  }, [params.id]);
 
   const selectItem = () => {
     onClickOptionItem();
