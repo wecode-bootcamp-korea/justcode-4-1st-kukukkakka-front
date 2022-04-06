@@ -33,12 +33,8 @@ function Detail() {
     border: '1px solid $gray-color',
   });
   const [count, setCount] = useState(1);
-
   const navigate = useNavigate();
-
   const optionPrice = 2500;
-
-  console.log(product.productDetailData[0]);
 
   useEffect(() => {
     fetch(`http://localhost:8000/products/${params.id}`)
