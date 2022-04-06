@@ -34,12 +34,8 @@ function Detail() {
     border: '1px solid $gray-color',
   });
   const [count, setCount] = useState(1);
-
   const navigate = useNavigate();
-
   const optionPrice = 2500;
-
-  console.log(product.productDetailData[0]);
 
   useEffect(() => {
     fetch(`http://localhost:8000/products/${params.id}`)
@@ -86,6 +82,7 @@ function Detail() {
     }
     postCart();
     modal ? setModal(false) : setModal(true);
+    window.scrollTo(0, 0);
   };
 
   // 추가상품박스 보이게 하는 함수
@@ -95,13 +92,13 @@ function Detail() {
       : setShowItemBox({ display: 'none' });
   };
 
-  // useEffect(() => {
-  //   fetch(`http://localhost:8000/products/${params.id}`)
-  //     .then(res => res.json())
-  //     .then(res => {
-  //       setProduct(res);
-  //     });
-  // }, [params.id]);
+  useEffect(() => {
+    fetch(`http://localhost:8000/products/${params.id}`)
+      .then(res => res.json())
+      .then(res => {
+        setProduct(res);
+      });
+  }, [params.id]);
 
   const selectItem = () => {
     onClickOptionItem();
@@ -187,7 +184,7 @@ function Detail() {
           <ul className={style.productInfo}>
             <li> {product.productDetailData[0].description}</li>
             <li> {product.productDetailData[0].name}</li>
-            <li>{product.productDetailData[0].price}원</li>
+            <li>{product.productDetailData[0].price.toLocaleString('en')}원</li>
           </ul>
           <div className={style.eventTittle}>
             회원 구매 시,
@@ -220,7 +217,7 @@ function Detail() {
           </div>
           <div className={style.priceBox}>
             <div>상품가격</div>
-            <div>{productPrice}원</div>
+            <div>{productPrice.toLocaleString('en')}원</div>
           </div>
           {notSelect && (
             <div className={style.priceBox}>
@@ -234,7 +231,7 @@ function Detail() {
           />
           <div className={style.totalPriceBox}>
             <span>총 주문금액</span>
-            <span>{totalPrice}원</span>
+            <span>{totalPrice.toLocaleString('en')}원</span>
           </div>
           <div className={style.contentBtnBox}>
             {modal && <DetailModal openModal={openModal} />}
