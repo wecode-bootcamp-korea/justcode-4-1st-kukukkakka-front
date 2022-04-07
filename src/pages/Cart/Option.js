@@ -6,7 +6,7 @@ function Option(props) {
   return (
     <li className={styles.optionList}>
       <span>{props.option.addOptionName.map(title => title)}</span>
-      {props.option.addOptionPrice.map(price => price)}원
+      {props.option.addOptionPrice.map(price => price.toLocaleString('en'))}원
       <div className={styles.optionDelete}>
         <IoCloseSharp />
       </div>
