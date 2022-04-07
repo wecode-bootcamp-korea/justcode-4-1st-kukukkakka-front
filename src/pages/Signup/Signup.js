@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { AiFillCheckCircle, AiOutlineCheckCircle } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
-import stylse from './Signup.module.scss';
+import styles from './Signup.module.scss';
 
 function Signup() {
   const navigate = useNavigate();
@@ -28,7 +28,7 @@ function Signup() {
   });
 
   const [buttonUi, setButtonUi] = useState({
-    name: stylse.idDuplicateCheck_disabled,
+    name: styles.idDuplicateCheck_disabled,
     text: '중복확인',
     disabled: false,
   });
@@ -46,7 +46,7 @@ function Signup() {
       });
       setButtonUi({
         ...buttonUi,
-        name: stylse.idDuplicateCheck_disabled,
+        name: styles.idDuplicateCheck_disabled,
         disabled: true,
       });
     } else if (!regEmail.test(email)) {
@@ -58,7 +58,7 @@ function Signup() {
       });
       setButtonUi({
         ...buttonUi,
-        name: stylse.idDuplicateCheck_disabled,
+        name: styles.idDuplicateCheck_disabled,
         text: '중복확인',
         disabled: true,
       });
@@ -71,7 +71,7 @@ function Signup() {
       });
       setButtonUi({
         ...buttonUi,
-        name: stylse.idDuplicateCheck_abled,
+        name: styles.idDuplicateCheck_abled,
         disabled: false,
       });
     }
@@ -157,7 +157,7 @@ function Signup() {
           alert('가입 가능한 이메일입니다.');
           setButtonUi({
             ...buttonUi,
-            name: stylse.idDuplicateCheck_finished,
+            name: styles.idDuplicateCheck_finished,
             text: '확인완료',
             disabled: true,
           });
@@ -202,15 +202,15 @@ function Signup() {
   };
   return (
     <div>
-      <header className={stylse.signupHeader}>
+      <header className={styles.signupHeader}>
         회원가입
-        <hr className={stylse.bar} />
+        <hr className={styles.bar} />
       </header>
-      <section className={stylse.boxWrapper}>
-        <div className={stylse.setWrapperId}>
+      <section className={styles.boxWrapper}>
+        <div className={styles.setWrapperId}>
           <span>아이디(이메일)</span>
           <input
-            className={stylse.inputBox}
+            className={styles.inputBox}
             placeholder="예)kukukkakka@kukukkakka.kr"
             onChange={emailHandler}
             value={email}
@@ -225,15 +225,15 @@ function Signup() {
         </div>
         <div
           className={
-            errtext.color_email ? stylse.validateGuide : stylse.unvalidateGuide
+            errtext.color_email ? styles.validateGuide : styles.unvalidateGuide
           }
         >
           {errtext.text_email}
         </div>
-        <div className={stylse.setWrapper}>
+        <div className={styles.setWrapper}>
           <span>비밀번호</span>
           <input
-            className={stylse.inputBox}
+            className={styles.inputBox}
             placeholder="영문,숫자를 포함하여 8자리-20자리"
             onChange={passwordHandler}
             type="password"
@@ -242,15 +242,15 @@ function Signup() {
         </div>
         <div
           className={
-            errtext.color_pw ? stylse.validateGuide : stylse.unvalidateGuide
+            errtext.color_pw ? styles.validateGuide : styles.unvalidateGuide
           }
         >
           {errtext.text_pw}
         </div>
-        <div className={stylse.setWrapper}>
+        <div className={styles.setWrapper}>
           <span> 비밀번호 확인 </span>
           <input
-            className={stylse.inputBox}
+            className={styles.inputBox}
             placeholder="비밀번호를 한 번 더 입력해주세요."
             onChange={passwordAgainHandler}
             value={passwordAgain}
@@ -260,27 +260,27 @@ function Signup() {
         <div
           className={
             errtext.color_pw_again
-              ? stylse.validateGuide
-              : stylse.unvalidateGuide
+              ? styles.validateGuide
+              : styles.unvalidateGuide
           }
         >
           {errtext.text_pw_again}
         </div>
-        <div className={stylse.setWrapper}>
+        <div className={styles.setWrapper}>
           <span>이름</span>
           <input
-            className={stylse.inputBox}
+            className={styles.inputBox}
             placeholder="이름을 입력해주세요."
             onChange={usernameHandler}
             value={username}
           />
         </div>
-        <div className={stylse.genderWrapper}>
+        <div className={styles.genderWrapper}>
           성별
-          <section className={stylse.genderWrap}>
+          <section className={styles.genderWrap}>
             <button
               className={
-                gender === '1' ? stylse.genderBtn_true : stylse.genderBtn_false
+                gender === '1' ? styles.genderBtn_true : styles.genderBtn_false
               }
               value="1"
               onClick={e => genderChoice(e, e.target.value)}
@@ -290,7 +290,7 @@ function Signup() {
             </button>
             <button
               className={
-                gender === '2' ? stylse.genderBtn_true : stylse.genderBtn_false
+                gender === '2' ? styles.genderBtn_true : styles.genderBtn_false
               }
               value="2"
               onClick={e => genderChoice(e, e.target.value)}
@@ -301,7 +301,7 @@ function Signup() {
             <button
               type="button"
               className={
-                gender === '3' ? stylse.genderBtn_true : stylse.genderBtn_false
+                gender === '3' ? styles.genderBtn_true : styles.genderBtn_false
               }
               value="3"
               onClick={e => genderChoice(e, e.target.value)}
@@ -311,35 +311,35 @@ function Signup() {
           </section>
         </div>
       </section>
-      <section className={stylse.bottonWrapper}>
+      <section className={styles.bottonWrapper}>
         <hr />
         이용약관 동의
-        <div className={stylse.policyCheck}>
+        <div className={styles.policyCheck}>
           {!checked ? (
             <AiOutlineCheckCircle
               size="30"
-              className={stylse.checkbox_false}
+              className={styles.checkbox_false}
               onClick={policyAgree}
             />
           ) : (
             <AiFillCheckCircle
               size="30"
-              className={stylse.checkbox_true}
+              className={styles.checkbox_true}
               onClick={policyAgree}
               value={checked}
             />
           )}
-          동의합니다. <span className={stylse.redText}>(필수)</span>
+          동의합니다. <span className={styles.redText}>(필수)</span>
         </div>
-        <section className={stylse.policyBrowse}>
+        <section className={styles.policyBrowse}>
           이용약관보기 · 개인정보처리방침 보기{' '}
         </section>
         <button
           disabled={!isPassedSignup}
           className={
             isPassedSignup === true
-              ? stylse.signuoBtn_true
-              : stylse.signuoBtn_false
+              ? styles.signuoBtn_true
+              : styles.signuoBtn_false
           }
           onClick={signUpPost}
         >
