@@ -18,23 +18,6 @@ function Cart() {
         setCartData(data);
       });
   }, []);
-
-  // const {
-  //   userId,
-  //   productName,
-  //   imageUrl,
-  //   productPrice,
-  //   productQuantity,
-  //   totalPrice,
-  //   addOptionName,
-  //   addOptionPrice,
-  //   orderStatus,
-  // } = cartData.useCart
-  // const onRemove = id => {
-  //   const tempList = lists.filter(list => list.id !== id);
-  //   setLists(tempList);
-  // };
-
   return (
     <section className={styles.cartSection}>
       <h1 className={styles.title}>장바구니</h1>

@@ -3,20 +3,21 @@ import styles from '../Cart/CartList.module.scss';
 import { IoCloseSharp, IoCheckmark } from 'react-icons/io5';
 import { FaPlus, FaMinus } from 'react-icons/fa';
 import Option from '../Cart/Option';
+
 function CartList({ cart }) {
   const [isChecked, setIsChecked] = useState(false);
   let quantity = cart.productQuantity;
 
   const [count, setCount] = useState(quantity);
-
-  let value = cart.productPrice;
-  let value2 = cart.addOptionPrice[0];
-
-  const [productPrice, setProductPrice] = useState(value);
-  const [totalPrice, setTotalPrice] = useState(value2);
   const [userId, setUserId] = useState(cart.productId);
+
+  const productPrice = cart.productPrice * count;
+  const totalPrice = productPrice + cart.addOptionPrice[0];
+
   const token = localStorage.getItem('token');
-  const handleCartChange = () => {
+
+  useEffect(() => {
+    console.log('count', count);
     fetch('http://localhost:8000/carts', {
       method: 'PATCH',
       headers: {
@@ -25,42 +26,29 @@ function CartList({ cart }) {
       },
       body: JSON.stringify({
         productId: userId,
-        quantity: count + 1,
+        quantity: count,
         totalPrice: totalPrice,
       }),
     })
       .then(response => response.json())
-      .then(result => console.log(result));
-  };
+      .then(result => result);
+  }, [count]);
 
+  function plusCount() {
+    setCount(prev => prev + 1);
+  }
   const checkProduct = () => {
     setIsChecked(prev => !prev);
   };
 
-  useEffect(() => {
-    setCount(count);
-    setProductPrice(value * count);
-    setTotalPrice(value * count + value2);
-  }, [count, productPrice, totalPrice]);
-
-  console.log(
-    `작동전 count ${count}, productPrice ${productPrice}, totalPrice ${totalPrice}`
-  );
-  async function plusCount() {
-    await setCount(prev => prev + 1);
-    console.log('Plus 작동후:', count);
-    await setProductPrice(prevPrice => prevPrice + value);
-    console.log('productprice 작동후', productPrice);
-    await setTotalPrice(prev => prev + value2);
-    console.log('totalPrice작동후', totalPrice);
+  function plusCount() {
+    setCount(prev => prev + 1);
   }
-  async function minsCount() {
+  function minusCount() {
     if (count === 1) {
       return 1;
     }
-    await setCount(prev => prev - 1);
-    await setProductPrice(prevPrice => prevPrice + value);
-    await setTotalPrice(prevTotal => prevTotal + value + value2);
+    setCount(prev => prev - 1);
   }
 
   return (
@@ -82,25 +70,14 @@ function CartList({ cart }) {
             {productPrice.toLocaleString('en')}
           </span>
           <div className={styles.quantityBox}>
-            <button
-              className={styles.minus}
-              onClick={() => {
-                minsCount();
-                handleCartChange();
-              }}
-            >
+            <button className={styles.minus} onClick={minusCount}>
               <FaMinus />
             </button>
             <span className={styles.count}>{count}</span>
-            <button
-              className={styles.plus}
-              onClick={() => {
-                plusCount();
-                handleCartChange();
-              }}
-            >
+            <button className={styles.plus} onClick={plusCount}>
               <FaPlus />
             </button>
+            {/* <button onClick={handleCartChange}>헤잉</button> */}
           </div>
           <div className={styles.delete}>
             <IoCloseSharp />
@@ -113,7 +90,7 @@ function CartList({ cart }) {
         </ul>
       </div>
       <div className={styles.priceBox}>
-        <p className={styles.price}>{totalPrice.toLocaleString('en')}</p>
+        <p className={styles.price}>{totalPrice}</p>
         <span className={styles.delivery}>무료배송</span>
       </div>
     </div>
