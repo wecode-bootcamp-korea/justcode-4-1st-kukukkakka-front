@@ -1,12 +1,10 @@
 import React from 'react';
 import style from './OptionList.module.scss';
 
-function OptionList({ list, showOption, selectItem }) {
-  // const params = useParams();
-  console.log('list: ', list.id);
+function OptionList({ list, showOption }) {
   return (
     <div>
-      <ul className={style.toggleList} style={showOption} onClick={selectItem}>
+      <ul className={style.toggleList} style={showOption}>
         <li>{list.name}</li>
         <li>{list.price}원</li>
       </ul>
