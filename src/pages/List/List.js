@@ -17,7 +17,6 @@ function List() {
   const location = useLocation();
 
   const url = `http://localhost:8000/products/search?${inputs}`;
-  console.log(url.search);
 
   useEffect(() => {
     fetch('http://localhost:8000/products')

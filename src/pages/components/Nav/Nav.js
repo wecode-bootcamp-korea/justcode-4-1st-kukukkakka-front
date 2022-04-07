@@ -68,7 +68,7 @@ function Nav() {
             <img
               className={styles.mainLogo}
               alt="main-logo"
-              src="img/main_logo.png"
+              src={`${process.env.PUBLIC_URL}/img/main_logo.png`}
               width="200"
               onClick={goToTop}
             />

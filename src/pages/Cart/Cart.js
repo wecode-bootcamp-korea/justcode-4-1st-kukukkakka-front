@@ -1,30 +1,25 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from '../Cart/Cart.module.scss';
-import { FaPlus, FaMinus } from 'react-icons/fa';
-import {
-  IoCloseSharp,
-  IoCheckmark,
-  IoAlertCircleOutline,
-} from 'react-icons/io5';
+import { IoCheckmark, IoAlertCircleOutline } from 'react-icons/io5';
+import CartList from './CartList';
 
 function Cart() {
-  const [isChecked, setIsChecked] = useState(false);
-  const [count, setCount] = useState(1);
-  const checkProduct = () => {
-    setIsChecked(prev => !prev);
-  };
+  const token = localStorage.getItem('token');
+  const [cartData, setCartData] = useState({ userCart: [] });
 
-  const plusCount = () => {
-    setCount(prev => prev + 1);
-    console.log(count);
-  };
+  useEffect(() => {
+    fetch('http://localhost:8000/carts', {
+      headers: {
+        token: token,
+      },
+    })
+      .then(res => res.json())
+      .then(data => {
+        setCartData(data);
+      });
+  }, []);
 
-  const minsCount = () => {
-    if (count === 1) {
-      return 1;
-    }
-    setCount(prev => prev - 1);
-  };
+  console.log('catdat:', cartData);
   return (
     <section className={styles.cartSection}>
       <h1 className={styles.title}>장바구니</h1>
@@ -37,58 +32,9 @@ function Cart() {
         <p className={styles.price}>합계금액</p>
       </div>
       <div className={styles.cartCenter}>
-        <div className={styles.cartItem}>
-          <div className={styles.checkbox}>
-            <IoCheckmark
-              onClick={checkProduct}
-              className={
-                isChecked ? `${styles.checked}` : `${styles.unchecked}`
-              }
-            />
-          </div>
-          <div className={styles.infoBox}>
-            <div className={styles.productImg}>
-              <img src="https://ifh.cc/g/2zkV3j.jpg" alt="product" />
-            </div>
-            <div className={styles.productDetail}>
-              <h2 className={styles.name}>코랄 로즈 에디션</h2>
-              <p className={styles.dueDate}>수령일: 2022-04-01</p>
-              <span className={styles.price}>17,000원</span>
-              <div className={styles.quantityBox}>
-                <button>
-                  <FaMinus onClick={minsCount} />
-                </button>
-                <span className={styles.count}>{count}</span>
-                <button className={styles.plus}>
-                  <FaPlus onClick={plusCount} />
-                </button>
-              </div>
-              <div className={styles.delete}>
-                <IoCloseSharp />
-              </div>
-            </div>
-          </div>
-          <div className={styles.optionBox}>
-            <ul>
-              <li>
-                편지 2,500원
-                <div className={styles.delete}>
-                  <IoCloseSharp />
-                </div>
-              </li>
-              <li>
-                편지 2,500원
-                <div className={styles.delete}>
-                  <IoCloseSharp />
-                </div>
-              </li>
-            </ul>
-          </div>
-          <div className={styles.priceBox}>
-            <p className={styles.price}>69,300원</p>
-            <span className={styles.delivery}>무료배송</span>
-          </div>
-        </div>
+        {cartData.userCart.map(cart => (
+          <CartList key={cart.id} cart={cart} />
+        ))}
       </div>
       <div className={styles.noticeBox}>
         <span>
