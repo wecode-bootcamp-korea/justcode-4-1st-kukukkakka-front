@@ -35,6 +35,7 @@ function Signup() {
       setErrtext({
         ...errtext,
         text_email: '',
+
         color_email: false,
         idCheck: false,
       });

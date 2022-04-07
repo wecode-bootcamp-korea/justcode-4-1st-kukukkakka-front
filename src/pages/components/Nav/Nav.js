@@ -1,19 +1,18 @@
-import { React, useState } from 'react';
+import { React, useState, useEffect } from 'react';
 import styles from './Nav.module.scss';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AiOutlineUser } from 'react-icons/ai';
 import { AiOutlineShopping } from 'react-icons/ai';
 
 function Nav() {
+  const token = localStorage.getItem('token');
   const [borderLine, setBorderLine] = useState('');
+  const [cartData, setCartData] = useState({ userCart: [] });
   // const [cartCounter, setCartCounter] = useState(0);
+  const navigate = useNavigate();
 
   const goToTop = () => {
     window.scrollTo(0, 0);
-  };
-
-  const alertGoToLogin = () => {
-    alert('장바구니는 로그인한 회원만 이용 가능합니다.');
   };
 
   const changeNavbarColor = () => {
@@ -24,9 +23,25 @@ function Nav() {
 
   window.addEventListener('scroll', changeNavbarColor);
 
-  // useEffect(()=>{
-  //   fetch('').then(res=>res.json()).then(res=>{setCartCounter(res)})
-  // },[cartCounter])
+  const vaildLogin = () => {
+    token
+      ? navigate('/cart')
+      : alert('장바구니는 로그인한 회원만 이용 가능합니다.');
+  };
+
+  useEffect(() => {
+    // token &&
+    fetch('http://localhost:8000/carts', {
+      headers: {
+        token: token,
+      },
+    })
+      .then(res => res.json())
+      .then(data => {
+        setCartData(data);
+        console.log(cartData);
+      });
+  }, []);
 
   return (
     <>
@@ -79,15 +94,16 @@ function Nav() {
               className={styles.iconBlank}
               size="40"
               color="#707070"
-              onClick={alertGoToLogin}
+              onClick={vaildLogin}
             />
-            {/* <span className={styles.cartCounterCss}>
-                style=
-                {{
-                  display: `${cartCounter} > 0 ? "" : "none"`,
-                }}
-                {cartCounter}
-              </span> */}
+            {/* <span
+              className={styles.cartCounterCss}
+              style={{
+                display: cartCounter === undefined ? 'none' : '',
+              }}
+            >
+              {cartCounter}
+            </span> */}
           </div>
         </div>
       </nav>
