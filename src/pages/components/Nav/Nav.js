@@ -8,7 +8,7 @@ function Nav() {
   const token = localStorage.getItem('token');
   const [borderLine, setBorderLine] = useState('');
   const [cartData, setCartData] = useState({ userCart: [] });
-  // const [cartCounter, setCartCounter] = useState(0);
+  const [counter, setCounter] = useState(0);
   const navigate = useNavigate();
 
   const goToTop = () => {
@@ -30,18 +30,19 @@ function Nav() {
   };
 
   useEffect(() => {
-    // token &&
-    fetch('http://localhost:8000/carts', {
-      headers: {
-        token: token,
-      },
-    })
-      .then(res => res.json())
-      .then(data => {
-        setCartData(data);
-        console.log(cartData);
-      });
-  }, []);
+    token &&
+      fetch('http://localhost:8000/carts', {
+        headers: {
+          token: token,
+        },
+      })
+        .then(res => res.json())
+        .then(data => {
+          setCartData(data);
+          setCounter(cartData.userCart[0].productQuantity);
+          console.log(cartData.userCart[0].productQuantity);
+        });
+  }, [counter]);
 
   return (
     <>
@@ -96,14 +97,14 @@ function Nav() {
               color="#707070"
               onClick={vaildLogin}
             />
-            {/* <span
+            <span
               className={styles.cartCounterCss}
               style={{
-                display: cartCounter === undefined ? 'none' : '',
+                display: counter > 0 ? 'block' : 'none',
               }}
             >
-              {cartCounter}
-            </span> */}
+              {counter}
+            </span>
           </div>
         </div>
       </nav>
