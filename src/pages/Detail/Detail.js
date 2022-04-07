@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import OperationBtns from './OperationBtns/OperationBtns';
 import style from './Detail.module.scss';
 import OptionList from './OptionList/OptionList';
@@ -19,6 +19,7 @@ function Detail() {
         discription: '',
         imageUrl: '',
         price: 0,
+        options: [],
       },
     ],
   });
@@ -28,14 +29,13 @@ function Detail() {
   const [totalPrice, setTotalPrice] = useState(value);
   const [changeText, setChangeText] = useState('함께하면 좋은 추천상품');
   const [showItemBox, setShowItemBox] = useState({ display: 'none' });
-  const [optionList, setOptionList] = useState({ display: 'none' });
+  const [showOption, setShowOption] = useState({ display: 'none' });
   const [changeBorder, setChangeBorder] = useState({
     border: '1px solid $gray-color',
   });
   const [count, setCount] = useState(1);
-  const navigate = useNavigate();
   const optionPrice = 2500;
-
+  // const navigate = useNavigate();
   useEffect(() => {
     fetch(`http://localhost:8000/products/${params.id}`)
       .then(res => res.json())
@@ -65,7 +65,7 @@ function Detail() {
   useEffect(() => {
     setProductPrice(value);
     setTotalPrice(value);
-  }, [value]);
+  }, [product]);
 
   const openModal = () => {
     // 비회원일 때
@@ -91,23 +91,16 @@ function Detail() {
       : setShowItemBox({ display: 'none' });
   };
 
-  useEffect(() => {
-    fetch(`http://localhost:8000/products/${params.id}`)
-      .then(res => res.json())
-      .then(res => {
-        setProduct(res);
-      });
-  }, [params.id]);
-
   const selectItem = () => {
     onClickOptionItem();
-    setOptionList({ display: 'none' });
+    setShowOption({ display: 'none' });
     setChangeBorder({ border: '1px solid #b1b1b1' });
 
     // 추가상품 두번이상 눌렀을 때
     if (showItemBox.display === 'block') {
       setChangeText('함께하면 좋은 추천상품');
       setNotSelect(false);
+
       setTotalPrice(totalPrice - optionPrice);
     } else {
       setChangeText('롱 모던 베이직 화분');
@@ -118,7 +111,7 @@ function Detail() {
 
   const notSelectItem = () => {
     setChangeText('선택안함');
-    setOptionList({ display: 'none' });
+    setShowOption({ display: 'none' });
     setChangeBorder({ border: '1px solid #b1b1b1' });
     setNotSelect(true);
 
@@ -131,23 +124,23 @@ function Detail() {
   };
 
   const onClickOptionToggle = () => {
-    if (optionList.display === 'none') {
-      setOptionList({ display: 'block' });
+    if (showOption.display === 'none') {
+      setShowOption({ display: 'block' });
       setChangeBorder({ border: '1px solid #FFCD32' });
+      return;
     } else {
-      setOptionList({ display: 'none' });
+      setShowOption({ display: 'none' });
       setChangeBorder({ border: '1px solid #b1b1b1' });
+      return;
     }
-    return optionList;
   };
-
   const minusPrice = () => {
     if (count - 1 < 1) return;
     setCount(count - 1);
     setProductPrice((count - 1) * value);
     setTotalPrice((count - 1) * value);
     showItemBox.display === 'block' &&
-      setTotalPrice((count - 1) * value + optionPrice);
+      totalPrice((count - 1) * value + optionPrice);
   };
 
   const plusPrice = () => {
@@ -206,12 +199,15 @@ function Detail() {
                 <div>{changeText}</div>
                 <i className={style.btnDown}>⌵</i>
               </button>
-              <OptionList
-                optionPrice={optionPrice}
-                optionList={optionList}
-                selectItem={selectItem}
-                notSelectItem={notSelectItem}
-              />
+              {product.productDetailData[0].options.map(list => (
+                <OptionList
+                  list={list}
+                  key={list.id}
+                  selectItem={selectItem}
+                  notSelectItem={notSelectItem}
+                  showOption={showOption}
+                />
+              ))}
             </div>
           </div>
           <div className={style.priceBox}>
@@ -223,11 +219,15 @@ function Detail() {
               <div>추가옵션 : 선택안함</div>
             </div>
           )}
-          <AddedOptionBox
-            changeStyle={showItemBox}
-            deleteItem={deleteItemBox}
-            optionPrice={optionPrice}
-          />
+          {product.productDetailData[0].options.map(list => (
+            <AddedOptionBox
+              list={list}
+              key={list.id}
+              changeStyle={showItemBox}
+              deleteItem={deleteItemBox}
+              optionPrice={optionPrice}
+            />
+          ))}
           <div className={style.totalPriceBox}>
             <span>총 주문금액</span>
             <span>{totalPrice.toLocaleString('en')}원</span>
