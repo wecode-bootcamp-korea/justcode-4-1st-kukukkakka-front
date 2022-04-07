@@ -9,14 +9,44 @@ function CartList({ cart }) {
   let quantity = cart.productQuantity;
 
   const [count, setCount] = useState(quantity);
-  const [userId, setUserId] = useState(cart.productId);
-
+  const [productId, setUserId] = useState(cart.productId);
+  console.log('productdi:', productId);
   const productPrice = cart.productPrice * count;
   const totalPrice = productPrice + cart.addOptionPrice[0];
-
   const token = localStorage.getItem('token');
 
+  // useEffect(() => {
+  //   fetch('http://localhost:8000/carts', {
+  //     method: 'delete',
+  //     headers: {
+  //       token: token,
+  //     },
+  //     body: JSON.stringify({
+  //       productId,
+  //     }),
+  //   })
+  //     .then(res => res.json())
+  //     .then(data => console.log(data));
+  // }, []);
+
+  const handleDelete = () => {
+    console.log('productdi:', productId);
+
+    fetch('http://localhost:8000/carts', {
+      method: 'delete',
+      headers: {
+        token: token,
+      },
+      body: JSON.stringify({
+        productId: productId,
+      }),
+    })
+      .then(res => res.json())
+      .then(data => console.log(data));
+  };
+
   useEffect(() => {
+    // setCount(count);
     console.log('count', count);
     fetch('http://localhost:8000/carts', {
       method: 'PATCH',
@@ -25,7 +55,7 @@ function CartList({ cart }) {
         token: token,
       },
       body: JSON.stringify({
-        productId: userId,
+        productId: productId,
         quantity: count,
         totalPrice: totalPrice,
       }),
@@ -50,7 +80,6 @@ function CartList({ cart }) {
     }
     setCount(prev => prev - 1);
   }
-
   return (
     <div className={styles.cartItem}>
       <div className={styles.checkbox}>
@@ -79,7 +108,7 @@ function CartList({ cart }) {
             </button>
             {/* <button onClick={handleCartChange}>헤잉</button> */}
           </div>
-          <div className={styles.delete}>
+          <div className={styles.delete} onClick={handleDelete}>
             <IoCloseSharp />
           </div>
         </div>
