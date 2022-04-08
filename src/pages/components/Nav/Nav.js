@@ -7,8 +7,8 @@ import { AiOutlineShopping } from 'react-icons/ai';
 function Nav() {
   const token = localStorage.getItem('token');
   const [borderLine, setBorderLine] = useState('');
-  const [cartData, setCartData] = useState({ userCart: [] });
-  const [counter, setCounter] = useState(0);
+  // const [cartData, setCartData] = useState({ userCart: [] });
+  // const [counter, setCounter] = useState(0);
   const navigate = useNavigate();
 
   const goToTop = () => {
@@ -29,20 +29,20 @@ function Nav() {
       : alert('장바구니는 로그인한 회원만 이용 가능합니다.');
   };
 
-  useEffect(() => {
-    token &&
-      fetch('http://localhost:8000/carts', {
-        headers: {
-          token: token,
-        },
-      })
-        .then(res => res.json())
-        .then(data => {
-          setCartData(data);
-          setCounter(cartData.userCart[0].productQuantity);
-          console.log(cartData.userCart[0].productQuantity);
-        });
-  }, [counter]);
+  // useEffect(() => {
+  //   token &&
+  //     fetch('http://localhost:8000/carts', {
+  //       headers: {
+  //         token: token,
+  //       },
+  //     })
+  //       .then(res => res.json())
+  //       .then(data => {
+  //         setCartData(data);
+  //         setCounter(cartData.userCart[0].productQuantity);
+  //         console.log(cartData.userCart[0].productQuantity);
+  //       });
+  // }, [counter]);
 
   return (
     <>
@@ -97,14 +97,14 @@ function Nav() {
               color="#707070"
               onClick={vaildLogin}
             />
-            <span
+            {/* <span
               className={styles.cartCounterCss}
               style={{
                 display: counter > 0 ? 'block' : 'none',
               }}
             >
               {counter}
-            </span>
+            </span> */}
           </div>
         </div>
       </nav>

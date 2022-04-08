@@ -16,6 +16,8 @@ function Cart() {
       .then(res => res.json())
       .then(data => {
         setCartData(data);
+        console.log('이거 데이터 : ', data);
+        console.log('이건 카트데이터 :', cartData);
       });
   }, []);
 

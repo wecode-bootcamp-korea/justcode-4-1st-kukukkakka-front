@@ -9,8 +9,8 @@ function CartList({ cart }) {
   let quantity = cart.productQuantity;
 
   const [count, setCount] = useState(quantity);
-  const [productId, setUserId] = useState(cart.productId);
-  console.log('productdi:', productId);
+  const [productId, setProductId] = useState(cart.productId);
+  console.log('productid:', productId);
   const productPrice = cart.productPrice * count;
   const totalPrice = productPrice + cart.addOptionPrice[0];
   const token = localStorage.getItem('token');
@@ -22,7 +22,7 @@ function CartList({ cart }) {
   //       token: token,
   //     },
   //     body: JSON.stringify({
-  //       productId,
+  //       productId: productId,
   //     }),
   //   })
   //     .then(res => res.json())
@@ -30,11 +30,11 @@ function CartList({ cart }) {
   // }, []);
 
   const handleDelete = () => {
-    console.log('productdi:', productId);
-
+    console.log('productdi22:', productId);
     fetch('http://localhost:8000/carts', {
       method: 'delete',
       headers: {
+        'Content-Type': 'application/json',
         token: token,
       },
       body: JSON.stringify({
