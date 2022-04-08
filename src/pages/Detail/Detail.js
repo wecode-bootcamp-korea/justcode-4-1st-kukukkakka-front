@@ -68,8 +68,6 @@ function Detail() {
     setTotalPrice(value);
   }, [value]);
 
-  console.log('optionId: ', optionId);
-
   const openModal = () => {
     // 비회원일 때
     // if() {
