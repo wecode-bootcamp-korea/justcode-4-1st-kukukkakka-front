@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import OperationBtns from './OperationBtns/OperationBtns';
 import style from './Detail.module.scss';
 import OptionList from './OptionList/OptionList';
@@ -10,7 +10,6 @@ function Detail() {
   const params = useParams();
 
   const [modal, setModal] = useState(false);
-  const [notSelect, setNotSelect] = useState(false);
   const [product, setProduct] = useState({
     productDetailData: [
       {
@@ -19,6 +18,7 @@ function Detail() {
         discription: '',
         imageUrl: '',
         price: 0,
+        options: [],
       },
     ],
   });
@@ -27,16 +27,17 @@ function Detail() {
 
   const [productPrice, setProductPrice] = useState(value);
   const [totalPrice, setTotalPrice] = useState(value);
+  const [optionId, setOptionId] = useState(0);
   const [changeText, setChangeText] = useState('함께하면 좋은 추천상품');
   const [showItemBox, setShowItemBox] = useState({ display: 'none' });
-  const [optionList, setOptionList] = useState({ display: 'none' });
+  const [showOption, setShowOption] = useState({ display: 'none' });
   const [changeBorder, setChangeBorder] = useState({
     border: '1px solid $gray-color',
   });
   const [count, setCount] = useState(1);
-  const navigate = useNavigate();
-  const optionPrice = 2500;
+  const optionPrice = 0;
 
+  // const navigate = useNavigate();
   useEffect(() => {
     fetch(`http://localhost:8000/products/${params.id}`)
       .then(res => res.json())
@@ -45,12 +46,12 @@ function Detail() {
       });
   }, [params.id]);
 
-  const postCart = () => {
+  const postToCart = () => {
     fetch('http://localhost:8000/carts', {
       method: 'post',
       body: JSON.stringify({
         productId: product.productDetailData[0].id,
-        addOptionId: [],
+        options: [],
         quantity: count,
         totalPrice: totalPrice,
       }),
@@ -76,79 +77,51 @@ function Detail() {
     //   return;
     // }
 
-    if (showItemBox.display === 'none' && !notSelect) {
+    if (showItemBox.display === 'none') {
       alert('추가옵션을 선택해주세요 :-)');
       return;
     }
-    postCart();
     modal ? setModal(false) : setModal(true);
     window.scrollTo(0, 0);
   };
 
   // 추가상품박스 보이게 하는 함수
-  const onClickOptionItem = () => {
-    showItemBox.display === 'none'
-      ? setShowItemBox({ display: 'block' })
-      : setShowItemBox({ display: 'none' });
+  const optionBoxHandler = () => {
+    showItemBox.display === 'none' && setShowItemBox({ display: 'block' });
   };
-
-  useEffect(() => {
-    fetch(`http://localhost:8000/products/${params.id}`)
-      .then(res => res.json())
-      .then(res => {
-        setProduct(res);
-      });
-  }, [params.id]);
 
   const selectItem = () => {
-    onClickOptionItem();
-    setOptionList({ display: 'none' });
+    optionBoxHandler();
+    setShowOption({ display: 'none' });
     setChangeBorder({ border: '1px solid #b1b1b1' });
 
-    // 추가상품 두번이상 눌렀을 때
     if (showItemBox.display === 'block') {
-      setChangeText('함께하면 좋은 추천상품');
-      setNotSelect(false);
+      // setChangeText(text);
       setTotalPrice(totalPrice - optionPrice);
     } else {
-      setChangeText('롱 모던 베이직 화분');
+      setChangeText('함께하면 좋은 추천상품');
       setTotalPrice(totalPrice + optionPrice);
-      setNotSelect(false);
-    }
-  };
-
-  const notSelectItem = () => {
-    setChangeText('선택안함');
-    setOptionList({ display: 'none' });
-    setChangeBorder({ border: '1px solid #b1b1b1' });
-    setNotSelect(true);
-
-    // 추가상품 눌렀다가 선택안함 눌렀을 때 추가상품박스 없애기
-    if (showItemBox.display === 'block') {
-      onClickOptionItem();
-      setTotalPrice(totalPrice - optionPrice);
-      setNotSelect(true);
     }
   };
 
   const onClickOptionToggle = () => {
-    if (optionList.display === 'none') {
-      setOptionList({ display: 'block' });
+    if (showOption.display === 'none') {
+      setShowOption({ display: 'block' });
       setChangeBorder({ border: '1px solid #FFCD32' });
+      return;
     } else {
-      setOptionList({ display: 'none' });
+      setShowOption({ display: 'none' });
       setChangeBorder({ border: '1px solid #b1b1b1' });
+      return;
     }
-    return optionList;
   };
-
   const minusPrice = () => {
     if (count - 1 < 1) return;
     setCount(count - 1);
     setProductPrice((count - 1) * value);
     setTotalPrice((count - 1) * value);
     showItemBox.display === 'block' &&
-      setTotalPrice((count - 1) * value + optionPrice);
+      totalPrice((count - 1) * value + optionPrice);
   };
 
   const plusPrice = () => {
@@ -163,7 +136,6 @@ function Detail() {
     setShowItemBox({ display: 'none' });
     setTotalPrice(totalPrice - optionPrice);
     setChangeText('함께하면 좋은 추천상품');
-    setNotSelect(false);
   };
 
   return (
@@ -207,28 +179,38 @@ function Detail() {
                 <div>{changeText}</div>
                 <i className={style.btnDown}>⌵</i>
               </button>
-              <OptionList
-                optionPrice={optionPrice}
-                optionList={optionList}
-                selectItem={selectItem}
-                notSelectItem={notSelectItem}
-              />
+              {product.productDetailData[0].options.map(list => (
+                <div
+                  key={list.id}
+                  onClick={() => {
+                    selectItem();
+                    setChangeText(list.name);
+                    setOptionId(list.id);
+                  }}
+                >
+                  <OptionList
+                    list={list}
+                    key={list.id}
+                    showOption={showOption}
+                    optionId={optionId}
+                  />
+                </div>
+              ))}
             </div>
           </div>
           <div className={style.priceBox}>
             <div>상품가격</div>
             <div>{productPrice.toLocaleString('en')}원</div>
           </div>
-          {notSelect && (
-            <div className={style.priceBox}>
-              <div>추가옵션 : 선택안함</div>
-            </div>
-          )}
-          <AddedOptionBox
-            changeStyle={showItemBox}
-            deleteItem={deleteItemBox}
-            optionPrice={optionPrice}
-          />
+          {product.productDetailData[0].options.map(list => (
+            <AddedOptionBox
+              list={list}
+              key={list.id}
+              changeStyle={showItemBox}
+              deleteItem={deleteItemBox}
+              optionId={optionId}
+            />
+          ))}
           <div className={style.totalPriceBox}>
             <span>총 주문금액</span>
             <span>{totalPrice.toLocaleString('en')}원</span>
