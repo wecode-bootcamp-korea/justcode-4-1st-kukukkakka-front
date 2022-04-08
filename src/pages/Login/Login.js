@@ -35,7 +35,8 @@ function Login() {
 
   const loginSuccess = () => {
     alert('로그인 성공!');
-    navigate('/signup');
+    navigate('/');
+    window.scrollTo(0, 0);
   };
 
   const postLogin = () => {
@@ -63,7 +64,6 @@ function Login() {
       .then(res => {
         if (res.token) {
           localStorage.setItem('token', res.token);
-          console.log('저장되었냐', res.token);
         } else {
           console.log('에러발생 : ', res.message);
         }
