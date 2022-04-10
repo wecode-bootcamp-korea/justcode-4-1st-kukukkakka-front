@@ -119,22 +119,25 @@ function Detail() {
     setCount(count - 1);
     setProductPrice((count - 1) * value);
     setTotalPrice((count - 1) * value);
-    showItemBox.display === 'block' &&
-      totalPrice((count - 1) * value + optionPrice);
   };
 
   const plusPrice = () => {
     setCount(count + 1);
     setProductPrice((count + 1) * value);
     setTotalPrice((count + 1) * value);
-    showItemBox.display === 'block' &&
-      setTotalPrice(value * (count + 1) + optionPrice);
   };
 
-  const deleteItemBox = () => {
+  const deleteItemBox = price => {
     setShowItemBox({ display: 'none' });
-    setTotalPrice(totalPrice - optionPrice);
     setChangeText('함께하면 좋은 추천상품');
+    setTotalPrice(totalPrice - price);
+    return totalPrice;
+  };
+
+  const optionPriceHandler = price => {
+    showItemBox.display === 'none'
+      ? setTotalPrice(totalPrice + price)
+      : deleteItemBox(price);
   };
 
   return (
@@ -183,8 +186,9 @@ function Detail() {
                   key={list.id}
                   onClick={() => {
                     selectItem();
-                    setChangeText(list.name);
                     setOptionId(list.id);
+                    setChangeText(list.name);
+                    optionPriceHandler(list.price);
                   }}
                 >
                   <OptionList
