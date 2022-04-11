@@ -7,8 +7,10 @@ import { AiOutlineShopping } from 'react-icons/ai';
 function Nav() {
   const token = localStorage.getItem('token');
   const [borderLine, setBorderLine] = useState('');
-  // const [cartData, setCartData] = useState({ userCart: [] });
-  // const [counter, setCounter] = useState(0);
+  const [counter, setCounter] = useState(0);
+  const [userName, setUserName] = useState('');
+  const [isLogIn, setIsLogIn] = useState(false);
+
   const navigate = useNavigate();
 
   const goToTop = () => {
@@ -29,34 +31,64 @@ function Nav() {
       : alert('장바구니는 로그인한 회원만 이용 가능합니다.');
   };
 
-  // useEffect(() => {
-  //   token &&
-  //     fetch('http://localhost:8000/carts', {
-  //       headers: {
-  //         token: token,
-  //       },
-  //     })
-  //       .then(res => res.json())
-  //       .then(data => {
-  //         setCartData(data);
-  //         setCounter(cartData.userCart[0].productQuantity);
-  //         console.log(cartData.userCart[0].productQuantity);
-  //       });
-  // }, [counter]);
+  useEffect(() => {
+    fetch('http://localhost:8000/carts', {
+      headers: {
+        'Content-Type': 'application/json',
+        token: token,
+      },
+    })
+      .then(res => res.json())
+      .then(data => {
+        setCounter(data.userCart.length);
+      });
+  }, [token]);
+
+  useEffect(() => {
+    fetch('http://localhost:8000/users/name', {
+      headers: {
+        'Content-Type': 'application/json',
+        token: token,
+      },
+    })
+      .then(res => res.json())
+      .then(data => {
+        setUserName(data.userName[0].username);
+      });
+  }, [token]);
+
+  useEffect(() => {
+    if (token) {
+      setIsLogIn(true);
+    } else {
+      setIsLogIn(false);
+    }
+  }, []);
 
   return (
     <>
       <header className={styles.headerWrapper}>
         <ul className={styles.headerList}>
-          <Link to="/login" style={{ textDecoration: 'none' }}>
-            <li className={styles.headerMenu}>로그인</li>
-          </Link>
-          <Link to="/signup" style={{ textDecoration: 'none' }}>
-            <li className={styles.headerMenu}>
-              회원가입
-              <span className={styles.pointColor}>(1000포인트 지급!)</span>
+          {isLogIn ? (
+            <li className={styles.headerLine}>
+              반갑습니다.{' '}
+              <span className={styles.headerUserName}>{userName}</span>님!
             </li>
-          </Link>
+          ) : (
+            <Link to="/login" style={{ textDecoration: 'none' }}>
+              <li className={styles.headerMenu}>로그인</li>
+            </Link>
+          )}
+          {isLogIn ? (
+            ''
+          ) : (
+            <Link to="/signup" style={{ textDecoration: 'none' }}>
+              <li className={styles.headerMenu}>
+                회원가입
+                <span className={styles.pointColor}>(1000포인트 지급!)</span>
+              </li>
+            </Link>
+          )}
           <li className={styles.headerMenu}>꾸까 고객센터</li>
           <li className={styles.headerMenuBold}>기업제휴</li>
         </ul>
@@ -97,14 +129,16 @@ function Nav() {
               color="#707070"
               onClick={vaildLogin}
             />
-            {/* <span
-              className={styles.cartCounterCss}
-              style={{
-                display: counter > 0 ? 'block' : 'none',
-              }}
-            >
-              {counter}
-            </span> */}
+            {isLogIn && (
+              <span
+                className={styles.cartCounterCss}
+                style={{
+                  display: counter > 0 ? 'block' : 'none',
+                }}
+              >
+                {counter}
+              </span>
+            )}
           </div>
         </div>
       </nav>

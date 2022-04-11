@@ -30,6 +30,10 @@ function CartList({ cart }) {
   // }, []);
 
   const handleDelete = () => {
+    setProductId(productId);
+  };
+
+  useEffect(() => {
     console.log('productdi22:', productId);
     fetch('http://localhost:8000/carts', {
       method: 'delete',
@@ -43,7 +47,7 @@ function CartList({ cart }) {
     })
       .then(res => res.json())
       .then(data => console.log(data));
-  };
+  }, [productId]);
 
   useEffect(() => {
     // setCount(count);
