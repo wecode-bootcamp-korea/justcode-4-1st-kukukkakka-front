@@ -23,6 +23,7 @@ function Detail() {
   });
 
   let value = product.productDetailData[0].price;
+
   const [productPrice, setProductPrice] = useState(value);
   const [totalPrice, setTotalPrice] = useState(value);
   const [optionId, setOptionId] = useState(0);

@@ -6,16 +6,21 @@ import CartList from './CartList';
 function Cart() {
   const token = localStorage.getItem('token');
   const [cartData, setCartData] = useState({ userCart: [] });
-
   useEffect(() => {
     fetch('http://localhost:8000/carts', {
       headers: {
         token: token,
+        headers: {
+          'Content-Type': 'application/json',
+          token: token,
+        },
       },
     })
       .then(res => res.json())
       .then(data => {
         setCartData(data);
+        console.log('이거 데이터 : ', data);
+        console.log('이건 카트데이터 :', cartData);
       });
   }, []);
 
