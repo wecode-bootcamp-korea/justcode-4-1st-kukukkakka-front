@@ -4,12 +4,14 @@ import { IoCloseSharp, IoCheckmark } from 'react-icons/io5';
 import { FaPlus, FaMinus } from 'react-icons/fa';
 import Option from '../Cart/Option';
 
-function CartList({ cart, deleteItem }) {
+function CartList({ cart }) {
   const [isChecked, setIsChecked] = useState(false);
   let quantity = cart.productQuantity;
 
   const [count, setCount] = useState(quantity);
+  const [getCart, setGetCart] = useState(cart);
   const [productId, setProductId] = useState(cart.productId);
+  const [id, setId] = useState(cart.id);
   const productPrice = cart.productPrice * count;
   const totalPrice = productPrice + cart.addOptionPrice[0];
   const token = localStorage.getItem('token');
@@ -22,11 +24,12 @@ function CartList({ cart, deleteItem }) {
   //       token: token,
   //     },
   //     body: JSON.stringify({
-  //       productId,
+  //       productId: productId,
+  //       id: id,
   //     }),
   //   })
   //     .then(res => res.json())
-  //     .then(data => console.log(data));
+  //     .then(data => setProductId(data));
   // }, [productId]);
 
   const handleDelete = () => {
@@ -38,11 +41,16 @@ function CartList({ cart, deleteItem }) {
       },
       body: JSON.stringify({
         productId: productId,
+        id: id,
       }),
     })
       .then(res => res.json())
-      .then(data => console.log(data));
+      .then(data => data);
   };
+
+  useEffect(() => {
+    setGetCart(productId);
+  }, [getCart]);
 
   useEffect(() => {
     fetch('http://localhost:8000/carts', {
