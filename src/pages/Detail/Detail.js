@@ -34,7 +34,7 @@ function Detail() {
   });
   const [count, setCount] = useState(1);
   const token = localStorage.getItem('token');
-  const optionPrice = 0;
+  // const optionPrice = 0;
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -49,11 +49,12 @@ function Detail() {
     fetch('http://localhost:8000/carts', {
       method: 'post',
       headers: {
+        'Content-Type': 'application/json',
         token: token,
       },
       body: JSON.stringify({
         productId: product.productDetailData[0].id,
-        options: optionId,
+        addOptionId: [optionId],
         quantity: count,
         totalPrice: totalPrice,
       }),
@@ -92,13 +93,12 @@ function Detail() {
     showItemBox.display === 'none' && setShowItemBox({ display: 'block' });
   };
 
-  const selectItem = () => {
+  const selectItem = optionPrice => {
     optionBoxHandler();
     setShowOption({ display: 'none' });
     setChangeBorder({ border: '1px solid #b1b1b1' });
 
     if (showItemBox.display === 'block') {
-      // setChangeText(text);
       setTotalPrice(totalPrice - optionPrice);
     } else {
       setChangeText('함께하면 좋은 추천상품');
@@ -130,10 +130,10 @@ function Detail() {
     setTotalPrice((count + 1) * value);
   };
 
-  const deleteItemBox = price => {
+  const deleteItemBox = optionPrice => {
     setShowItemBox({ display: 'none' });
     setChangeText('함께하면 좋은 추천상품');
-    setTotalPrice(totalPrice - price);
+    setTotalPrice(totalPrice - optionPrice);
     return totalPrice;
   };
 
@@ -143,11 +143,11 @@ function Detail() {
       : deleteItemBox(price);
   };
 
-  const onClickOptionItem = (id, name, price) => {
-    selectItem();
+  const onClickOptionItem = (id, name, optionPrice) => {
+    selectItem(optionPrice);
     setOptionId(id);
     setChangeText(name);
-    optionPriceHandler(price);
+    optionPriceHandler(optionPrice);
   };
 
   return (
