@@ -25,7 +25,7 @@ function CartList({ cart }) {
   //     },
   //     body: JSON.stringify({
   //       productId: productId,
-  //       id: id,
+
   //     }),
   //   })
   //     .then(res => res.json())

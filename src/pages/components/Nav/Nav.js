@@ -1,12 +1,17 @@
-import { React, useState } from 'react';
+import { React, useState, useEffect } from 'react';
 import styles from './Nav.module.scss';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AiOutlineUser } from 'react-icons/ai';
 import { AiOutlineShopping } from 'react-icons/ai';
 
 function Nav() {
+  const token = localStorage.getItem('token');
   const [borderLine, setBorderLine] = useState('');
-  // const [cartCounter, setCartCounter] = useState(0);
+  const [counter, setCounter] = useState(0);
+  const [userName, setUserName] = useState('');
+  const [isLogIn, setIsLogIn] = useState(false);
+
+  const navigate = useNavigate();
 
   const goToTop = () => {
     window.scrollTo(0, 0);
@@ -20,23 +25,70 @@ function Nav() {
 
   window.addEventListener('scroll', changeNavbarColor);
 
-  // useEffect(()=>{
-  //   fetch('').then(res=>res.json()).then(res=>{setCartCounter(res)})
-  // },[cartCounter])
+  const vaildLogin = () => {
+    token
+      ? navigate('/cart')
+      : alert('장바구니는 로그인한 회원만 이용 가능합니다.');
+  };
+
+  useEffect(() => {
+    fetch('http://localhost:8000/carts', {
+      headers: {
+        'Content-Type': 'application/json',
+        token: token,
+      },
+    })
+      .then(res => res.json())
+      .then(data => {
+        setCounter(data.userCart.length);
+      });
+  }, [token]);
+
+  useEffect(() => {
+    fetch('http://localhost:8000/users/name', {
+      headers: {
+        'Content-Type': 'application/json',
+        token: token,
+      },
+    })
+      .then(res => res.json())
+      .then(data => {
+        setUserName(data.userName[0].username);
+      });
+  }, [token]);
+
+  useEffect(() => {
+    if (token) {
+      setIsLogIn(true);
+    } else {
+      setIsLogIn(false);
+    }
+  }, []);
 
   return (
     <>
       <header className={styles.headerWrapper}>
         <ul className={styles.headerList}>
-          <Link to="/login" style={{ textDecoration: 'none' }}>
-            <li className={styles.headerMenu}>로그인</li>
-          </Link>
-          <Link to="/signup" style={{ textDecoration: 'none' }}>
-            <li className={styles.headerMenu}>
-              회원가입
-              <span className={styles.pointColor}>(1000포인트 지급!)</span>
+          {isLogIn ? (
+            <li className={styles.headerLine}>
+              반갑습니다.{' '}
+              <span className={styles.headerUserName}>{userName}</span>님!
             </li>
-          </Link>
+          ) : (
+            <Link to="/login" style={{ textDecoration: 'none' }}>
+              <li className={styles.headerMenu}>로그인</li>
+            </Link>
+          )}
+          {isLogIn ? (
+            ''
+          ) : (
+            <Link to="/signup" style={{ textDecoration: 'none' }}>
+              <li className={styles.headerMenu}>
+                회원가입
+                <span className={styles.pointColor}>(1000포인트 지급!)</span>
+              </li>
+            </Link>
+          )}
           <li className={styles.headerMenu}>꾸까 고객센터</li>
           <li className={styles.headerMenuBold}>기업제휴</li>
         </ul>
@@ -71,21 +123,22 @@ function Nav() {
             <Link to="/login">
               <AiOutlineUser size="40" color="#707070" onClick={goToTop} />
             </Link>
-            <Link to="/cart">
-              <AiOutlineShopping
-                className={styles.iconBlank}
-                size="40"
-                color="#707070"
-                onClick={goToTop}
-              />
-              {/* <span className={styles.cartCounterCss}>
-                style=
-                {{
-                  display: `${cartCounter} > 0 ? "" : "none"`,
+            <AiOutlineShopping
+              className={styles.iconBlank}
+              size="40"
+              color="#707070"
+              onClick={vaildLogin}
+            />
+            {isLogIn && (
+              <span
+                className={styles.cartCounterCss}
+                style={{
+                  display: counter > 0 ? 'block' : 'none',
                 }}
-                {cartCounter}
-              </span> */}
-            </Link>
+              >
+                {counter}
+              </span>
+            )}
           </div>
         </div>
       </nav>

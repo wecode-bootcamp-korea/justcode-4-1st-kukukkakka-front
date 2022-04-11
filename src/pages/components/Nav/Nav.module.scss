@@ -17,6 +17,16 @@ $yellowColor: #ffcd32;
     margin: 20px 0;
     list-style: none;
 
+    .headerLine {
+      padding: $paddingValue;
+      border-right: 1px solid $darkColor;
+
+      .headerUserName {
+        color: $yellowColor;
+        font-weight: 500;
+      }
+    }
+
     .headerMenu {
       padding: $paddingValue;
       color: $darkColor;
@@ -79,7 +89,7 @@ $yellowColor: #ffcd32;
 .cartCounterCss {
   position: absolute;
   top: 20%;
-  right: 9.4%;
+  right: 11%;
   padding: 3px 6px;
   border-radius: 50%;
   background-color: $yellowColor;
