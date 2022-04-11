@@ -26,7 +26,11 @@ function Footer() {
               꾸꾸까까 고객센터{'>'}
             </button>
           </div>
-          <img alt="main-logo" src="img/main_logo_white.png" width="200" />
+          <img
+            alt="main-logo"
+            src={`${process.env.PUBLIC_URL}/img/main_logo_white.png`}
+            width="200"
+          />
         </section>
 
         <section className={styles.infoWrapper}>

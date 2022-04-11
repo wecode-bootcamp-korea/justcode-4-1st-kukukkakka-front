@@ -6,7 +6,7 @@ function OptionList({ list, showOption }) {
     <div>
       <ul className={style.toggleList} style={showOption}>
         <li>{list.name}</li>
-        <li>{list.price}원</li>
+        <li>{list.price.toLocaleString('en')}원</li>
       </ul>
     </div>
   );
