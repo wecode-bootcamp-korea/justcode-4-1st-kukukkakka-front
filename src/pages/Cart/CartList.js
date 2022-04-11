@@ -4,13 +4,12 @@ import { IoCloseSharp, IoCheckmark } from 'react-icons/io5';
 import { FaPlus, FaMinus } from 'react-icons/fa';
 import Option from '../Cart/Option';
 
-function CartList({ cart }) {
+function CartList({ cart, deleteItem }) {
   const [isChecked, setIsChecked] = useState(false);
   let quantity = cart.productQuantity;
 
   const [count, setCount] = useState(quantity);
-  const [productId, setUserId] = useState(cart.productId);
-  console.log('productdi:', productId);
+  const [productId, setProductId] = useState(cart.productId);
   const productPrice = cart.productPrice * count;
   const totalPrice = productPrice + cart.addOptionPrice[0];
   const token = localStorage.getItem('token');
@@ -19,6 +18,7 @@ function CartList({ cart }) {
   //   fetch('http://localhost:8000/carts', {
   //     method: 'delete',
   //     headers: {
+  //       'Content-Type': 'application/json',
   //       token: token,
   //     },
   //     body: JSON.stringify({
@@ -27,14 +27,13 @@ function CartList({ cart }) {
   //   })
   //     .then(res => res.json())
   //     .then(data => console.log(data));
-  // }, []);
+  // }, [productId]);
 
   const handleDelete = () => {
-    console.log('productdi:', productId);
-
     fetch('http://localhost:8000/carts', {
       method: 'delete',
       headers: {
+        'Content-Type': 'application/json',
         token: token,
       },
       body: JSON.stringify({
@@ -46,8 +45,6 @@ function CartList({ cart }) {
   };
 
   useEffect(() => {
-    // setCount(count);
-    console.log('count', count);
     fetch('http://localhost:8000/carts', {
       method: 'PATCH',
       headers: {
@@ -106,7 +103,6 @@ function CartList({ cart }) {
             <button className={styles.plus} onClick={plusCount}>
               <FaPlus />
             </button>
-            {/* <button onClick={handleCartChange}>헤잉</button> */}
           </div>
           <div className={styles.delete} onClick={handleDelete}>
             <IoCloseSharp />
