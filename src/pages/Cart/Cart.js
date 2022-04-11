@@ -19,7 +19,6 @@ function Cart() {
       });
   }, []);
 
-  console.log('catdat:', cartData);
   return (
     <section className={styles.cartSection}>
       <h1 className={styles.title}>장바구니</h1>

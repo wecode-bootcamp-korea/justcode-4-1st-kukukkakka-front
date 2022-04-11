@@ -10,7 +10,6 @@ function CartList({ cart }) {
 
   const [count, setCount] = useState(quantity);
   const [productId, setUserId] = useState(cart.productId);
-  console.log('productdi:', productId);
   const productPrice = cart.productPrice * count;
   const totalPrice = productPrice + cart.addOptionPrice[0];
   const token = localStorage.getItem('token');
@@ -46,8 +45,6 @@ function CartList({ cart }) {
   };
 
   useEffect(() => {
-    // setCount(count);
-    console.log('count', count);
     fetch('http://localhost:8000/carts', {
       method: 'PATCH',
       headers: {
