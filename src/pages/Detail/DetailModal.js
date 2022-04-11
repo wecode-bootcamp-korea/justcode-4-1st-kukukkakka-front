@@ -2,9 +2,10 @@ import React from 'react';
 import style from './DetailModal.module.scss';
 import { useNavigate } from 'react-router-dom';
 
-function DetailModal({ openModal }) {
+function DetailModal({ openModal, postToCart }) {
   const navigate = useNavigate();
   const goToCart = () => {
+    postToCart();
     navigate('/Cart');
     window.scrollTo(0, 0);
   };

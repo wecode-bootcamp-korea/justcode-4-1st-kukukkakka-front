@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import OperationBtns from './OperationBtns/OperationBtns';
 import style from './Detail.module.scss';
 import OptionList from './OptionList/OptionList';
@@ -8,7 +8,6 @@ import DetailModal from './DetailModal';
 
 function Detail() {
   const params = useParams();
-
   const [modal, setModal] = useState(false);
   const [product, setProduct] = useState({
     productDetailData: [
@@ -34,9 +33,10 @@ function Detail() {
     border: '1px solid $gray-color',
   });
   const [count, setCount] = useState(1);
+  const token = localStorage.getItem('token');
   const optionPrice = 0;
+  const navigate = useNavigate();
 
-  // const navigate = useNavigate();
   useEffect(() => {
     fetch(`http://localhost:8000/products/${params.id}`)
       .then(res => res.json())
@@ -48,9 +48,12 @@ function Detail() {
   const postToCart = () => {
     fetch('http://localhost:8000/carts', {
       method: 'post',
+      headers: {
+        token: token,
+      },
       body: JSON.stringify({
         productId: product.productDetailData[0].id,
-        options: [],
+        options: optionId,
         quantity: count,
         totalPrice: totalPrice,
       }),
@@ -70,11 +73,11 @@ function Detail() {
 
   const openModal = () => {
     // 비회원일 때
-    // if() {
-    //   alert('로그인을 먼저 해주세요!');
-    //   navigate('/login');
-    //   return;
-    // }
+    if (!token) {
+      alert('로그인을 먼저 해주세요!');
+      navigate('/login');
+      return;
+    }
 
     if (showItemBox.display === 'none') {
       alert('추가옵션을 선택해주세요 :-)');
@@ -140,6 +143,13 @@ function Detail() {
       : deleteItemBox(price);
   };
 
+  const onClickOptionItem = (id, name, price) => {
+    selectItem();
+    setOptionId(id);
+    setChangeText(name);
+    optionPriceHandler(price);
+  };
+
   return (
     <div className={style.container}>
       <header>
@@ -185,10 +195,7 @@ function Detail() {
                 <div
                   key={list.id}
                   onClick={() => {
-                    selectItem();
-                    setOptionId(list.id);
-                    setChangeText(list.name);
-                    optionPriceHandler(list.price);
+                    onClickOptionItem(list.id, list.name, list.price);
                   }}
                 >
                   <OptionList
@@ -219,7 +226,9 @@ function Detail() {
             <span>{totalPrice.toLocaleString('en')}원</span>
           </div>
           <div className={style.contentBtnBox}>
-            {modal && <DetailModal openModal={openModal} />}
+            {modal && (
+              <DetailModal openModal={openModal} postToCart={postToCart} />
+            )}
             <button className={style.yellowBtn} onClick={openModal}>
               장바구니
             </button>
