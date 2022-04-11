@@ -22,7 +22,7 @@ function CartList({ cart, deleteItem }) {
   //       token: token,
   //     },
   //     body: JSON.stringify({
-  //       productId,
+  //       productId: productId,
   //     }),
   //   })
   //     .then(res => res.json())
