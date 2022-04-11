@@ -31,10 +31,7 @@ function Cart() {
     fetch('http://localhost:8000/carts', {
       headers: {
         token: token,
-        headers: {
-          'Content-Type': 'application/json',
-          token: token,
-        },
+        'Content-Type': 'application/json',
       },
     })
       .then(res => res.json())
