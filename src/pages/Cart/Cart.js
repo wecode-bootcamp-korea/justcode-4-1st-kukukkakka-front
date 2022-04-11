@@ -7,9 +7,6 @@ function Cart() {
   const token = localStorage.getItem('token');
   const [cartData, setCartData] = useState({ userCart: [] });
 
-  const value = cartData.userCart.map(item => item.productId);
-  const [productId, setProductId] = useState(value);
-
   // const deleteItem = () => {
   //   fetch('http://localhost:8000/carts', {
   //     method: 'delete',
@@ -42,8 +39,6 @@ function Cart() {
       .then(res => res.json())
       .then(data => {
         setCartData(data);
-        console.log('이거 데이터 : ', data);
-        console.log('이건 카트데이터 :', cartData);
       });
   }, []);
 
@@ -60,7 +55,7 @@ function Cart() {
       </div>
       <div className={styles.cartCenter}>
         {cartData.userCart.map(cart => (
-          <CartList key={cart.id} cart={cart} />
+          <CartList key={cart.id} cart={cart} cartData={cartData} />
         ))}
       </div>
       <div className={styles.noticeBox}>

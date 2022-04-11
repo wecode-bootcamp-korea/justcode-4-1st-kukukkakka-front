@@ -4,13 +4,13 @@ import { IoCloseSharp, IoCheckmark } from 'react-icons/io5';
 import { FaPlus, FaMinus } from 'react-icons/fa';
 import Option from '../Cart/Option';
 
-function CartList({ cart }) {
+function CartList({ cart, cartData }) {
+  console.log(cart);
   const [isChecked, setIsChecked] = useState(false);
   let quantity = cart.productQuantity;
 
   const [count, setCount] = useState(quantity);
-  const [getCart, setGetCart] = useState(cart);
-  const [productId, setProductId] = useState(cart.productId);
+  const [getCartData, setGetCartData] = useState(cartData);
   const [id, setId] = useState(cart.id);
   const productPrice = cart.productPrice * count;
   const totalPrice = productPrice + cart.addOptionPrice[0];
@@ -32,6 +32,10 @@ function CartList({ cart }) {
   //     .then(data => setProductId(data));
   // }, [productId]);
 
+  // useEffect(() => {
+  //   handleDelete();
+  // }, [getCartData]);
+
   const handleDelete = () => {
     fetch('http://localhost:8000/carts', {
       method: 'delete',
@@ -40,17 +44,12 @@ function CartList({ cart }) {
         token: token,
       },
       body: JSON.stringify({
-        productId: productId,
         id: id,
       }),
     })
       .then(res => res.json())
       .then(data => data);
   };
-
-  useEffect(() => {
-    setGetCart(productId);
-  }, [getCart]);
 
   useEffect(() => {
     fetch('http://localhost:8000/carts', {
@@ -60,7 +59,7 @@ function CartList({ cart }) {
         token: token,
       },
       body: JSON.stringify({
-        productId: productId,
+        id: id,
         quantity: count,
         totalPrice: totalPrice,
       }),
@@ -123,7 +122,7 @@ function CartList({ cart }) {
         </ul>
       </div>
       <div className={styles.priceBox}>
-        <p className={styles.price}>{totalPrice}</p>
+        <p className={styles.price}>{totalPrice.toLocaleString('en')}</p>
         <span className={styles.delivery}>무료배송</span>
       </div>
     </div>
