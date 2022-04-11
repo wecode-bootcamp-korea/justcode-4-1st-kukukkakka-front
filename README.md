@@ -6,19 +6,31 @@
 기간 : 22.03.28 - 22.04.15
 구성 : Fullstack 4명 
 
-![image](https://user-images.githubusercontent.com/98023289/162653197-73f5d1d0-6a89-4126-902e-3cba63a5f115.png)
+- [백엔드 깃헙주소](https://github.com/wecode-bootcamp-korea/justcode-4-1st-kukukkakka-back)
+- [프론트엔드 깃헙주소](https://github.com/wecode-bootcamp-korea/justcode-4-1st-kukukkakka-front)
 
+### 개인 블로그
+- [권지호](https://xxziiko.tistory.com/) 
+- [박송이](https://velog.io/@songyi7091)
+- [김민경](https://velog.io/@alicia-mkkim)
+- [김다미](https://velog.io/@damdaridam)
 
-### DB modeling
+</br>
+
+# DEMO
+* main page
+![image](https://user-images.githubusercontent.com/98023289/162654632-6c1b9ef1-e770-4a92-a982-4197e4b63104.png)
+
+</br>
+
+# DB modeling
 
 ![image](https://user-images.githubusercontent.com/98023289/162653302-f013fd10-11ef-4d24-b980-5baf15c8c4f9.png)
 
 
-### Backend Architecture
-![image](https://user-images.githubusercontent.com/98023289/162653391-d050231b-6710-4f5a-b5fb-a7ad40158ed3.png)
+</br>
 
-
-### Technologies
+# Technologies
 - 사용언어 : Javascript
 - 런타임환경 : Node.js
 - 웹, 앱 프레임워크 : Express
