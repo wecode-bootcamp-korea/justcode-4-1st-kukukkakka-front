@@ -72,7 +72,6 @@ function Detail() {
   }, [value]);
 
   const openModal = () => {
-    // 비회원일 때
     if (!token) {
       alert('로그인을 먼저 해주세요!');
       navigate('/login');
@@ -83,11 +82,17 @@ function Detail() {
       alert('추가옵션을 선택해주세요 :-)');
       return;
     }
-    modal ? setModal(false) : setModal(true);
-    window.scrollTo(0, 0);
+
+    if (modal) {
+      setModal(false);
+      return;
+    } else {
+      setModal(true);
+      window.scrollTo(0, 0);
+      postToCart();
+    }
   };
 
-  // 추가상품박스 보이게 하는 함수
   const optionBoxHandler = () => {
     showItemBox.display === 'none' && setShowItemBox({ display: 'block' });
   };
@@ -116,6 +121,7 @@ function Detail() {
       return;
     }
   };
+
   const minusPrice = () => {
     if (count - 1 < 1) return;
     setCount(count - 1);
@@ -225,9 +231,7 @@ function Detail() {
             <span>{totalPrice.toLocaleString('en')}원</span>
           </div>
           <div className={style.contentBtnBox}>
-            {modal && (
-              <DetailModal openModal={openModal} postToCart={postToCart} />
-            )}
+            {modal && <DetailModal openModal={openModal} />}
             <button className={style.yellowBtn} onClick={openModal}>
               장바구니
             </button>
