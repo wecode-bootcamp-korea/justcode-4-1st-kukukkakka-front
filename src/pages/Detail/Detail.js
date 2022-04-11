@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import OperationBtns from './OperationBtns/OperationBtns';
 import style from './Detail.module.scss';
 import OptionList from './OptionList/OptionList';
@@ -8,7 +8,6 @@ import DetailModal from './DetailModal';
 
 function Detail() {
   const params = useParams();
-
   const [modal, setModal] = useState(false);
   const [product, setProduct] = useState({
     productDetailData: [
@@ -34,9 +33,9 @@ function Detail() {
     border: '1px solid $gray-color',
   });
   const [count, setCount] = useState(1);
-  const optionPrice = 0;
+  const token = localStorage.getItem('token');
+  const navigate = useNavigate();
 
-  // const navigate = useNavigate();
   useEffect(() => {
     fetch(`http://localhost:8000/products/${params.id}`)
       .then(res => res.json())
@@ -48,9 +47,13 @@ function Detail() {
   const postToCart = () => {
     fetch('http://localhost:8000/carts', {
       method: 'post',
+      headers: {
+        'Content-Type': 'application/json',
+        token: token,
+      },
       body: JSON.stringify({
         productId: product.productDetailData[0].id,
-        options: [],
+        addOptionId: [optionId],
         quantity: count,
         totalPrice: totalPrice,
       }),
@@ -69,33 +72,37 @@ function Detail() {
   }, [value]);
 
   const openModal = () => {
-    // 비회원일 때
-    // if() {
-    //   alert('로그인을 먼저 해주세요!');
-    //   navigate('/login');
-    //   return;
-    // }
+    if (!token) {
+      alert('로그인을 먼저 해주세요!');
+      navigate('/login');
+      return;
+    }
 
     if (showItemBox.display === 'none') {
       alert('추가옵션을 선택해주세요 :-)');
       return;
     }
-    modal ? setModal(false) : setModal(true);
-    window.scrollTo(0, 0);
+
+    if (modal) {
+      setModal(false);
+      return;
+    } else {
+      setModal(true);
+      window.scrollTo(0, 0);
+      postToCart();
+    }
   };
 
-  // 추가상품박스 보이게 하는 함수
   const optionBoxHandler = () => {
     showItemBox.display === 'none' && setShowItemBox({ display: 'block' });
   };
 
-  const selectItem = () => {
+  const selectItem = optionPrice => {
     optionBoxHandler();
     setShowOption({ display: 'none' });
     setChangeBorder({ border: '1px solid #b1b1b1' });
 
     if (showItemBox.display === 'block') {
-      // setChangeText(text);
       setTotalPrice(totalPrice - optionPrice);
     } else {
       setChangeText('함께하면 좋은 추천상품');
@@ -114,27 +121,38 @@ function Detail() {
       return;
     }
   };
+
   const minusPrice = () => {
     if (count - 1 < 1) return;
     setCount(count - 1);
     setProductPrice((count - 1) * value);
     setTotalPrice((count - 1) * value);
-    showItemBox.display === 'block' &&
-      totalPrice((count - 1) * value + optionPrice);
   };
 
   const plusPrice = () => {
     setCount(count + 1);
     setProductPrice((count + 1) * value);
     setTotalPrice((count + 1) * value);
-    showItemBox.display === 'block' &&
-      setTotalPrice(value * (count + 1) + optionPrice);
   };
 
-  const deleteItemBox = () => {
+  const deleteItemBox = optionPrice => {
     setShowItemBox({ display: 'none' });
-    setTotalPrice(totalPrice - optionPrice);
     setChangeText('함께하면 좋은 추천상품');
+    setTotalPrice(totalPrice - optionPrice);
+    return totalPrice;
+  };
+
+  const optionPriceHandler = optionPrice => {
+    showItemBox.display === 'none'
+      ? setTotalPrice(totalPrice + optionPrice)
+      : deleteItemBox(optionPrice);
+  };
+
+  const onClickOptionItem = (id, name, optionPrice) => {
+    selectItem(optionPrice);
+    setOptionId(id);
+    setChangeText(name);
+    optionPriceHandler(optionPrice);
   };
 
   return (
@@ -182,9 +200,7 @@ function Detail() {
                 <div
                   key={list.id}
                   onClick={() => {
-                    selectItem();
-                    setChangeText(list.name);
-                    setOptionId(list.id);
+                    onClickOptionItem(list.id, list.name, list.price);
                   }}
                 >
                   <OptionList
