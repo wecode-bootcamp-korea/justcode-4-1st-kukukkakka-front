@@ -100,7 +100,6 @@ function Detail() {
 
   const selectItem = optionPrice => {
     optionBoxHandler();
-
     setShowOption({ display: 'none' });
     setChangeBorder({ border: '1px solid #b1b1b1' });
 
