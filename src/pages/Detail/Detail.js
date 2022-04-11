@@ -34,7 +34,6 @@ function Detail() {
   });
   const [count, setCount] = useState(1);
   const token = localStorage.getItem('token');
-  // const optionPrice = 0;
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -137,10 +136,10 @@ function Detail() {
     return totalPrice;
   };
 
-  const optionPriceHandler = price => {
+  const optionPriceHandler = optionPrice => {
     showItemBox.display === 'none'
-      ? setTotalPrice(totalPrice + price)
-      : deleteItemBox(price);
+      ? setTotalPrice(totalPrice + optionPrice)
+      : deleteItemBox(optionPrice);
   };
 
   const onClickOptionItem = (id, name, optionPrice) => {
