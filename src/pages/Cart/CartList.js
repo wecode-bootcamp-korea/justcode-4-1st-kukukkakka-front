@@ -24,20 +24,15 @@ function CartList({ cart, cartData }) {
   //       token: token,
   //     },
   //     body: JSON.stringify({
-  //       productId: productId,
-
+  //       id: id,
   //     }),
   //   })
   //     .then(res => res.json())
-  //     .then(data => setProductId(data));
-  // }, [productId]);
+  //     .then(data => data);
+  // }, []);
 
-  // useEffect(() => {
-  //   handleDelete();
-  // }, [getCartData]);
-
-  const handleDelete = () => {
-    fetch('http://localhost:8000/carts', {
+  const handleDelete = async () => {
+    await fetch('http://localhost:8000/carts', {
       method: 'delete',
       headers: {
         'Content-Type': 'application/json',

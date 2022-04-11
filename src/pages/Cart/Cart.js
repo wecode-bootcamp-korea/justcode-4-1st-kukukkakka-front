@@ -6,6 +6,7 @@ import CartList from './CartList';
 function Cart() {
   const token = localStorage.getItem('token');
   const [cartData, setCartData] = useState({ userCart: [] });
+  const [newCart, setNewCart] = useState({ userCart: [] });
 
   // const deleteItem = () => {
   //   fetch('http://localhost:8000/carts', {
@@ -39,6 +40,7 @@ function Cart() {
       .then(res => res.json())
       .then(data => {
         setCartData(data);
+        console.log('!!!data', data);
       });
   }, []);
 
