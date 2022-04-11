@@ -42,7 +42,7 @@ function CartList({ cart, deleteItem }) {
     })
       .then(res => res.json())
       .then(data => console.log(data));
-  }, [productId]);
+  };
 
   useEffect(() => {
     fetch('http://localhost:8000/carts', {
