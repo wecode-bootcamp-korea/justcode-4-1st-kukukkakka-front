@@ -12,6 +12,20 @@ function Cart() {
   useEffect(() => {
     refreshData();
   }, []);
+  console.log(cartData);
+
+  useEffect(() => {
+    fetch('http://localhost:8000/carts', {
+      headers: {
+        'Content-Type': 'application/json',
+        token: token,
+      },
+    })
+      .then(res => res.json())
+      .then(data => {
+        setCartData(data);
+      });
+  }, []);
 
   const refreshData = async () => {
     await fetch('http://localhost:8000/carts', {
@@ -21,10 +35,7 @@ function Cart() {
       },
     })
       .then(res => res.json())
-      .then(data => {
-        setCartData(data);
-        console.log(data);
-      });
+      .then(data => setCartData(data));
   };
 
   return (

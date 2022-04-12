@@ -53,6 +53,7 @@ function Nav() {
     })
       .then(res => res.json())
       .then(data => {
+        console.log(data);
         setUserName(data.userName[0].username);
       });
   }, [isLogIn]);
