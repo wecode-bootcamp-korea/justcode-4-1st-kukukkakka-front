@@ -8,10 +8,13 @@ function Cart() {
   const [cartData, setCartData] = useState({
     userCart: [],
   });
-  const [deleteItem, setDeletItem] = useState(false);
 
   useEffect(() => {
-    fetch('http://localhost:8000/carts', {
+    refreshData();
+  }, []);
+
+  const refreshData = async () => {
+    await fetch('http://localhost:8000/carts', {
       headers: {
         'Content-Type': 'application/json',
         token: token,
@@ -20,9 +23,9 @@ function Cart() {
       .then(res => res.json())
       .then(data => {
         setCartData(data);
-        setDeletItem(true);
+        console.log(data);
       });
-  }, [deleteItem]);
+  };
 
   return (
     <section className={styles.cartSection}>
@@ -37,12 +40,7 @@ function Cart() {
       </div>
       <div className={styles.cartCenter}>
         {cartData.userCart.map(cart => (
-          <CartList
-            key={cart.id}
-            cart={cart}
-            deleteItem={deleteItem}
-            setDeletItem={setDeletItem}
-          />
+          <CartList key={cart.id} cart={cart} refreshData={refreshData} />
         ))}
       </div>
       <div className={styles.noticeBox}>

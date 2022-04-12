@@ -71,7 +71,7 @@ function Nav() {
         <ul className={styles.headerList}>
           {isLogIn ? (
             <li className={styles.headerLine}>
-              반갑습니다.{' '}
+              반갑습니다.
               <span className={styles.headerUserName}>{userName}</span>님!
             </li>
           ) : (
