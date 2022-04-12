@@ -6,6 +6,7 @@ import CartList from './CartList';
 function Cart() {
   const token = localStorage.getItem('token');
   const [cartData, setCartData] = useState({ userCart: [] });
+
   useEffect(() => {
     fetch('http://localhost:8000/carts', {
       headers: {

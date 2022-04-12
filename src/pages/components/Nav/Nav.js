@@ -42,7 +42,7 @@ function Nav() {
       .then(data => {
         setCounter(data.userCart.length);
       });
-  }, [token]);
+  }, [isLogIn]);
 
   useEffect(() => {
     fetch('http://localhost:8000/users/name', {
@@ -55,7 +55,7 @@ function Nav() {
       .then(data => {
         setUserName(data.userName[0].username);
       });
-  }, [token]);
+  }, [isLogIn]);
 
   useEffect(() => {
     if (token) {
@@ -63,7 +63,7 @@ function Nav() {
     } else {
       setIsLogIn(false);
     }
-  }, []);
+  }, [isLogIn]);
 
   return (
     <>
