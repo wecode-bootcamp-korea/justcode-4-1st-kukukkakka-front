@@ -4,38 +4,18 @@ import { IoCloseSharp, IoCheckmark } from 'react-icons/io5';
 import { FaPlus, FaMinus } from 'react-icons/fa';
 import Option from '../Cart/Option';
 
-function CartList({ cart, cartData }) {
-  console.log(cart);
+function CartList({ cart, deleteItem, setDeletItem }) {
   const [isChecked, setIsChecked] = useState(false);
   let quantity = cart.productQuantity;
   const [count, setCount] = useState(quantity);
-  const [getCartData, setGetCartData] = useState(cartData);
-  const [id, setId] = useState(cart.id);
   const productPrice = cart.productPrice * count;
   const totalPrice = productPrice + cart.addOptionPrice[0];
   const token = localStorage.getItem('token');
-
-  // useEffect(() => {
-  //   fetch('http://localhost:8000/carts', {
-  //     method: 'delete',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       token: token,
-  //     },
-  //     body: JSON.stringify({
-  //       productId: productId,
-
-  //     }),
-  //   })
-  //     .then(res => res.json())
-  //     .then(data => setProductId(data));
-  // }, [productId]);
-
-  // useEffect(() => {
-  //   handleDelete();
-  // }, [getCartData]);
+  let id = cart.id;
 
   const handleDelete = () => {
+    setDeletItem(false);
+
     fetch('http://localhost:8000/carts', {
       method: 'delete',
       headers: {
@@ -44,6 +24,8 @@ function CartList({ cart, cartData }) {
       },
       body: JSON.stringify({
         id: id,
+        quantity: count,
+        totalPrice: totalPrice,
       }),
     })
       .then(res => res.json())
@@ -84,46 +66,52 @@ function CartList({ cart, cartData }) {
     setCount(prev => prev - 1);
   }
   return (
-    <div className={styles.cartItem}>
-      <div className={styles.checkbox}>
-        <IoCheckmark
-          onClick={checkProduct}
-          className={isChecked ? `${styles.checked}` : `${styles.unchecked}`}
-        />
-      </div>
-      <div className={styles.infoBox}>
-        <div className={styles.productImg}>
-          <img src={cart.imageUrl} alt="product" />
-        </div>
-        <div className={styles.productDetail}>
-          <h2 className={styles.name}>{cart.productName}</h2>
-          <p className={styles.dueDate}>수령일: 2022-04-01</p>
-          <span className={styles.price}>
-            {productPrice.toLocaleString('en')}
-          </span>
-          <div className={styles.quantityBox}>
-            <button className={styles.minus} onClick={minusCount}>
-              <FaMinus />
-            </button>
-            <span className={styles.count}>{count}</span>
-            <button className={styles.plus} onClick={plusCount}>
-              <FaPlus />
-            </button>
+    <div>
+      {deleteItem && (
+        <div className={styles.cartItem}>
+          <div className={styles.checkbox}>
+            <IoCheckmark
+              onClick={checkProduct}
+              className={
+                isChecked ? `${styles.checked}` : `${styles.unchecked}`
+              }
+            />
           </div>
-          <div className={styles.delete} onClick={handleDelete}>
-            <IoCloseSharp />
+          <div className={styles.infoBox}>
+            <div className={styles.productImg}>
+              <img src={cart.imageUrl} alt="product" />
+            </div>
+            <div className={styles.productDetail}>
+              <h2 className={styles.name}>{cart.productName}</h2>
+              <p className={styles.dueDate}>수령일: 2022-04-01</p>
+              <span className={styles.price}>
+                {productPrice.toLocaleString('en')}
+              </span>
+              <div className={styles.quantityBox}>
+                <button className={styles.minus} onClick={minusCount}>
+                  <FaMinus />
+                </button>
+                <span className={styles.count}>{count}</span>
+                <button className={styles.plus} onClick={plusCount}>
+                  <FaPlus />
+                </button>
+              </div>
+              <div className={styles.delete} onClick={handleDelete}>
+                <IoCloseSharp />
+              </div>
+            </div>
+          </div>
+          <div className={styles.optionBox}>
+            <ul>
+              <Option option={cart} />
+            </ul>
+          </div>
+          <div className={styles.priceBox}>
+            <p className={styles.price}>{totalPrice.toLocaleString('en')}</p>
+            <span className={styles.delivery}>무료배송</span>
           </div>
         </div>
-      </div>
-      <div className={styles.optionBox}>
-        <ul>
-          <Option option={cart} />
-        </ul>
-      </div>
-      <div className={styles.priceBox}>
-        <p className={styles.price}>{totalPrice.toLocaleString('en')}</p>
-        <span className={styles.delivery}>무료배송</span>
-      </div>
+      )}
     </div>
   );
 }
