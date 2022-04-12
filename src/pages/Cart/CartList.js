@@ -62,53 +62,52 @@ function CartList({ cart, refreshData }) {
     setCount(prev => prev - 1);
   }
 
-  const onClickDelete = async () => {
-    await handleDelete();
-    await refreshData();
-  };
-
   return (
-    <div>
-      <div className={styles.cartItem}>
-        <div className={styles.checkbox}>
-          <IoCheckmark
-            onClick={checkProduct}
-            className={isChecked ? `${styles.checked}` : `${styles.unchecked}`}
-          />
+    <div className={styles.cartItem}>
+      <div className={styles.checkbox}>
+        <IoCheckmark
+          onClick={checkProduct}
+          className={isChecked ? `${styles.checked}` : `${styles.unchecked}`}
+        />
+      </div>
+      <div className={styles.infoBox}>
+        <div className={styles.productImg}>
+          <img src={cart.imageUrl} alt="product" />
         </div>
-        <div className={styles.infoBox}>
-          <div className={styles.productImg}>
-            <img src={cart.imageUrl} alt="product" />
+        <div className={styles.productDetail}>
+          <h2 className={styles.name}>{cart.productName}</h2>
+          <p className={styles.dueDate}>수령일: 2022-04-01</p>
+          <span className={styles.price}>
+            {productPrice.toLocaleString('en')}
+          </span>
+          <div className={styles.quantityBox}>
+            <button className={styles.minus} onClick={minusCount}>
+              <FaMinus />
+            </button>
+            <span className={styles.count}>{count}</span>
+            <button className={styles.plus} onClick={plusCount}>
+              <FaPlus />
+            </button>
           </div>
-          <div className={styles.productDetail}>
-            <h2 className={styles.name}>{cart.productName}</h2>
-            <p className={styles.dueDate}>수령일: 2022-04-01</p>
-            <span className={styles.price}>
-              {productPrice.toLocaleString('en')}
-            </span>
-            <div className={styles.quantityBox}>
-              <button className={styles.minus} onClick={minusCount}>
-                <FaMinus />
-              </button>
-              <span className={styles.count}>{count}</span>
-              <button className={styles.plus} onClick={plusCount}>
-                <FaPlus />
-              </button>
-            </div>
-            <div className={styles.delete} onClick={onClickDelete}>
-              <IoCloseSharp />
-            </div>
+          <div
+            className={styles.delete}
+            onClick={async () => {
+              await handleDelete();
+              await refreshData();
+            }}
+          >
+            <IoCloseSharp />
           </div>
         </div>
-        <div className={styles.optionBox}>
-          <ul>
-            <Option option={cart} />
-          </ul>
-        </div>
-        <div className={styles.priceBox}>
-          <p className={styles.price}>{totalPrice.toLocaleString('en')}</p>
-          <span className={styles.delivery}>무료배송</span>
-        </div>
+      </div>
+      <div className={styles.optionBox}>
+        <ul>
+          <Option option={cart} />
+        </ul>
+      </div>
+      <div className={styles.priceBox}>
+        <p className={styles.price}>{totalPrice.toLocaleString('en')}</p>
+        <span className={styles.delivery}>무료배송</span>
       </div>
     </div>
   );

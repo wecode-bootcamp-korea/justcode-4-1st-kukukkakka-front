@@ -22,9 +22,7 @@ function Cart() {
       },
     })
       .then(res => res.json())
-      .then(data => {
-        setCartData(data);
-      });
+      .then(data => setCartData(data));
   };
 
   return (
