@@ -4,33 +4,17 @@ import { IoCloseSharp, IoCheckmark } from 'react-icons/io5';
 import { FaPlus, FaMinus } from 'react-icons/fa';
 import Option from '../Cart/Option';
 
-function CartList({ cart, cartData, setCartData, setFlag }) {
+function CartList({ cart, refreshData }) {
   const [isChecked, setIsChecked] = useState(false);
   let quantity = cart.productQuantity;
-
   const [count, setCount] = useState(quantity);
-  const [getCartData, setGetCartData] = useState(cartData);
-  const [id, setId] = useState(cart.id);
   const productPrice = cart.productPrice * count;
   const totalPrice = productPrice + cart.addOptionPrice[0];
   const token = localStorage.getItem('token');
-  // useEffect(() => {
-  //   fetch('http://localhost:8000/carts', {
-  //     method: 'delete',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       token: token,
-  //     },
-  //     body: JSON.stringify({
-  //       id: id,
-  //     }),
-  //   })
-  //     .then(res => res.json())
-  //     .then(data => setGetCartData(data));
-  // }, [getCartData]);
+  let id = cart.id;
 
-  const handleDelete = () => {
-    fetch('http://localhost:8000/carts', {
+  const handleDelete = async () => {
+    await fetch('http://localhost:8000/carts', {
       method: 'delete',
       headers: {
         'Content-Type': 'application/json',
@@ -38,15 +22,13 @@ function CartList({ cart, cartData, setCartData, setFlag }) {
       },
       body: JSON.stringify({
         id: id,
+        quantity: count,
+        totalPrice: totalPrice,
       }),
     })
       .then(res => res.json())
-      .then(data => setFlag(1));
-    // setCartData(getCartData.userCart.filter(item => item.id !== id));
-    // );
+      .then(data => data);
   };
-
-  console.log('!!!', cartData.userCart);
 
   useEffect(() => {
     fetch('http://localhost:8000/carts', {
@@ -72,9 +54,6 @@ function CartList({ cart, cartData, setCartData, setFlag }) {
     setIsChecked(prev => !prev);
   };
 
-  function plusCount() {
-    setCount(prev => prev + 1);
-  }
   function minusCount() {
     if (count === 1) {
       return 1;
@@ -108,7 +87,13 @@ function CartList({ cart, cartData, setCartData, setFlag }) {
               <FaPlus />
             </button>
           </div>
-          <div className={styles.delete} onClick={handleDelete}>
+          <div
+            className={styles.delete}
+            onClick={async () => {
+              await handleDelete();
+              await refreshData();
+            }}
+          >
             <IoCloseSharp />
           </div>
         </div>

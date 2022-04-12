@@ -5,25 +5,15 @@ import CartList from './CartList';
 
 function Cart() {
   const token = localStorage.getItem('token');
+  const [cartData, setCartData] = useState({
+    userCart: [],
+  });
 
-  const [cartData, setCartData] = useState({ userCart: [] });
-  const [flag, setFlag] = useState(0);
-  console.log('cart ::::::', cartData);
+  useEffect(() => {
+    refreshData();
+  }, []);
+  console.log(cartData);
 
-  // const deleteItem = () => {
-  //   fetch('http://localhost:8000/carts', {
-  //     method: 'delete',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       token: token,
-  //     },
-  //     body: JSON.stringify({
-  //       productId: productId,
-  //     }),
-  //   })
-  //     .then(res => res.json())
-  //     .then(data => setProductId(data));
-  // };
   useEffect(() => {
     fetch('http://localhost:8000/carts', {
       headers: {
@@ -32,8 +22,21 @@ function Cart() {
       },
     })
       .then(res => res.json())
+      .then(data => {
+        setCartData(data);
+      });
+  }, []);
+  const refreshData = async () => {
+    await fetch('http://localhost:8000/carts', {
+      headers: {
+        'Content-Type': 'application/json',
+        token: token,
+      },
+    })
+      .then(res => res.json())
       .then(data => setCartData(data));
-  }, [flag]);
+  };
+
   return (
     <section className={styles.cartSection}>
       <h1 className={styles.title}>장바구니</h1>
@@ -47,14 +50,7 @@ function Cart() {
       </div>
       <div className={styles.cartCenter}>
         {cartData.userCart.map(cart => (
-          <CartList
-            key={cart.id}
-            cart={cart}
-            cartData={cartData}
-            setCartData={setCartData}
-            cartId={cart.id}
-            setFlag={setFlag}
-          />
+          <CartList key={cart.id} cart={cart} refreshData={refreshData} />
         ))}
       </div>
       <div className={styles.noticeBox}>
