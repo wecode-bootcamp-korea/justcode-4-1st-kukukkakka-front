@@ -4,8 +4,7 @@ import { IoCloseSharp, IoCheckmark } from 'react-icons/io5';
 import { FaPlus, FaMinus } from 'react-icons/fa';
 import Option from '../Cart/Option';
 
-function CartList({ cart, cartData }) {
-  console.log(cart);
+function CartList({ cart, cartData, setCartData, setFlag }) {
   const [isChecked, setIsChecked] = useState(false);
   let quantity = cart.productQuantity;
 
@@ -15,7 +14,6 @@ function CartList({ cart, cartData }) {
   const productPrice = cart.productPrice * count;
   const totalPrice = productPrice + cart.addOptionPrice[0];
   const token = localStorage.getItem('token');
-
   // useEffect(() => {
   //   fetch('http://localhost:8000/carts', {
   //     method: 'delete',
@@ -28,11 +26,11 @@ function CartList({ cart, cartData }) {
   //     }),
   //   })
   //     .then(res => res.json())
-  //     .then(data => data);
-  // }, []);
+  //     .then(data => setGetCartData(data));
+  // }, [getCartData]);
 
-  const handleDelete = async () => {
-    await fetch('http://localhost:8000/carts', {
+  const handleDelete = () => {
+    fetch('http://localhost:8000/carts', {
       method: 'delete',
       headers: {
         'Content-Type': 'application/json',
@@ -43,8 +41,12 @@ function CartList({ cart, cartData }) {
       }),
     })
       .then(res => res.json())
-      .then(data => data);
+      .then(data => setFlag(1));
+    // setCartData(getCartData.userCart.filter(item => item.id !== id));
+    // );
   };
+
+  console.log('!!!', cartData.userCart);
 
   useEffect(() => {
     fetch('http://localhost:8000/carts', {

@@ -5,8 +5,10 @@ import CartList from './CartList';
 
 function Cart() {
   const token = localStorage.getItem('token');
+
   const [cartData, setCartData] = useState({ userCart: [] });
-  const [newCart, setNewCart] = useState({ userCart: [] });
+  const [flag, setFlag] = useState(0);
+  console.log('cart ::::::', cartData);
 
   // const deleteItem = () => {
   //   fetch('http://localhost:8000/carts', {
@@ -22,25 +24,16 @@ function Cart() {
   //     .then(res => res.json())
   //     .then(data => setProductId(data));
   // };
-
-  // const deleteSelectedItem = id => {
-  //   const filterItem = cartData.userCart.filter(item => item.id !== id);
-  //   setProductId(filterItem);
-  // };
   useEffect(() => {
     fetch('http://localhost:8000/carts', {
       headers: {
-        token: token,
         'Content-Type': 'application/json',
+        token: token,
       },
     })
       .then(res => res.json())
-      .then(data => {
-        setCartData(data);
-        console.log('!!!data', data);
-      });
-  }, []);
-
+      .then(data => setCartData(data));
+  }, [flag]);
   return (
     <section className={styles.cartSection}>
       <h1 className={styles.title}>장바구니</h1>
@@ -54,7 +47,14 @@ function Cart() {
       </div>
       <div className={styles.cartCenter}>
         {cartData.userCart.map(cart => (
-          <CartList key={cart.id} cart={cart} cartData={cartData} />
+          <CartList
+            key={cart.id}
+            cart={cart}
+            cartData={cartData}
+            setCartData={setCartData}
+            cartId={cart.id}
+            setFlag={setFlag}
+          />
         ))}
       </div>
       <div className={styles.noticeBox}>
