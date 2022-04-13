@@ -47,12 +47,13 @@ function CartList({ cart, refreshData }) {
       .then(result => result);
   }, [count]);
 
-  function plusCount() {
-    setCount(prev => prev + 1);
-  }
   const checkProduct = () => {
     setIsChecked(prev => !prev);
   };
+
+  function plusCount() {
+    setCount(prev => prev + 1);
+  }
 
   function minusCount() {
     if (count === 1) {
@@ -60,6 +61,7 @@ function CartList({ cart, refreshData }) {
     }
     setCount(prev => prev - 1);
   }
+
   return (
     <div className={styles.cartItem}>
       <div className={styles.checkbox}>
