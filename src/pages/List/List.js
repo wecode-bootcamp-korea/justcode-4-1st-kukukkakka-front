@@ -4,7 +4,7 @@ import styles from '../List/List.module.scss';
 import { AiOutlineSearch } from 'react-icons/ai';
 
 import ListCard from '../List/ListCard';
-import { useLocation } from 'react-router-dom';
+
 function List() {
   const [lists, setLists] = useState({
     productList: [],
@@ -14,9 +14,6 @@ function List() {
   const [highPrice, setHighPrice] = useState([]);
   const [inputs, setInputs] = useState('');
   const [showRecommend, setShowRecommend] = useState(false);
-  const location = useLocation();
-
-  const url = `http://localhost:8000/products/search?${inputs}`;
 
   useEffect(() => {
     fetch('http://localhost:8000/products')
@@ -25,21 +22,6 @@ function List() {
         setLists(res);
       });
   }, []);
-
-  //유저가 찾은 키워드를 백엔드에 보내주기
-
-  // const sendKeywords = () => {
-  //   fetch('/keywords', {
-  //     method: 'post',
-  //     body: JSON.stringify({
-  //       keyword: inputs,
-  //     }),
-  //   })
-  //     .then(res => res.json())
-  //     .then(result => console.log({ message: result }));
-  // };
-
-  // useEffect(() => {}, []);
 
   const inputValue = e => {
     e.preventDefault();
