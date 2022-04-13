@@ -29,6 +29,7 @@ function CartList({ cart, refreshData }) {
       .then(res => res.json())
       .then(data => data);
   };
+  // console.log(cartData)
 
   useEffect(() => {
     fetch('http://localhost:8000/carts', {
