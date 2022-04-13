@@ -29,6 +29,7 @@ function CartList({ cart, refreshData }) {
       .then(res => res.json())
       .then(data => data);
   };
+  // console.log(cartData)
 
   useEffect(() => {
     fetch('http://localhost:8000/carts', {
@@ -47,12 +48,13 @@ function CartList({ cart, refreshData }) {
       .then(result => result);
   }, [count]);
 
-  function plusCount() {
-    setCount(prev => prev + 1);
-  }
   const checkProduct = () => {
     setIsChecked(prev => !prev);
   };
+
+  function plusCount() {
+    setCount(prev => prev + 1);
+  }
 
   function minusCount() {
     if (count === 1) {
