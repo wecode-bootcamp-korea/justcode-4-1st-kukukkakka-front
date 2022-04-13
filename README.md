@@ -21,6 +21,21 @@
 
 # Demo
 
+### Product Detail Page
+
+</br>
+
+![ezgif com-gif-maker (2)](https://user-images.githubusercontent.com/97842933/163200056-533b918a-f736-46b6-9e59-3ea46a1baff7.gif)
+
+- productList fetch GET 
+- 수량버튼 클릭 시 수량 증/감
+- 추가옵션 토글기능
+- 추가상품 클릭 시 추가상품 UI 추가 
+- 옵션 가격을 포함한 총 합계 계산
+- 장바구니 클릭 시 fetch POST & 이동
+
+</br>
+
 ### Main Page
 
 </br>
@@ -34,16 +49,14 @@
 
 ![image](https://user-images.githubusercontent.com/98023289/162682402-dec47838-4d28-4001-beeb-d9bbac90a75f.png)
 
-### Product Detail Page
 
-</br>
-
-![image](https://user-images.githubusercontent.com/98023289/162682550-93680c18-f4a2-4706-ac4b-7b8b01c618b3.png)
 
 
 # DB modeling
 
 ![image](https://user-images.githubusercontent.com/98023289/162653302-f013fd10-11ef-4d24-b980-5baf15c8c4f9.png)
+
+
 
 </br>
 
