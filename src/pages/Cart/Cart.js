@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import styles from '../Cart/Cart.module.scss';
 import { IoCheckmark, IoAlertCircleOutline } from 'react-icons/io5';
 import CartList from './CartList';
-import { AiOutlineSearch } from 'react-icons/ai';
 
 function Cart() {
   const token = localStorage.getItem('token');
