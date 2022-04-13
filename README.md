@@ -17,6 +17,21 @@
 - [김민경](https://velog.io/@alicia-mkkim)
 - [김다미](https://velog.io/@damdaridam)
 
+
+
+</br>
+
+# Technologies
+- 사용언어 : Javascript
+- 라이브러리 : React (Hook 사용)
+- 라이브러리 : Scss
+- 협업툴 : Git, Github
+- 커뮤니케이션툴 : Notion, Slack
+
+
+
+
+
 </br>
 
 # Demo
@@ -27,12 +42,17 @@
 
 ![ezgif com-gif-maker (2)](https://user-images.githubusercontent.com/97842933/163200056-533b918a-f736-46b6-9e59-3ea46a1baff7.gif)
 
-- productList fetch GET 
-- 수량버튼 클릭 시 수량 증/감
-- 추가옵션 토글기능
-- 추가상품 클릭 시 추가상품 UI 추가 
-- 옵션 가격을 포함한 총 합계 계산
-- 장바구니 클릭 시 fetch POST & 이동
+## 상세 내용 
+- 레이아웃
+   - 꾸까 레이아웃 구현
+   - productList fetch GET 
+
+- 기능
+   - 수량버튼 클릭 시 수량 증/감
+   - 추가옵션 토글기능
+   - 추가상품 클릭 시 추가상품 UI 추가 
+   - 옵션 가격을 포함한 총 합계 계산
+   - 장바구니 클릭 시 fetch POST & 이동
 
 </br>
 
@@ -57,12 +77,3 @@
 ![image](https://user-images.githubusercontent.com/98023289/162653302-f013fd10-11ef-4d24-b980-5baf15c8c4f9.png)
 
 
-
-</br>
-
-# Technologies
-- 사용언어 : Javascript
-- 라이브러리 : React (Hook 사용)
-- 라이브러리 : Scss
-- 협업툴 : Git, Github
-- 커뮤니케이션툴 : Notion, Slack
