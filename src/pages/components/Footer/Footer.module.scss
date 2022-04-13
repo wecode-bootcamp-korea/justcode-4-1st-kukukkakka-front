@@ -1,0 +1,85 @@
+$white: white;
+$border: 1px solid white;
+
+@mixin container {
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+footer {
+  color: $white;
+}
+
+.footerWrapper {
+  padding: 80px 0;
+  background-color: #222222;
+
+  .footerConatiner {
+    @include container();
+
+    .iconWrapper {
+      display: flex;
+      gap: 10px;
+    }
+  }
+}
+
+.serviceWrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 25px;
+  padding-bottom: 10px;
+  border-bottom: 0.5px solid #9b9b9b;
+
+  .serviceSubWrapper {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    .serviceContent {
+      font-size: 22px;
+    }
+    .serviceTime {
+      color: #9b9b9b;
+      font-size: 14px;
+      font-weight: 300;
+    }
+    .serviceButton {
+      height: 40px;
+      padding: 0 25px;
+      border: $border;
+      border-radius: 30px;
+      color: $white;
+      background: none;
+      cursor: pointer;
+    }
+  }
+}
+
+.infoWrapper {
+  color: #d3d3d3;
+  font-size: 14px;
+
+  .infoContent {
+    display: flex;
+    margin: 10px 0;
+    gap: 10px;
+
+    .infoContentMiddle {
+      padding: 0 10px;
+      border-left: $border;
+      border-right: $border;
+    }
+  }
+  .infoRights {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+
+    .infoTermsOfUse {
+      display: flex;
+      gap: 20px;
+    }
+  }
+}

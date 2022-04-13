@@ -1,0 +1,46 @@
+$gray-color: #b1b1b1;
+$large-font-size: 20px;
+$medium-font-size: 13px;
+$small-font-size: 11px;
+$padding-bottom: 20px;
+
+@mixin fontStyle($bottom, $weight, $size) {
+  padding-bottom: $bottom;
+  font-weight: $weight;
+  font-size: $size;
+}
+
+.option_btn_box {
+  margin-bottom: 50px;
+  border: 1px solid $gray-color;
+  border-radius: 5px;
+}
+
+.toggleList {
+  padding-left: 20px;
+  padding-bottom: 20px;
+  border-top: 1px solid rgb(237, 237, 237);
+
+  cursor: pointer;
+  :first-child {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  :last-child {
+    @include fontStyle(0, 400, 15px);
+  }
+}
+
+.option_btn_box ul {
+  @include fontStyle(8px, 400, $medium-font-size);
+  padding: 20px;
+  border-top: 1px solid lightgray;
+  background-color: white;
+  cursor: pointer;
+
+  :first-child {
+    padding-bottom: 10px;
+    font-size: 16px;
+  }
+}

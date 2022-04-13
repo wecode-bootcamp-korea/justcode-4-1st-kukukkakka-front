@@ -1,0 +1,168 @@
+$gray_color: #b1b1b1;
+$large_font_size: 25px;
+$medium_font_size: 16px;
+$small_font_size: 12px;
+$padding_bottom: 25px;
+
+@mixin sidePadding($px) {
+  padding-left: $px;
+  padding-right: $px;
+}
+@mixin sideMargin($px) {
+  margin-left: $px;
+  margin-right: $px;
+}
+
+@mixin grayBox {
+  @include fontStyle(15px, 400, $medium_font_size);
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  padding: 20px 15px;
+  background-color: #f7f7f7;
+  border: 1px solid white;
+  border-radius: 5px;
+}
+
+@mixin fontStyle($bottom, $weight, $size) {
+  padding-bottom: $bottom;
+  font-weight: $weight;
+  font-size: $size;
+}
+
+@mixin btns($color) {
+  padding: 10px 80px;
+  border: 1px solid white;
+  border-radius: 5px;
+  background-color: $color;
+  font-size: $medium-font-size;
+  cursor: pointer;
+}
+.container {
+  @include sideMargin(40px);
+  @include sidePadding(40px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 20px;
+
+  padding-bottom: 300px;
+}
+
+.category {
+  @include fontStyle($padding_bottom, 300, $small_font_size);
+  @include sidePadding(30px);
+  position: relative;
+  padding-top: 50px;
+  padding-right: 800px;
+  color: $gray_color;
+}
+.content {
+  display: flex;
+}
+
+.imgBox {
+  width: 400px;
+  height: 400px;
+}
+
+.detailBox {
+  @include sidePadding(50px);
+  width: 550px;
+}
+
+.productInfo {
+  display: flex;
+  flex-direction: column;
+
+  :first-child {
+    @include fontStyle($padding_bottom, 300, 13px);
+    padding-top: 10px;
+    color: #7e7e7e;
+  }
+
+  :nth-child(2) {
+    @include fontStyle($padding_bottom, bold, $large_font_size);
+  }
+
+  :last-child {
+    @include fontStyle($padding_bottom, normal, $large_font_size);
+  }
+}
+
+.eventTittle {
+  @include fontStyle($padding_bottom, normal, $medium_font_size);
+  padding-top: 25px;
+  border-top: 1px solid lightgray;
+  border-bottom: 1px solid lightgray;
+
+  :first-child {
+    padding-left: 10px;
+    color: #46cfa7;
+  }
+}
+
+.inBox {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 20px;
+}
+
+.contentTittle {
+  @include fontStyle($padding_bottom, 500, $medium-font-size);
+  display: flex;
+  padding-top: 18px;
+}
+
+.priceBox {
+  @include grayBox;
+}
+
+.contentBtnBox {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 20px;
+  .whiteBtn {
+    @include btns(#ececec);
+  }
+
+  .yellowBtn {
+    @include btns(#ffcd32);
+  }
+}
+
+.option_btn_box {
+  margin-bottom: 50px;
+  border: 1px solid $gray-color;
+  border-radius: 5px;
+}
+
+.optionBtn {
+  @include fontStyle(8px, lighter, 14px);
+  display: flex;
+  padding: 20px 20px 20px 20px;
+  border: 1px solid white;
+  border-radius: 5px;
+  background-color: white;
+  cursor: pointer;
+
+  :first-child {
+    padding-right: 70px;
+  }
+}
+
+.totalPriceBox {
+  padding: 30px 0;
+
+  text-align: right;
+
+  :first-child {
+    @include fontStyle(20px, normal, $medium_font_size);
+    padding-right: 20px;
+  }
+
+  :last-child {
+    @include fontStyle(20px, 500, $large_font_size);
+  }
+}
