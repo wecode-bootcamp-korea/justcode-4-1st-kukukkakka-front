@@ -113,18 +113,18 @@ $yellow: #ffcd32;
   padding-bottom: 100px;
 }
 
-// @media screen and (max-width: 1200px) {
-//   .listTop {
-//     padding: 0 30px;
-//   }
-//   .listContainer {
-//     max-width: 100%;
-//     width: 100%;
-//     gap: 15px;
-//     justify-content: space-between;
-//     padding: 0 30px;
-//   }
-// }
+@media screen and (max-width: 1200px) {
+  .listTop {
+    padding: 0 30px;
+  }
+  .listContainer {
+    max-width: 100%;
+    width: 100%;
+    gap: 15px;
+    justify-content: space-evenly;
+    padding: 0 30px;
+  }
+}
 
 // @media screen and (max-width: 676px) {
 //   .listTop {
