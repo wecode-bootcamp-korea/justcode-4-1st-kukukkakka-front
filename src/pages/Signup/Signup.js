@@ -148,7 +148,7 @@ function Signup() {
     buttonUi.text === '확인완료';
 
   const duplicatePost = () => {
-    fetch('http://BASE_URL:8000/users/signup/duplicate', {
+    fetch('/users/signup/duplicate', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -179,7 +179,7 @@ function Signup() {
   };
 
   const signUpPost = () => {
-    fetch('http://BASE_URL/users/signup', {
+    fetch('/users/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
