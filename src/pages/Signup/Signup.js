@@ -148,7 +148,7 @@ function Signup() {
     buttonUi.text === '확인완료';
 
   const duplicatePost = () => {
-    fetch('http://localhost:8000/users/signup/duplicate', {
+    fetch('http://3.36.49.236:8000/users/signup/duplicate', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -179,7 +179,7 @@ function Signup() {
   };
 
   const signUpPost = () => {
-    fetch('http://localhost:8000/users/signup', {
+    fetch('http://3.36.49.236:8000/users/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
