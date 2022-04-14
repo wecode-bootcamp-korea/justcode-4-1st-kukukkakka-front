@@ -14,7 +14,7 @@ function CartList({ cart, refreshData }) {
   let id = cart.id;
 
   const handleDelete = async () => {
-    await fetch('http://BASE_URL:8000/carts', {
+    await fetch('/carts', {
       method: 'delete',
       headers: {
         'Content-Type': 'application/json',
@@ -32,7 +32,7 @@ function CartList({ cart, refreshData }) {
   // console.log(cartData)
 
   useEffect(() => {
-    fetch('http://BASE_URL:8000/carts', {
+    fetch('/carts', {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
