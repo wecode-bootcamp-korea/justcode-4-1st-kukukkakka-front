@@ -18,7 +18,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "distribute": "npm i && npm run build && pm2 serve build 3000 --name <project-front> --spa"
   },
   "eslintConfig": {
     "extends": [
@@ -41,6 +42,7 @@
   "devDependencies": {
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.0.0",
-    "prettier": "^2.6.1"
+    "prettier": "^2.6.1",
+    "pm2": "^5.1.2"
   }
 }

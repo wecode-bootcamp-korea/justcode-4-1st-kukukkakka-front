@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { AiFillCheckCircle, AiOutlineCheckCircle } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
 import styles from './Signup.module.scss';
 
 function Signup() {
+  useEffect(() => {
+    setInputs({ ...inputs, gender: '1' });
+  }, []);
+
   const navigate = useNavigate();
   const [inputs, setInputs] = useState([
     {
