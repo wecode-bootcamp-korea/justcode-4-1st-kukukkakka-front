@@ -16,7 +16,7 @@ function List() {
   const [showRecommend, setShowRecommend] = useState(false);
 
   useEffect(() => {
-    fetch('http://localhost:8000/products')
+    fetch('http://3.36.49.236:8000/products')
       .then(res => res.json())
       .then(res => {
         setLists(res);
