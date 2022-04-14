@@ -14,7 +14,7 @@ function Cart() {
   }, []);
 
   const refreshData = async () => {
-    await fetch('http://3.36.49.236:8000/carts', {
+    await fetch('http://BASE_URL:8000/carts', {
       headers: {
         'Content-Type': 'application/json',
         token: token,
