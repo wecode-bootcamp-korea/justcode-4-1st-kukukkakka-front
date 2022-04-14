@@ -32,7 +32,7 @@ function Nav() {
   };
 
   useEffect(() => {
-    fetch('http://3.36.49.236:8000/carts', {
+    fetch('http://BASE_URL:8000/carts', {
       headers: {
         'Content-Type': 'application/json',
         token: token,
@@ -45,7 +45,7 @@ function Nav() {
   }, [isLogIn]);
 
   useEffect(() => {
-    fetch('http://3.36.49.236:8000/users/name', {
+    fetch('http://BASE_URL:8000/users/name', {
       headers: {
         'Content-Type': 'application/json',
         token: token,
