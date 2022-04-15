@@ -48,11 +48,13 @@
    - productList fetch GET 
 
 - 기능
-   - 수량버튼 클릭 시 수량 증/감
-   - 추가옵션 토글기능
-   - 추가상품 클릭 시 추가상품 UI 추가 
-   - 옵션 가격을 포함한 총 합계 계산
-   - 장바구니 클릭 시 fetch POST & 이동
+   - productList fetch GET 
+   - 수량을 관리하는 useState 생성하여 수량버튼 클릭 시 수량 증/감
+   - display 상태를 관리하는 useState 생성하여 추가옵션 토글기능 구현
+   - 추가상품 클릭 시 추가상품 UI component 추가하는 기능
+   - 데이터를 map 하고 useState로 상태관리 하여 선택한 옵션 가격을 포함한 총 합계 계산
+   - 장바구니 클릭 시 fetch POST
+   - useNavigate 이용하여 장바구니로 이동
 
 </br>
 
