@@ -20,7 +20,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "distribute": "npm i && npm run build && pm2 serve build 3000 --name kukukkakka-front --spa"
+    "distribute": "npm i && npm run build && pm2 serve build 8000 --name kukukkakka-front --spa"
   },
   "eslintConfig": {
     "extends": [
