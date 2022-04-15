@@ -28,7 +28,7 @@ function Main() {
 
   //메인 리스트 카드 컴포넌트
   useEffect(() => {
-    fetch('http://localhost:8000/products')
+    fetch('/products')
       .then(res => res.json())
       .then(res => {
         setLists(res);

@@ -2,6 +2,7 @@
   "name": "kukukkakka-front",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://3.36.49.236:8000",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.3",
     "@testing-library/react": "^12.1.4",
@@ -18,7 +19,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "distribute": "npm i && npm run build && pm2 serve build 8000 --name kukukkakka-front --spa"
   },
   "eslintConfig": {
     "extends": [
@@ -41,6 +43,7 @@
   "devDependencies": {
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.0.0",
+    "pm2": "^5.2.0",
     "prettier": "^2.6.1"
   }
 }

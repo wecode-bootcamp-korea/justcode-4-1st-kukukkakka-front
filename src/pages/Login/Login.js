@@ -40,7 +40,7 @@ function Login() {
   };
 
   const postLogin = () => {
-    fetch('http://localhost:8000/users/login', {
+    fetch('/users/login', {
       method: 'POST',
       headers: {
         'content-Type': 'application/json',

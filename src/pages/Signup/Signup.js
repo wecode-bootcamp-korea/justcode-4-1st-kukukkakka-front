@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { AiFillCheckCircle, AiOutlineCheckCircle } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
 import styles from './Signup.module.scss';
 
 function Signup() {
+  useEffect(() => {
+    setInputs({ ...inputs, gender: '1' });
+  }, []);
+
   const navigate = useNavigate();
   const [inputs, setInputs] = useState([
     {
@@ -144,7 +148,7 @@ function Signup() {
     buttonUi.text === '확인완료';
 
   const duplicatePost = () => {
-    fetch('http://localhost:8000/users/signup/duplicate', {
+    fetch('/users/signup/duplicate', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -175,7 +179,7 @@ function Signup() {
   };
 
   const signUpPost = () => {
-    fetch('http://localhost:8000/users/signup', {
+    fetch('/users/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
