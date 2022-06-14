@@ -22,12 +22,6 @@
     "eject": "react-scripts eject",
     "distribute": "npm i && npm run build && pm2 serve build 8000 --name kukukkakka-front --spa"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
   "browserslist": {
     "production": [
       ">0.2%",
@@ -44,6 +38,6 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.0.0",
     "pm2": "^5.2.0",
-    "prettier": "^2.6.1"
+    "prettier": "^2.7.0"
   }
 }
