@@ -8,6 +8,22 @@ $yellowColor: #ffcd32;
   margin: 0 auto;
 }
 
+@mixin styledMenu {
+  height: 30px;
+  color: $darkColor;
+  font-size: 18px;
+  font-weight: 400;
+
+  &:hover {
+    bottom: -14px;
+    border-bottom: 5px solid $yellowColor;
+  }
+
+  @media screen and (max-width: 1024px) {
+    padding: 30px 0;
+  }
+}
+
 .headerWrapper {
   @include container();
 
@@ -51,39 +67,35 @@ $yellowColor: #ffcd32;
   top: 0;
   background-color: white;
   z-index: 99;
-
   .navWrapper {
-    @include container();
     display: flex;
     justify-content: space-between;
     align-items: center;
+    @include container();
+  }
 
-    .mainLogo {
-      padding-top: 20px;
-    }
-    .navList {
+  .mainLogo {
+    padding-top: 20px;
+  }
+
+  .navList {
+    display: none;
+
+    @media screen and (min-width: 1025px) {
       display: flex;
       justify-content: space-around;
       gap: 60px;
+    }
 
-      .navMenu {
-        height: 30px;
-        color: $darkColor;
-        font-size: 18px;
-        font-weight: 400;
-
-        &:hover {
-          bottom: -14px;
-          border-bottom: 5px solid $yellowColor;
-        }
-      }
+    .navMenu {
+      @include styledMenu();
     }
   }
 }
 
 .iconBlank {
   position: relative;
-  margin-left: 20px;
+  margin: 0 10px;
 }
 
 .cartCounterCss {
@@ -94,4 +106,37 @@ $yellowColor: #ffcd32;
   border-radius: 50%;
   background-color: $yellowColor;
   font-size: 12px;
+}
+.hamburgerIcon {
+  display: block;
+  color: #707070;
+  margin-left: 10px;
+  cursor: pointer;
+  @media screen and (min-width: 1025px) {
+    display: none;
+  }
+}
+
+.dropDownMenu {
+  display: none;
+
+  @media screen and (max-width: 1024px) {
+    display: flex;
+    padding: 30px;
+  }
+
+  @media screen and (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+  }
+
+  .dropItems {
+    @include styledMenu();
+    cursor: pointer;
+
+    @media screen and (max-width: 768px) {
+    }
+  }
 }

@@ -1,8 +1,8 @@
 import { React, useState, useEffect } from 'react';
 import styles from './Nav.module.scss';
 import { Link, useNavigate } from 'react-router-dom';
-import { AiOutlineUser } from 'react-icons/ai';
-import { AiOutlineShopping } from 'react-icons/ai';
+import { AiOutlineUser, AiOutlineShopping } from 'react-icons/ai';
+import { GiHamburgerMenu } from 'react-icons/gi';
 
 function Nav() {
   const token = localStorage.getItem('token');
@@ -10,6 +10,7 @@ function Nav() {
   const [counter, setCounter] = useState(0);
   const [userName, setUserName] = useState('');
   const [isLogIn, setIsLogIn] = useState(false);
+  const [isDropdown, setIsDropdown] = useState(false);
 
   const navigate = useNavigate();
 
@@ -66,6 +67,10 @@ function Nav() {
     }
   }, [isLogIn]);
 
+  const onClickToggleBtn = () => {
+    !isDropdown ? setIsDropdown(true) : setIsDropdown(false);
+  };
+
   return (
     <>
       <header className={styles.headerWrapper}>
@@ -97,6 +102,11 @@ function Nav() {
 
       <nav className={styles.navSticky} style={{ borderBottom: borderLine }}>
         <div className={styles.navWrapper}>
+          <GiHamburgerMenu
+            size="30"
+            className={styles.hamburgerIcon}
+            onClick={onClickToggleBtn}
+          />
           <Link to="/">
             <img
               className={styles.mainLogo}
@@ -120,6 +130,7 @@ function Nav() {
             <li className={styles.navMenu}>소품샵</li>
             <li className={styles.navMenu}>이벤트</li>
           </ul>
+
           <div>
             <Link to="/login">
               <AiOutlineUser size="40" color="#707070" onClick={goToTop} />
@@ -142,6 +153,24 @@ function Nav() {
             )}
           </div>
         </div>
+        {isDropdown && (
+          <div>
+            <ul className={styles.dropDownMenu}>
+              <li className={styles.dropItems}>꽃 정기구독</li>
+              <Link
+                to="/list"
+                style={{ textDecoration: 'none' }}
+                onClick={goToTop}
+              >
+                <li className={styles.dropItems}>꽃다발</li>
+              </Link>
+              <li className={styles.dropItems}>당일배송</li>
+              <li className={styles.dropItems}>플라워클래스</li>
+              <li className={styles.dropItems}>소품샵</li>
+              <li className={styles.dropItems}>이벤트</li>
+            </ul>
+          </div>
+        )}
       </nav>
     </>
   );
